@@ -43,7 +43,6 @@ nav{
   gap:20px;flex-wrap:wrap;
   position:relative;overflow:hidden;
 }
-/* cat illustration removed from ::before/::after — handled by inline SVG */
 .hero::before,.hero::after{display:none}
 .hero-left{position:relative;z-index:1}
 .hero-label{
@@ -183,7 +182,7 @@ nav{
 .note-area{display:none}
 .note-area.active{display:flex;flex-direction:column;gap:8px}
 .note-entry{background:var(--white);border:1px solid rgba(179,32,0,.15);border-left:3px solid var(--red);padding:9px 32px 9px 12px;position:relative;font-size:.88rem;line-height:1.75;color:var(--dk)}
-.note-entry .del-note{position:absolute;top:7px;right:9px;background:none;border:none;cursor:pointer;color:rgba(96,17,0,.3);font-size:.85rem;transition:.15s;font-family:inherit}
+.note-entry .del-note{position:absolute;top:7px;right:9px;background:none;border:none;cursor:pointer;color:rgba(96,17,0,.3);font-size:.85rem;transition:.15px;font-family:inherit}
 .note-entry .del-note:hover{color:var(--red)}
 .note-input-row{display:flex;gap:8px}
 .note-input-row textarea{flex:1;background:var(--white);border:2px solid rgba(96,17,0,.18);color:var(--dk);padding:8px 10px;font-size:.88rem;resize:none;outline:none;font-family:inherit;transition:.18s}
@@ -198,13 +197,6 @@ nav{
 .cover-upload .up-label{font-size:.78rem;color:rgba(96,17,0,.4);pointer-events:none;font-weight:900;letter-spacing:.1em;text-transform:uppercase;font-family:'Anton',sans-serif}
 .cover-upload input{position:absolute;inset:0;opacity:0;cursor:pointer}
 
-/* OCR */
-.ocr-box{background:rgba(179,32,0,.06);padding:14px;border:2px solid rgba(179,32,0,.18);border-left:4px solid var(--red)}
-.ocr-label{font-size:.7rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-family:'Anton',sans-serif}
-.ocr-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.ocr-file{border:2px solid rgba(96,17,0,.2);padding:5px 10px;font-size:.82rem;background:var(--white);flex:1;min-width:0;font-family:inherit;color:var(--dk)}
-.ocr-sel{border:2px solid rgba(96,17,0,.2);padding:5px 8px;font-size:.82rem;background:var(--white);font-family:inherit;color:var(--dk)}
-
 /* BTN */
 .btn{border:none;cursor:pointer;padding:9px 22px;font-size:.8rem;font-weight:900;font-family:'Anton',sans-serif;letter-spacing:.12em;text-transform:uppercase;transition:.15s}
 .btn-primary{background:var(--red);color:var(--cream);border:2.5px solid var(--red)}
@@ -214,6 +206,27 @@ nav{
 .btn-danger{background:transparent;border:2.5px solid var(--red);color:var(--red)}
 .btn-danger:hover{background:var(--red);color:var(--cream)}
 .btn-sm{padding:6px 14px;font-size:.74rem}
+
+/* EXPORT CARDS */
+.export-card{
+  border:2.5px solid rgba(96,17,0,.2);padding:18px 20px;
+  display:flex;align-items:center;gap:16px;
+  background:rgba(179,32,0,.04);
+  transition:.18s;
+}
+.export-card:hover{border-color:var(--red);background:rgba(179,32,0,.08)}
+.export-icon{
+  font-family:'Anton',sans-serif;font-size:2rem;
+  color:var(--red);width:48px;text-align:center;flex-shrink:0;line-height:1;
+}
+.export-info{flex:1}
+.export-title{font-family:'Anton',sans-serif;font-size:.95rem;letter-spacing:.12em;color:var(--dk);margin-bottom:3px}
+.export-desc{font-size:.76rem;color:rgba(96,17,0,.5);line-height:1.5}
+.export-count{
+  font-family:'Anton',sans-serif;font-size:.7rem;letter-spacing:.1em;
+  color:rgba(96,17,0,.35);margin-top:10px;padding-top:10px;
+  border-top:1px solid rgba(96,17,0,.1);
+}
 
 /* DETAIL */
 .detail-cover{width:100%;max-height:260px;object-fit:contain;border:2px solid rgba(96,17,0,.15);background:rgba(179,32,0,.06);margin-bottom:6px}
@@ -242,7 +255,6 @@ nav{
   .nav-btn{padding:5px 10px;font-size:.72rem}
   .hero{padding:28px 16px 24px;flex-direction:column;align-items:flex-start}
   .hero-title{font-size:3.2rem}
-  #heroImg{height:140px!important;right:0!important;top:-10px!important}
   .hero-count{font-size:3rem}
   .toolbar-band{padding:10px 16px}
   .shelf-wrap{padding:20px 16px}
@@ -252,8 +264,6 @@ nav{
   .form-row{flex-direction:column;gap:10px}
   .note-tab{font-size:.62rem;padding:7px 2px}
   .hero-sub{font-size:.82rem}
-  .ocr-row{flex-direction:column;align-items:stretch}
-  .ocr-file{width:100%}
 }
 </style>
 </head>
@@ -266,7 +276,7 @@ nav{
   </div>
   <div class="nav-right">
     <button class="nav-btn" onclick="openAdd()">+ NEW BOOK</button>
-    <button class="nav-btn accent" onclick="openSettings()">SETTINGS</button>
+    <button class="nav-btn accent" onclick="openExport()">EXPORT</button>
   </div>
 </nav>
 
@@ -278,7 +288,6 @@ nav{
     <div class="hero-sub">不閱讀不會死，但會變笨。</div>
   </div>
   <div style="position:relative;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;gap:4px">
-    <!-- decorative big letter -->
     <div style="position:absolute;right:-20px;top:-30px;font-family:'Anton',sans-serif;font-size:14rem;color:var(--red);opacity:.07;line-height:1;pointer-events:none;user-select:none">READ</div>
     <div class="hero-count" id="hero-count" style="position:relative;z-index:1">
       0<span>BOOKS READ</span>
@@ -347,20 +356,6 @@ nav{
         <div id="na-心得" class="note-area"></div>
         <div id="na-延伸" class="note-area"></div>
       </div>
-      <div class="ocr-box">
-        <div class="ocr-label">Screenshot OCR（需設定 API Key）</div>
-        <div class="ocr-row">
-          <input type="file" class="ocr-file" id="ocrInput" accept="image/*">
-          <select class="ocr-sel" id="ocrTarget">
-            <option value="句子">→ 印象句子</option>
-            <option value="摘要">→ 內容摘要</option>
-            <option value="心得">→ 讀後心得</option>
-            <option value="延伸">→ 延伸筆記</option>
-          </select>
-          <button class="btn btn-outline btn-sm" onclick="runOCR()">辨識</button>
-        </div>
-        <div id="ocrStatus" style="font-size:.76rem;color:rgba(96,17,0,.45);margin-top:7px;letter-spacing:.05em"></div>
-      </div>
       <div style="display:flex;gap:10px;justify-content:flex-end">
         <button class="btn btn-outline" onclick="closeAddModal()">CANCEL</button>
         <button class="btn btn-primary" onclick="saveBook()">SAVE BOOK</button>
@@ -377,21 +372,39 @@ nav{
   </div>
 </div>
 
-<!-- SETTINGS -->
-<div class="overlay" id="settingsOverlay" onclick="closeSettings(event)">
+<!-- EXPORT MODAL -->
+<div class="overlay" id="exportOverlay" onclick="closeExport(event)">
   <div class="modal" onclick="e=>e.stopPropagation()">
-    <div class="modal-head"><h3>SETTINGS</h3><button class="close-btn" onclick="closeSettingsModal()">✕</button></div>
+    <div class="modal-head">
+      <h3>EXPORT DATA</h3>
+      <button class="close-btn" onclick="closeExportModal()">✕</button>
+    </div>
     <div class="modal-body">
-      <div class="form-group">
-        <label>Anthropic API Key（截圖 OCR 用）</label>
-        <input type="password" id="apiKeyInput" placeholder="sk-ant-…">
+      <p style="font-size:.82rem;color:rgba(96,17,0,.55);line-height:1.65;letter-spacing:.03em">
+        備份你的閱讀紀錄，以防網站異動或資料遺失。<br>建議定期匯出一份存在本機。
+      </p>
+
+      <!-- CSV -->
+      <div class="export-card">
+        <div class="export-icon">CSV</div>
+        <div class="export-info">
+          <div class="export-title">試算表備份</div>
+          <div class="export-desc">匯出為 .csv 格式，可直接用 Excel、Numbers 或 Google Sheets 開啟。包含書名、作者、日期、評分與四類筆記。</div>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="exportCSV()" style="flex-shrink:0;align-self:center">↓ CSV</button>
       </div>
-      <p style="font-size:.8rem;color:rgba(96,17,0,.5);line-height:1.6">API Key 僅儲存於你的瀏覽器本地，不會傳送至任何第三方伺服器。<br>
-      可前往 <a href="https://console.anthropic.com" target="_blank" style="color:var(--red)">console.anthropic.com</a> 取得。</p>
-      <div style="display:flex;gap:10px;justify-content:flex-end">
-        <button class="btn btn-outline" onclick="closeSettingsModal()">CANCEL</button>
-        <button class="btn btn-primary" onclick="saveSettings()">SAVE</button>
+
+      <!-- JSON -->
+      <div class="export-card">
+        <div class="export-icon">JSON</div>
+        <div class="export-info">
+          <div class="export-title">完整備份</div>
+          <div class="export-desc">匯出所有資料（含封面圖片）為 .json 格式。可作為完整備份，未來也能重新匯入。</div>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="exportJSON()" style="flex-shrink:0;align-self:center">↓ JSON</button>
       </div>
+
+      <div class="export-count" id="export-count"></div>
     </div>
   </div>
 </div>
@@ -420,15 +433,7 @@ async function loadBooks(){
   const snap = await getDocs(collection(db,'books'));
   books = snap.docs.map(d=>({id:d.id,...d.data()}));
   books.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-  loadBooks();
-
-// expose functions to global scope for onclick handlers
-window.openAdd=openAdd;window.openEdit=openEdit;window.closeAddModal=closeAddModal;
-window.saveBook=saveBook;window.closeDetailModal=closeDetailModal;window.closeDetail=closeDetail;
-window.openDetail=openDetail;window.deleteBook=deleteBook;window.openSettings=openSettings;
-window.closeSettingsModal=closeSettingsModal;window.closeSettings=closeSettings;window.saveSettings=saveSettings;
-window.setView=setView;window.switchTab=switchTab;window.addNote=addNote;window.delNote=delNote;
-window.runOCR=runOCR;window.handleCoverUpload=handleCoverUpload;
+  renderShelf();
 }
 
 async function save(b,isEdit){
@@ -442,8 +447,6 @@ async function save(b,isEdit){
     books.unshift(b);
   }
 }
-
-function getKey(){return localStorage.getItem('apiKey')||''}
 
 function dotsHTML(r,sz=10){return[1,2,3,4,5].map(i=>`<span class="rdot ${i<=r?'on':'off'}" style="width:${sz}px;height:${sz}px"></span>`).join('')}
 
@@ -541,22 +544,6 @@ function renderNoteArea(t){
 function addNote(t){const inp=document.getElementById('ni-'+t);const v=inp.value.trim();if(!v)return;if(!tmpNotes[t])tmpNotes[t]=[];tmpNotes[t].push(v);inp.value='';renderNoteArea(t)}
 function delNote(t,i){tmpNotes[t].splice(i,1);renderNoteArea(t)}
 
-async function runOCR(){
-  const key=getKey();if(!key){toast('請先設定 API Key');return;}
-  const file=document.getElementById('ocrInput').files[0];if(!file){toast('請選擇截圖');return;}
-  const target=document.getElementById('ocrTarget').value;
-  const status=document.getElementById('ocrStatus');status.textContent='辨識中…';
-  try{
-    const b64=await toB64(file);
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:file.type,data:b64}},{type:'text',text:'請完整提取這張圖片中的所有文字內容，只輸出文字本身，不要加任何說明或格式標記。'}]}]})});
-    const data=await res.json();const text=data.content?.[0]?.text||'';
-    if(!text){status.textContent='無法辨識';return;}
-    if(!tmpNotes[target])tmpNotes[target]=[];tmpNotes[target].push(text);renderNoteArea(target);switchTab(target);
-    status.textContent='辨識完成 ✓';document.getElementById('ocrInput').value='';
-  }catch(err){status.textContent='失敗：'+err.message}
-}
-function toB64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=()=>rej(new Error('讀取失敗'));r.readAsDataURL(file)})}
-
 function openDetail(id){
   const b=books.find(x=>x.id===id);if(!b)return;
   document.getElementById('d-title').textContent=b.title;
@@ -577,15 +564,73 @@ async function deleteBook(id){
   renderShelf();closeDetailModal();toast('DELETED');
 }
 
-function openSettings(){document.getElementById('apiKeyInput').value=getKey();document.getElementById('settingsOverlay').classList.add('open')}
-function closeSettings(e){if(e.target===document.getElementById('settingsOverlay'))closeSettingsModal()}
-function closeSettingsModal(){document.getElementById('settingsOverlay').classList.remove('open')}
-function saveSettings(){localStorage.setItem('apiKey',document.getElementById('apiKeyInput').value.trim());closeSettingsModal();toast('SAVED')}
+/* ── EXPORT ─────────────────────────── */
+function openExport(){
+  const n=books.length;
+  const nc=books.reduce((s,b)=>s+Object.values(b.notes||{}).flat().length,0);
+  document.getElementById('export-count').textContent=`目前共 ${n} 本書 · ${nc} 則筆記`;
+  document.getElementById('exportOverlay').classList.add('open');
+}
+function closeExport(e){if(e.target===document.getElementById('exportOverlay'))closeExportModal()}
+function closeExportModal(){document.getElementById('exportOverlay').classList.remove('open')}
+
+function csvCell(v){
+  const s=String(v==null?'':v);
+  // wrap in quotes if contains comma, newline, or quote
+  if(s.includes(',')||s.includes('\n')||s.includes('"'))
+    return '"'+s.replace(/"/g,'""')+'"';
+  return s;
+}
+
+function exportCSV(){
+  if(!books.length){toast('尚無書籍資料');return;}
+  const headers=['書名','作者','閱讀日期','評分（/5）','印象句子','內容摘要','讀後心得','延伸筆記'];
+  const rows=books.map(b=>[
+    b.title||'',
+    b.author||'',
+    b.date||'',
+    b.rating||0,
+    (b.notes?.['句子']||[]).join(' ／ '),
+    (b.notes?.['摘要']||[]).join(' ／ '),
+    (b.notes?.['心得']||[]).join(' ／ '),
+    (b.notes?.['延伸']||[]).join(' ／ ')
+  ]);
+  const csv='\uFEFF'+[headers,...rows].map(r=>r.map(csvCell).join(',')).join('\r\n');
+  const date=new Date().toISOString().slice(0,10);
+  downloadBlob(new Blob([csv],{type:'text/csv;charset=utf-8'}),`reading-air-${date}.csv`);
+  toast('CSV 匯出完成');
+}
+
+function exportJSON(){
+  if(!books.length){toast('尚無書籍資料');return;}
+  const payload={exportedAt:new Date().toISOString(),count:books.length,books:books};
+  const json=JSON.stringify(payload,null,2);
+  const date=new Date().toISOString().slice(0,10);
+  downloadBlob(new Blob([json],{type:'application/json'}),`reading-air-${date}.json`);
+  toast('JSON 備份完成');
+}
+
+function downloadBlob(blob,filename){
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=filename;
+  document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(url);a.remove()},200);
+}
 
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2400)}
 
-renderShelf();
+// expose to global scope for onclick handlers
+window.openAdd=openAdd;window.openEdit=openEdit;window.closeAddModal=closeAddModal;
+window.saveBook=saveBook;window.closeDetailModal=closeDetailModal;window.closeDetail=closeDetail;
+window.openDetail=openDetail;window.deleteBook=deleteBook;
+window.openExport=openExport;window.closeExportModal=closeExportModal;window.closeExport=closeExport;
+window.exportCSV=exportCSV;window.exportJSON=exportJSON;
+window.setView=setView;window.switchTab=switchTab;window.addNote=addNote;window.delNote=delNote;
+window.handleCoverUpload=handleCoverUpload;
+
+loadBooks();
 </script>
 </body>
 </html>
