@@ -235,6 +235,26 @@ nav{
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--dk)}::-webkit-scrollbar-thumb{background:var(--red);border-radius:0}
+
+@media(max-width:600px){
+  nav{padding:0 16px;height:56px}
+  .logo-en{font-size:1.3rem}
+  .nav-btn{padding:5px 10px;font-size:.72rem}
+  .hero{padding:28px 16px 24px;flex-direction:column;align-items:flex-start}
+  .hero-title{font-size:3.2rem}
+  #heroImg{height:140px!important;right:0!important;top:-10px!important}
+  .hero-count{font-size:3rem}
+  .toolbar-band{padding:10px 16px}
+  .shelf-wrap{padding:20px 16px}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px}
+  .modal{max-height:95vh}
+  .modal-body{padding:16px}
+  .form-row{flex-direction:column;gap:10px}
+  .note-tab{font-size:.62rem;padding:7px 2px}
+  .hero-sub{font-size:.82rem}
+  .ocr-row{flex-direction:column;align-items:stretch}
+  .ocr-file{width:100%}
+}
 </style>
 </head>
 <body>
@@ -259,7 +279,7 @@ nav{
   </div>
   <div style="position:relative;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:8px">
     <!-- Cat SVG illustration -->
-    <img id="heroImg" src="背景素材.png" style="height:220px;position:absolute;right:-10px;top:-20px;pointer-events:none;mix-blend-mode:multiply;opacity:.85;object-fit:contain">
+    <img id="heroImg" src="avatar.png" style="height:220px;position:absolute;right:-10px;top:-20px;pointer-events:none;mix-blend-mode:multiply;opacity:.85;object-fit:contain">
     <div class="hero-count" id="hero-count" style="position:relative;z-index:1">
       0<span>BOOKS READ</span>
     </div>
@@ -376,11 +396,53 @@ nav{
   </div>
 </div>
 
-<script>
-let books=JSON.parse(localStorage.getItem('myBooks')||'[]');
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAcqo-Hw6RL-JXXqejjMs3X4J5EVENAZoA",
+  authDomain: "reading-air.firebaseapp.com",
+  projectId: "reading-air",
+  storageBucket: "reading-air.firebasestorage.app",
+  messagingSenderId: "492355141405",
+  appId: "1:492355141405:web:75f9edd41d8ad33f5eebf4"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let books=[];
 let view='grid',editId=null,currentRating=0,currentCover=null;
 let tmpNotes={句子:[],摘要:[],心得:[],延伸:[]};
-function save(){localStorage.setItem('myBooks',JSON.stringify(books))}
+
+async function loadBooks(){
+  const snap = await getDocs(collection(db,'books'));
+  books = snap.docs.map(d=>({id:d.id,...d.data()}));
+  books.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  loadBooks();
+
+// expose functions to global scope for onclick handlers
+window.openAdd=openAdd;window.openEdit=openEdit;window.closeAddModal=closeAddModal;
+window.saveBook=saveBook;window.closeDetailModal=closeDetailModal;window.closeDetail=closeDetail;
+window.openDetail=openDetail;window.deleteBook=deleteBook;window.openSettings=openSettings;
+window.closeSettingsModal=closeSettingsModal;window.closeSettings=closeSettings;window.saveSettings=saveSettings;
+window.setView=setView;window.switchTab=switchTab;window.addNote=addNote;window.delNote=delNote;
+window.runOCR=runOCR;window.handleCoverUpload=handleCoverUpload;
+}
+
+async function save(b,isEdit){
+  if(isEdit){
+    const ref=doc(db,'books',b.id);
+    await updateDoc(ref,b);
+  } else {
+    b.createdAt=Date.now();
+    const ref=await addDoc(collection(db,'books'),b);
+    b.id=ref.id;
+    books.unshift(b);
+  }
+}
+
 function getKey(){return localStorage.getItem('apiKey')||''}
 
 function dotsHTML(r,sz=10){return[1,2,3,4,5].map(i=>`<span class="rdot ${i<=r?'on':'off'}" style="width:${sz}px;height:${sz}px"></span>`).join('')}
@@ -452,11 +514,17 @@ function openEdit(id){
 }
 function closeAdd(e){if(e.target===document.getElementById('addOverlay'))closeAddModal()}
 function closeAddModal(){document.getElementById('addOverlay').classList.remove('open')}
-function saveBook(){
+async function saveBook(){
   const title=document.getElementById('f-title').value.trim();if(!title){toast('請輸入書名');return;}
-  const b={id:editId||Date.now().toString(),title,author:document.getElementById('f-author').value.trim(),date:document.getElementById('f-date').value,rating:currentRating,cover:currentCover,notes:JSON.parse(JSON.stringify(tmpNotes))};
-  if(editId){const i=books.findIndex(x=>x.id===editId);if(i>=0)books[i]=b;}else books.unshift(b);
-  save();renderShelf();closeAddModal();toast(editId?'UPDATED':'SAVED');
+  const b={title,author:document.getElementById('f-author').value.trim(),date:document.getElementById('f-date').value,rating:currentRating,cover:currentCover,notes:JSON.parse(JSON.stringify(tmpNotes))};
+  if(editId){
+    b.id=editId;
+    await save(b,true);
+    const i=books.findIndex(x=>x.id===editId);if(i>=0)books[i]=b;
+  } else {
+    await save(b,false);
+  }
+  renderShelf();closeAddModal();toast(editId?'UPDATED':'SAVED');
 }
 function handleCoverUpload(e){const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=ev=>{currentCover=ev.target.result;document.getElementById('coverPreview').src=currentCover;document.getElementById('coverPreview').style.display='block';document.getElementById('coverLabel').style.display='none';};r.readAsDataURL(file)}
 function setStars(n){currentRating=n;document.querySelectorAll('#starPick span').forEach((s,i)=>s.classList.toggle('on',i<n))}
@@ -502,7 +570,12 @@ function openDetail(id){
 }
 function closeDetail(e){if(e.target===document.getElementById('detailOverlay'))closeDetailModal()}
 function closeDetailModal(){document.getElementById('detailOverlay').classList.remove('open')}
-function deleteBook(id){if(!confirm('確定要刪除這本書嗎？'))return;books=books.filter(b=>b.id!==id);save();renderShelf();closeDetailModal();toast('DELETED')}
+async function deleteBook(id){
+  if(!confirm('確定要刪除這本書嗎？'))return;
+  await deleteDoc(doc(db,'books',id));
+  books=books.filter(b=>b.id!==id);
+  renderShelf();closeDetailModal();toast('DELETED');
+}
 
 function openSettings(){document.getElementById('apiKeyInput').value=getKey();document.getElementById('settingsOverlay').classList.add('open')}
 function closeSettings(e){if(e.target===document.getElementById('settingsOverlay'))closeSettingsModal()}
