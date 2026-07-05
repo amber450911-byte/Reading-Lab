@@ -315,7 +315,7 @@ nav{
 
 <!-- ADD MODAL -->
 <div class="overlay" id="addOverlay" onclick="closeAdd(event)">
-  <div class="modal" onclick="e=>e.stopPropagation()">
+  <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-head">
       <h3 id="modal-title">ADD BOOK</h3>
       <button class="close-btn" onclick="closeAddModal()">✕</button>
@@ -366,7 +366,7 @@ nav{
 
 <!-- DETAIL MODAL -->
 <div class="overlay" id="detailOverlay" onclick="closeDetail(event)">
-  <div class="modal" onclick="e=>e.stopPropagation()">
+  <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-head"><h3 id="d-title"></h3><button class="close-btn" onclick="closeDetailModal()">✕</button></div>
     <div class="modal-body" id="d-body"></div>
   </div>
@@ -374,7 +374,7 @@ nav{
 
 <!-- EXPORT MODAL -->
 <div class="overlay" id="exportOverlay" onclick="closeExport(event)">
-  <div class="modal" onclick="e=>e.stopPropagation()">
+  <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-head">
       <h3>EXPORT DATA</h3>
       <button class="close-btn" onclick="closeExportModal()">✕</button>
@@ -437,13 +437,16 @@ async function loadBooks(){
 }
 
 async function save(b,isEdit){
+  // Firestore doesn't allow 'id' as a field name — strip it before writing
+  const {id:_id,...data}=b;
   if(isEdit){
     const ref=doc(db,'books',b.id);
-    await updateDoc(ref,b);
+    await updateDoc(ref,data);
   } else {
-    b.createdAt=Date.now();
-    const ref=await addDoc(collection(db,'books'),b);
+    data.createdAt=Date.now();
+    const ref=await addDoc(collection(db,'books'),data);
     b.id=ref.id;
+    b.createdAt=data.createdAt;
     books.unshift(b);
   }
 }
@@ -621,7 +624,7 @@ function downloadBlob(blob,filename){
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2400)}
 
-// expose to global scope for onclick handlers
+// expose to global scope BEFORE loadBooks so onclick handlers work immediately
 window.openAdd=openAdd;window.openEdit=openEdit;window.closeAddModal=closeAddModal;
 window.saveBook=saveBook;window.closeDetailModal=closeDetailModal;window.closeDetail=closeDetail;
 window.openDetail=openDetail;window.deleteBook=deleteBook;
