@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>閱讀空氣</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,900;1,900&family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dk:#601100;--red:#B32000;--cream:#F0E7C8;--white:#FFFFFF;
+  --cream2:#e8dbb8;--red2:#8a1800;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--dk);color:var(--cream);font-family:'Noto Sans TC',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* ── NAV ─────────────────────────────── */
+nav{
+  background:var(--red);
+  padding:0 40px;height:70px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:5px solid var(--cream);
+  position:relative;z-index:10;
+}
+.logo-wrap{display:flex;flex-direction:column;line-height:1}
+.logo-en{font-family:'Anton',sans-serif;font-size:1.9rem;letter-spacing:.12em;color:var(--cream);line-height:1}
+.logo-zh{font-size:.62rem;letter-spacing:.35em;color:rgba(240,231,200,.55);font-weight:700;text-transform:uppercase;margin-top:1px}
+.nav-right{display:flex;gap:10px;align-items:center}
+.nav-btn{
+  font-family:'Anton',sans-serif;background:transparent;
+  border:2.5px solid var(--cream);color:var(--cream);
+  padding:7px 20px;cursor:pointer;font-size:.85rem;
+  letter-spacing:.12em;transition:.15s;
+}
+.nav-btn:hover{background:var(--cream);color:var(--red)}
+.nav-btn.accent{background:var(--cream);color:var(--red)}
+.nav-btn.accent:hover{background:var(--cream2)}
+
+/* ── HERO BAND ───────────────────────── */
+.hero{
+  background:var(--cream);color:var(--dk);
+  padding:48px 40px 40px;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+}
+/* cat illustration removed from ::before/::after — handled by inline SVG */
+.hero::before,.hero::after{display:none}
+.hero-left{position:relative;z-index:1}
+.hero-label{
+  font-family:'Anton',sans-serif;font-size:.75rem;letter-spacing:.3em;
+  color:var(--red);margin-bottom:8px;
+}
+.hero-title{
+  font-family:'Anton',sans-serif;font-size:5.5rem;line-height:.9;
+  color:var(--dk);letter-spacing:.06em;text-transform:uppercase;
+}
+.hero-title em{color:var(--red);font-style:normal;display:block}
+.hero-sub{font-size:.9rem;color:var(--red2);margin-top:14px;letter-spacing:.06em;max-width:340px;line-height:1.6}
+.hero-count{
+  font-family:'Anton',sans-serif;font-size:5rem;color:var(--red);
+  line-height:1;text-align:right;position:relative;z-index:1;
+}
+.hero-count span{display:block;font-size:.75rem;letter-spacing:.2em;color:var(--dk);margin-top:2px}
+
+/* ── TOOLBAR BAND ────────────────────── */
+.toolbar-band{
+  background:var(--dk);border-top:4px solid var(--red);border-bottom:4px solid var(--red);
+  padding:14px 40px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+}
+.search-wrap{flex:1;max-width:360px;position:relative}
+.search-wrap input{
+  width:100%;background:transparent;border:2.5px solid rgba(240,231,200,.3);
+  color:var(--cream);padding:10px 16px;font-size:.88rem;outline:none;
+  font-family:'Noto Sans TC',sans-serif;transition:.18s;
+  border-radius:0;
+}
+.search-wrap input::placeholder{color:rgba(240,231,200,.3)}
+.search-wrap input:focus{border-color:var(--cream);background:rgba(240,231,200,.06)}
+.view-toggle{display:flex;margin-left:auto}
+.vtbtn{
+  font-family:'Anton',sans-serif;
+  background:transparent;border:2.5px solid rgba(240,231,200,.3);
+  color:rgba(240,231,200,.4);padding:8px 20px;cursor:pointer;
+  font-size:.78rem;letter-spacing:.12em;transition:.15s;border-right:none;
+}
+.vtbtn:last-child{border-right:2.5px solid rgba(240,231,200,.3)}
+.vtbtn.active{background:var(--red);color:var(--cream);border-color:var(--red)}
+.vtbtn:not(.active):hover{background:rgba(240,231,200,.08);color:var(--cream)}
+
+/* ── SHELF CONTENT ───────────────────── */
+.shelf-wrap{padding:36px 40px}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:20px}
+.book-card{
+  background:var(--cream);color:var(--dk);
+  border:3px solid var(--cream);
+  cursor:pointer;transition:.22s;position:relative;overflow:hidden;
+}
+.book-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:var(--red);
+}
+.book-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,.5),0 4px 0 var(--red)}
+.book-cover{width:100%;height:215px;object-fit:cover;display:block}
+.book-cover-ph{
+  width:100%;height:215px;background:var(--red);
+  display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+}
+.ph-circle{position:absolute;width:160px;height:160px;border-radius:50%;border:30px solid rgba(255,255,255,.1)}
+.ph-circle2{position:absolute;width:240px;height:240px;border-radius:50%;border:20px solid rgba(255,255,255,.06);top:-40px;right:-60px}
+.ph-letter{font-family:'Anton',sans-serif;font-size:5rem;color:rgba(240,231,200,.6);position:relative;z-index:1;letter-spacing:.05em}
+.book-info{padding:12px 14px 14px;background:var(--cream)}
+.book-title{font-weight:900;font-size:.93rem;line-height:1.3;margin-bottom:3px;
+  overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;color:var(--dk)}
+.book-author{font-size:.76rem;color:var(--red2);margin-bottom:8px;font-style:italic}
+.rating-row{display:flex;gap:3px;margin-bottom:3px}
+.rdot{border-radius:50%;flex-shrink:0}
+.rdot.on{background:var(--red)}
+.rdot.off{background:rgba(96,17,0,.18)}
+.book-date{font-size:.7rem;color:rgba(96,17,0,.45);letter-spacing:.05em}
+
+/* LIST */
+.list{display:flex;flex-direction:column;gap:8px}
+.list-card{
+  background:rgba(240,231,200,.06);border:2px solid rgba(240,231,200,.12);
+  border-left:5px solid var(--red);
+  display:flex;align-items:center;gap:16px;padding:14px 20px;cursor:pointer;transition:.18s;
+}
+.list-card:hover{background:rgba(240,231,200,.1);border-color:rgba(240,231,200,.25);transform:translateX(4px)}
+.list-cover{width:50px;height:68px;object-fit:cover;border:2px solid rgba(240,231,200,.15);flex-shrink:0}
+.list-cover-ph{width:50px;height:68px;background:var(--red);border:2px solid rgba(240,231,200,.1);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:1.4rem;color:rgba(240,231,200,.7);letter-spacing:.04em}
+.list-title{font-weight:900;font-size:1rem;color:var(--cream);margin-bottom:2px}
+.list-author{font-size:.8rem;color:rgba(240,231,200,.4);font-style:italic}
+
+/* ── MODAL ───────────────────────────── */
+.overlay{
+  position:fixed;inset:0;background:rgba(60,10,0,.75);backdrop-filter:blur(4px);
+  z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:.25s;
+}
+.overlay.open{opacity:1;pointer-events:all}
+.modal{
+  background:var(--cream);color:var(--dk);
+  border:3px solid var(--red);
+  width:100%;max-width:650px;max-height:90vh;overflow-y:auto;
+  transform:translateY(14px);transition:.25s;
+  box-shadow:8px 8px 0 var(--dk);
+}
+.overlay.open .modal{transform:translateY(0)}
+.modal-head{
+  padding:18px 24px;display:flex;align-items:center;justify-content:space-between;
+  background:var(--red);border-bottom:3px solid var(--dk);
+}
+.modal-head h3{font-family:'Anton',sans-serif;font-size:1.4rem;letter-spacing:.15em;color:var(--cream)}
+.close-btn{background:none;border:none;cursor:pointer;font-size:1.3rem;color:rgba(240,231,200,.6);line-height:1}
+.close-btn:hover{color:var(--cream)}
+.modal-body{padding:24px;display:flex;flex-direction:column;gap:16px}
+
+/* FORM */
+.form-row{display:flex;gap:14px;flex-wrap:wrap}
+.form-group{display:flex;flex-direction:column;gap:5px;flex:1;min-width:155px}
+.form-group label{font-size:.7rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+.form-group input,.form-group textarea,.form-group select{
+  background:var(--white);border:2px solid rgba(96,17,0,.2);
+  color:var(--dk);padding:10px 12px;font-size:.9rem;outline:none;
+  font-family:'Noto Sans TC',sans-serif;resize:vertical;transition:.18s;
+}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--red)}
+
+/* STAR */
+.star-pick{display:flex;gap:5px;cursor:pointer;padding-top:4px}
+.star-pick span{width:22px;height:22px;border-radius:50%;border:2px solid rgba(96,17,0,.2);background:#fff;transition:.15s}
+.star-pick span.on{background:var(--red);border-color:var(--red)}
+.star-pick span:hover{border-color:var(--red)}
+
+/* NOTE TABS */
+.note-tabs{display:flex;gap:0;border:2.5px solid var(--red);overflow:hidden}
+.note-tab{flex:1;border:none;background:rgba(179,32,0,.06);padding:8px 4px;cursor:pointer;font-size:.72rem;font-family:'Noto Sans TC',sans-serif;font-weight:700;letter-spacing:.05em;color:rgba(96,17,0,.5);transition:.15s;border-right:1px solid rgba(179,32,0,.2);text-align:center}
+.note-tab:last-child{border-right:none}
+.note-tab.active{background:var(--red);color:var(--cream)}
+.note-area{display:none}
+.note-area.active{display:flex;flex-direction:column;gap:8px}
+.note-entry{background:var(--white);border:1px solid rgba(179,32,0,.15);border-left:3px solid var(--red);padding:9px 32px 9px 12px;position:relative;font-size:.88rem;line-height:1.75;color:var(--dk)}
+.note-entry .del-note{position:absolute;top:7px;right:9px;background:none;border:none;cursor:pointer;color:rgba(96,17,0,.3);font-size:.85rem;transition:.15s;font-family:inherit}
+.note-entry .del-note:hover{color:var(--red)}
+.note-input-row{display:flex;gap:8px}
+.note-input-row textarea{flex:1;background:var(--white);border:2px solid rgba(96,17,0,.18);color:var(--dk);padding:8px 10px;font-size:.88rem;resize:none;outline:none;font-family:inherit;transition:.18s}
+.note-input-row textarea:focus{border-color:var(--red)}
+.note-input-row button{align-self:flex-end;padding:9px 16px;border:2.5px solid var(--red);background:transparent;color:var(--red);cursor:pointer;font-weight:900;font-family:'Anton',sans-serif;font-size:.8rem;letter-spacing:.1em;transition:.15s}
+.note-input-row button:hover{background:var(--red);color:var(--cream)}
+
+/* COVER UPLOAD */
+.cover-upload{width:100%;height:130px;border:2.5px dashed rgba(179,32,0,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:.18s;position:relative;overflow:hidden;background:rgba(179,32,0,.04)}
+.cover-upload:hover{border-color:var(--red)}
+.cover-upload img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cover-upload .up-label{font-size:.78rem;color:rgba(96,17,0,.4);pointer-events:none;font-weight:900;letter-spacing:.1em;text-transform:uppercase;font-family:'Anton',sans-serif}
+.cover-upload input{position:absolute;inset:0;opacity:0;cursor:pointer}
+
+/* OCR */
+.ocr-box{background:rgba(179,32,0,.06);padding:14px;border:2px solid rgba(179,32,0,.18);border-left:4px solid var(--red)}
+.ocr-label{font-size:.7rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-family:'Anton',sans-serif}
+.ocr-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ocr-file{border:2px solid rgba(96,17,0,.2);padding:5px 10px;font-size:.82rem;background:var(--white);flex:1;min-width:0;font-family:inherit;color:var(--dk)}
+.ocr-sel{border:2px solid rgba(96,17,0,.2);padding:5px 8px;font-size:.82rem;background:var(--white);font-family:inherit;color:var(--dk)}
+
+/* BTN */
+.btn{border:none;cursor:pointer;padding:9px 22px;font-size:.8rem;font-weight:900;font-family:'Anton',sans-serif;letter-spacing:.12em;text-transform:uppercase;transition:.15s}
+.btn-primary{background:var(--red);color:var(--cream);border:2.5px solid var(--red)}
+.btn-primary:hover{background:var(--red2)}
+.btn-outline{background:transparent;border:2.5px solid rgba(96,17,0,.3);color:var(--dk)}
+.btn-outline:hover{border-color:var(--red);color:var(--red)}
+.btn-danger{background:transparent;border:2.5px solid var(--red);color:var(--red)}
+.btn-danger:hover{background:var(--red);color:var(--cream)}
+.btn-sm{padding:6px 14px;font-size:.74rem}
+
+/* DETAIL */
+.detail-cover{width:100%;max-height:260px;object-fit:contain;border:2px solid rgba(96,17,0,.15);background:rgba(179,32,0,.06);margin-bottom:6px}
+.detail-cover-ph{width:100%;height:160px;background:var(--red);display:flex;align-items:center;justify-content:center;margin-bottom:6px;position:relative;overflow:hidden}
+.detail-meta{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 14px}
+.detail-rule{border:none;border-top:2px solid rgba(96,17,0,.12);margin:0 0 14px}
+.note-sec-title{font-size:.7rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:7px;display:flex;align-items:center;gap:8px;font-family:'Anton',sans-serif}
+.note-sec-title::before{content:'';width:14px;height:2px;background:var(--red)}
+.note-block{background:var(--white);border:1px solid rgba(96,17,0,.1);border-left:3px solid var(--red);padding:9px 12px;font-size:.88rem;line-height:1.75;margin-bottom:5px}
+
+/* EMPTY */
+.empty{text-align:center;padding:90px 20px;color:rgba(240,231,200,.25)}
+.empty .big{font-family:'Anton',sans-serif;font-size:7rem;letter-spacing:.15em;color:var(--red);opacity:.2;margin-bottom:16px;line-height:1}
+.empty p{font-size:.95rem;letter-spacing:.06em}
+.empty strong{color:var(--cream)}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--red);color:var(--cream);padding:10px 28px;font-size:.82rem;font-weight:900;opacity:0;transition:.3s;z-index:999;pointer-events:none;letter-spacing:.1em;text-transform:uppercase;font-family:'Anton',sans-serif;border:2px solid var(--cream);box-shadow:4px 4px 0 var(--dk)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--dk)}::-webkit-scrollbar-thumb{background:var(--red);border-radius:0}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo-wrap">
+    <div class="logo-en">READING AIR</div>
+    <div class="logo-zh">閱讀空氣 · My Reading Journal</div>
+  </div>
+  <div class="nav-right">
+    <button class="nav-btn" onclick="openAdd()">+ NEW BOOK</button>
+    <button class="nav-btn accent" onclick="openSettings()">SETTINGS</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-label">MY READING SHELF</div>
+    <div class="hero-title">MY<em>BOOKS</em></div>
+    <div class="hero-sub">不閱讀不會死，但會變笨。</div>
+  </div>
+  <div style="position:relative;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+    <!-- Cat SVG illustration -->
+    <img id="heroImg" style="height:220px;position:absolute;right:-10px;top:-20px;pointer-events:none;mix-blend-mode:multiply;opacity:.85;object-fit:contain">
+    <div class="hero-count" id="hero-count" style="position:relative;z-index:1">
+      0<span>BOOKS READ</span>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar-band">
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="SEARCH TITLE OR AUTHOR…" oninput="renderShelf()">
+  </div>
+  <div class="view-toggle">
+    <button class="vtbtn active" id="vg" onclick="setView('grid')">COVER</button>
+    <button class="vtbtn" id="vl" onclick="setView('list')">LIST</button>
+  </div>
+</div>
+
+<!-- SHELF -->
+<div class="shelf-wrap">
+  <div id="shelf"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ADD MODAL -->
+<div class="overlay" id="addOverlay" onclick="closeAdd(event)">
+  <div class="modal" onclick="e=>e.stopPropagation()">
+    <div class="modal-head">
+      <h3 id="modal-title">ADD BOOK</h3>
+      <button class="close-btn" onclick="closeAddModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Cover Image</label>
+        <div class="cover-upload" onclick="document.getElementById('coverInput').click()">
+          <img id="coverPreview" src="" style="display:none">
+          <span class="up-label" id="coverLabel">Click to Upload</span>
+          <input type="file" id="coverInput" accept="image/*" onchange="handleCoverUpload(event)">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>書名 *</label><input type="text" id="f-title" placeholder="輸入書名"></div>
+        <div class="form-group"><label>作者</label><input type="text" id="f-author" placeholder="輸入作者"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>閱讀日期</label><input type="date" id="f-date"></div>
+        <div class="form-group">
+          <label>評分</label>
+          <div class="star-pick" id="starPick">
+            <span data-v="1"></span><span data-v="2"></span><span data-v="3"></span>
+            <span data-v="4"></span><span data-v="5"></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>筆記</label>
+        <div class="note-tabs">
+          <button class="note-tab active" data-t="句子" onclick="switchTab('句子')">印象句子</button>
+          <button class="note-tab" data-t="摘要" onclick="switchTab('摘要')">內容摘要</button>
+          <button class="note-tab" data-t="心得" onclick="switchTab('心得')">讀後心得</button>
+          <button class="note-tab" data-t="延伸" onclick="switchTab('延伸')">延伸筆記</button>
+        </div>
+        <div id="na-句子" class="note-area active"></div>
+        <div id="na-摘要" class="note-area"></div>
+        <div id="na-心得" class="note-area"></div>
+        <div id="na-延伸" class="note-area"></div>
+      </div>
+      <div class="ocr-box">
+        <div class="ocr-label">Screenshot OCR（需設定 API Key）</div>
+        <div class="ocr-row">
+          <input type="file" class="ocr-file" id="ocrInput" accept="image/*">
+          <select class="ocr-sel" id="ocrTarget">
+            <option value="句子">→ 印象句子</option>
+            <option value="摘要">→ 內容摘要</option>
+            <option value="心得">→ 讀後心得</option>
+            <option value="延伸">→ 延伸筆記</option>
+          </select>
+          <button class="btn btn-outline btn-sm" onclick="runOCR()">辨識</button>
+        </div>
+        <div id="ocrStatus" style="font-size:.76rem;color:rgba(96,17,0,.45);margin-top:7px;letter-spacing:.05em"></div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:flex-end">
+        <button class="btn btn-outline" onclick="closeAddModal()">CANCEL</button>
+        <button class="btn btn-primary" onclick="saveBook()">SAVE BOOK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="overlay" id="detailOverlay" onclick="closeDetail(event)">
+  <div class="modal" onclick="e=>e.stopPropagation()">
+    <div class="modal-head"><h3 id="d-title"></h3><button class="close-btn" onclick="closeDetailModal()">✕</button></div>
+    <div class="modal-body" id="d-body"></div>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div class="overlay" id="settingsOverlay" onclick="closeSettings(event)">
+  <div class="modal" onclick="e=>e.stopPropagation()">
+    <div class="modal-head"><h3>SETTINGS</h3><button class="close-btn" onclick="closeSettingsModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Anthropic API Key（截圖 OCR 用）</label>
+        <input type="password" id="apiKeyInput" placeholder="sk-ant-…">
+      </div>
+      <p style="font-size:.8rem;color:rgba(96,17,0,.5);line-height:1.6">API Key 僅儲存於你的瀏覽器本地，不會傳送至任何第三方伺服器。<br>
+      可前往 <a href="https://console.anthropic.com" target="_blank" style="color:var(--red)">console.anthropic.com</a> 取得。</p>
+      <div style="display:flex;gap:10px;justify-content:flex-end">
+        <button class="btn btn-outline" onclick="closeSettingsModal()">CANCEL</button>
+        <button class="btn btn-primary" onclick="saveSettings()">SAVE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let books=JSON.parse(localStorage.getItem('myBooks')||'[]');
+let view='grid',editId=null,currentRating=0,currentCover=null;
+let tmpNotes={句子:[],摘要:[],心得:[],延伸:[]};
+function save(){localStorage.setItem('myBooks',JSON.stringify(books))}
+function getKey(){return localStorage.getItem('apiKey')||''}
+
+function dotsHTML(r,sz=10){return[1,2,3,4,5].map(i=>`<span class="rdot ${i<=r?'on':'off'}" style="width:${sz}px;height:${sz}px"></span>`).join('')}
+
+function renderShelf(){
+  const q=(document.getElementById('search').value||'').toLowerCase();
+  const f=books.filter(b=>b.title.toLowerCase().includes(q)||(b.author||'').toLowerCase().includes(q));
+  document.getElementById('hero-count').innerHTML=`${books.length}<span>BOOKS READ</span>`;
+  const shelf=document.getElementById('shelf');
+  if(!f.length){
+    shelf.innerHTML=`<div class="empty"><div class="big">EMPTY</div><p>${q?'No results found':'No books yet — click <strong>+ NEW BOOK</strong> to start'}</p></div>`;
+    shelf.className='';return;
+  }
+  if(view==='grid'){shelf.className='grid';shelf.innerHTML=f.map(cardHTML).join('');}
+  else{shelf.className='list';shelf.innerHTML=f.map(listHTML).join('');}
+}
+
+function cardHTML(b){
+  const L=(b.title||'?')[0];
+  const cover=b.cover
+    ?`<img class="book-cover" src="${b.cover}" alt="">`
+    :`<div class="book-cover-ph"><div class="ph-circle"></div><div class="ph-circle2"></div><span class="ph-letter">${esc(L)}</span></div>`;
+  return`<div class="book-card" onclick="openDetail('${b.id}')">
+    ${cover}
+    <div class="book-info">
+      <div class="book-title">${esc(b.title)}</div>
+      <div class="book-author">${esc(b.author||'')}</div>
+      <div class="rating-row">${dotsHTML(b.rating||0)}</div>
+      <div class="book-date">${b.date||''}</div>
+    </div>
+  </div>`;
+}
+
+function listHTML(b){
+  const L=(b.title||'?')[0];
+  const cover=b.cover?`<img class="list-cover" src="${b.cover}" alt="">`:
+    `<div class="list-cover-ph">${esc(L)}</div>`;
+  const nc=Object.values(b.notes||{}).flat().length;
+  return`<div class="list-card" onclick="openDetail('${b.id}')">
+    ${cover}
+    <div style="flex:1;min-width:0">
+      <div class="list-title">${esc(b.title)}</div>
+      <div class="list-author">${esc(b.author||'')}${b.date?' · '+b.date:''}</div>
+      <div style="font-size:.72rem;color:rgba(240,231,200,.3);margin-top:3px">${nc} 則筆記</div>
+    </div>
+    <div style="flex-shrink:0"><div class="rating-row">${dotsHTML(b.rating||0)}</div></div>
+  </div>`;
+}
+
+function setView(v){view=v;document.getElementById('vg').classList.toggle('active',v==='grid');document.getElementById('vl').classList.toggle('active',v==='list');renderShelf()}
+
+function openAdd(){
+  editId=null;currentRating=0;currentCover=null;tmpNotes={句子:[],摘要:[],心得:[],延伸:[]};
+  document.getElementById('modal-title').textContent='ADD BOOK';
+  ['f-title','f-author'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f-date').value=new Date().toISOString().slice(0,10);
+  document.getElementById('coverPreview').style.display='none';document.getElementById('coverLabel').style.display='';
+  setStars(0);renderNotesAll();document.getElementById('addOverlay').classList.add('open');switchTab('句子');
+}
+function openEdit(id){
+  const b=books.find(x=>x.id===id);if(!b)return;
+  editId=id;currentRating=b.rating||0;currentCover=b.cover||null;
+  tmpNotes=JSON.parse(JSON.stringify(b.notes||{}));['句子','摘要','心得','延伸'].forEach(k=>{if(!tmpNotes[k])tmpNotes[k]=[]});
+  document.getElementById('modal-title').textContent='EDIT BOOK';
+  document.getElementById('f-title').value=b.title;document.getElementById('f-author').value=b.author||'';document.getElementById('f-date').value=b.date||'';
+  if(b.cover){document.getElementById('coverPreview').src=b.cover;document.getElementById('coverPreview').style.display='block';document.getElementById('coverLabel').style.display='none';}
+  else{document.getElementById('coverPreview').style.display='none';document.getElementById('coverLabel').style.display='';}
+  setStars(currentRating);renderNotesAll();document.getElementById('addOverlay').classList.add('open');switchTab('句子');
+}
+function closeAdd(e){if(e.target===document.getElementById('addOverlay'))closeAddModal()}
+function closeAddModal(){document.getElementById('addOverlay').classList.remove('open')}
+function saveBook(){
+  const title=document.getElementById('f-title').value.trim();if(!title){toast('請輸入書名');return;}
+  const b={id:editId||Date.now().toString(),title,author:document.getElementById('f-author').value.trim(),date:document.getElementById('f-date').value,rating:currentRating,cover:currentCover,notes:JSON.parse(JSON.stringify(tmpNotes))};
+  if(editId){const i=books.findIndex(x=>x.id===editId);if(i>=0)books[i]=b;}else books.unshift(b);
+  save();renderShelf();
+
+// Load hero image from uploaded file via drag or auto if cached
+(function(){
+  // Try to load from localStorage cache
+  const cached = localStorage.getItem('heroImg');
+  if(cached) document.getElementById('heroImg').src = cached;
+})();
+closeAddModal();toast(editId?'UPDATED':'SAVED');
+}
+function handleCoverUpload(e){const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=ev=>{currentCover=ev.target.result;document.getElementById('coverPreview').src=currentCover;document.getElementById('coverPreview').style.display='block';document.getElementById('coverLabel').style.display='none';};r.readAsDataURL(file)}
+function setStars(n){currentRating=n;document.querySelectorAll('#starPick span').forEach((s,i)=>s.classList.toggle('on',i<n))}
+document.getElementById('starPick').addEventListener('click',e=>{const s=e.target.closest('[data-v]');if(s)setStars(+s.dataset.v)});
+
+let curTab='句子';
+function switchTab(t){curTab=t;document.querySelectorAll('.note-tab').forEach(b=>b.classList.toggle('active',b.dataset.t===t));document.querySelectorAll('.note-area').forEach(a=>a.classList.toggle('active',a.id==='na-'+t))}
+function renderNotesAll(){['句子','摘要','心得','延伸'].forEach(t=>renderNoteArea(t))}
+function renderNoteArea(t){
+  const el=document.getElementById('na-'+t);
+  const entries=(tmpNotes[t]||[]).map((n,i)=>`<div class="note-entry">${esc(n).replace(/\n/g,'<br>')}<button class="del-note" onclick="delNote('${t}',${i})">✕</button></div>`).join('');
+  el.innerHTML=entries+`<div class="note-input-row"><textarea id="ni-${t}" rows="2" placeholder="新增筆記…"></textarea><button onclick="addNote('${t}')">ADD</button></div>`;
+}
+function addNote(t){const inp=document.getElementById('ni-'+t);const v=inp.value.trim();if(!v)return;if(!tmpNotes[t])tmpNotes[t]=[];tmpNotes[t].push(v);inp.value='';renderNoteArea(t)}
+function delNote(t,i){tmpNotes[t].splice(i,1);renderNoteArea(t)}
+
+async function runOCR(){
+  const key=getKey();if(!key){toast('請先設定 API Key');return;}
+  const file=document.getElementById('ocrInput').files[0];if(!file){toast('請選擇截圖');return;}
+  const target=document.getElementById('ocrTarget').value;
+  const status=document.getElementById('ocrStatus');status.textContent='辨識中…';
+  try{
+    const b64=await toB64(file);
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:file.type,data:b64}},{type:'text',text:'請完整提取這張圖片中的所有文字內容，只輸出文字本身，不要加任何說明或格式標記。'}]}]})});
+    const data=await res.json();const text=data.content?.[0]?.text||'';
+    if(!text){status.textContent='無法辨識';return;}
+    if(!tmpNotes[target])tmpNotes[target]=[];tmpNotes[target].push(text);renderNoteArea(target);switchTab(target);
+    status.textContent='辨識完成 ✓';document.getElementById('ocrInput').value='';
+  }catch(err){status.textContent='失敗：'+err.message}
+}
+function toB64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=()=>rej(new Error('讀取失敗'));r.readAsDataURL(file)})}
+
+function openDetail(id){
+  const b=books.find(x=>x.id===id);if(!b)return;
+  document.getElementById('d-title').textContent=b.title;
+  const L=(b.title||'?')[0];
+  const cover=b.cover?`<img class="detail-cover" src="${b.cover}" alt="">`:
+    `<div class="detail-cover-ph"><div class="ph-circle"></div><div class="ph-circle2"></div><span style="font-family:'Anton',sans-serif;font-size:5rem;color:rgba(240,231,200,.5);position:relative;z-index:1">${esc(L)}</span></div>`;
+  const types=[{k:'句子',l:'印象句子'},{k:'摘要',l:'內容摘要'},{k:'心得',l:'讀後心得'},{k:'延伸',l:'延伸筆記'}];
+  const notesHTML=types.map(nt=>{const arr=b.notes?.[nt.k]||[];if(!arr.length)return'';return`<div style="margin-bottom:14px"><div class="note-sec-title">${nt.l}</div>${arr.map(n=>`<div class="note-block">${esc(n).replace(/\n/g,'<br>')}</div>`).join('')}</div>`;}).join('');
+  document.getElementById('d-body').innerHTML=`${cover}<div class="detail-meta"><div class="rating-row">${dotsHTML(b.rating||0,13)}</div>${b.author?`<span style="font-size:.85rem;color:rgba(96,17,0,.55);font-style:italic">${esc(b.author)}</span>`:''} ${b.date?`<span style="font-size:.82rem;color:rgba(96,17,0,.4)">${b.date}</span>`:''}</div><hr class="detail-rule">${notesHTML||'<p style="color:rgba(96,17,0,.35);font-size:.88rem;font-style:italic">尚無筆記</p>'}<div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px;padding-top:12px;border-top:1px solid rgba(96,17,0,.1)"><button class="btn btn-outline btn-sm" onclick="openEdit('${b.id}');closeDetailModal()">EDIT</button><button class="btn btn-danger btn-sm" onclick="deleteBook('${b.id}')">DELETE</button></div>`;
+  document.getElementById('detailOverlay').classList.add('open');
+}
+function closeDetail(e){if(e.target===document.getElementById('detailOverlay'))closeDetailModal()}
+function closeDetailModal(){document.getElementById('detailOverlay').classList.remove('open')}
+function deleteBook(id){if(!confirm('確定要刪除這本書嗎？'))return;books=books.filter(b=>b.id!==id);save();renderShelf();closeDetailModal();toast('DELETED')}
+
+function openSettings(){document.getElementById('apiKeyInput').value=getKey();document.getElementById('settingsOverlay').classList.add('open')}
+function closeSettings(e){if(e.target===document.getElementById('settingsOverlay'))closeSettingsModal()}
+function closeSettingsModal(){document.getElementById('settingsOverlay').classList.remove('open')}
+function saveSettings(){localStorage.setItem('apiKey',document.getElementById('apiKeyInput').value.trim());closeSettingsModal();toast('SAVED')}
+
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2400)}
+
+renderShelf();
+</script>
+</body>
+</html>
