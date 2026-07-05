@@ -4,115 +4,62 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>閱讀空氣</title>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,900;1,900&family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --dk:#601100;--red:#B32000;--cream:#F0E7C8;--white:#FFFFFF;
-  --cream2:#e8dbb8;--red2:#8a1800;
+  --cream2:#e8dbb8;--cream3:#d8cba8;--red2:#8a1800;
+  --nb-a:#F0E7C8;--nb-b:#E6D9B0;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--dk);color:var(--cream);font-family:'Noto Sans TC',sans-serif;min-height:100vh;overflow-x:hidden}
 
-/* ── NAV ─────────────────────────────── */
-nav{
-  background:var(--red);
-  padding:0 40px;height:70px;
-  display:flex;align-items:center;justify-content:space-between;
-  border-bottom:5px solid var(--cream);
-  position:relative;z-index:10;
-}
+/* NAV */
+nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:center;justify-content:space-between;border-bottom:5px solid var(--cream);position:relative;z-index:10}
 .logo-wrap{display:flex;flex-direction:column;line-height:1}
 .logo-en{font-family:'Anton',sans-serif;font-size:1.9rem;letter-spacing:.12em;color:var(--cream);line-height:1}
 .logo-zh{font-size:.62rem;letter-spacing:.35em;color:rgba(240,231,200,.55);font-weight:700;text-transform:uppercase;margin-top:1px}
 .nav-right{display:flex;gap:10px;align-items:center}
-.nav-btn{
-  font-family:'Anton',sans-serif;background:transparent;
-  border:2.5px solid var(--cream);color:var(--cream);
-  padding:7px 20px;cursor:pointer;font-size:.85rem;
-  letter-spacing:.12em;transition:.15s;
-}
+.nav-btn{font-family:'Anton',sans-serif;background:transparent;border:2.5px solid var(--cream);color:var(--cream);padding:7px 20px;cursor:pointer;font-size:.85rem;letter-spacing:.12em;transition:.15s}
 .nav-btn:hover{background:var(--cream);color:var(--red)}
 .nav-btn.accent{background:var(--cream);color:var(--red)}
 .nav-btn.accent:hover{background:var(--cream2)}
 
-/* ── HERO BAND ───────────────────────── */
-.hero{
-  background:var(--cream);color:var(--dk);
-  padding:48px 40px 40px;
-  display:flex;align-items:flex-end;justify-content:space-between;
-  gap:20px;flex-wrap:wrap;
-  position:relative;overflow:hidden;
-}
-.hero::before,.hero::after{display:none}
+/* HERO */
+.hero{background:var(--cream);color:var(--dk);padding:48px 40px 40px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden}
 .hero-left{position:relative;z-index:1}
-.hero-label{
-  font-family:'Anton',sans-serif;font-size:.75rem;letter-spacing:.3em;
-  color:var(--red);margin-bottom:8px;
-}
-.hero-title{
-  font-family:'Anton',sans-serif;font-size:5.5rem;line-height:.9;
-  color:var(--dk);letter-spacing:.06em;text-transform:uppercase;
-}
+.hero-label{font-family:'Anton',sans-serif;font-size:.75rem;letter-spacing:.3em;color:var(--red);margin-bottom:8px}
+.hero-title{font-family:'Anton',sans-serif;font-size:5.5rem;line-height:.9;color:var(--dk);letter-spacing:.06em;text-transform:uppercase}
 .hero-title em{color:var(--red);font-style:normal;display:block}
 .hero-sub{font-size:.9rem;color:var(--red2);margin-top:14px;letter-spacing:.06em;max-width:340px;line-height:1.6}
-.hero-count{
-  font-family:'Anton',sans-serif;font-size:5rem;color:var(--red);
-  line-height:1;text-align:right;position:relative;z-index:1;
-}
+.hero-count{font-family:'Anton',sans-serif;font-size:5rem;color:var(--red);line-height:1;text-align:right;position:relative;z-index:1}
 .hero-count span{display:block;font-size:.75rem;letter-spacing:.2em;color:var(--dk);margin-top:2px}
 
-/* ── TOOLBAR BAND ────────────────────── */
-.toolbar-band{
-  background:var(--dk);border-top:4px solid var(--red);border-bottom:4px solid var(--red);
-  padding:14px 40px;
-  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
-}
-.search-wrap{flex:1;max-width:360px;position:relative}
-.search-wrap input{
-  width:100%;background:transparent;border:2.5px solid rgba(240,231,200,.3);
-  color:var(--cream);padding:10px 16px;font-size:.88rem;outline:none;
-  font-family:'Noto Sans TC',sans-serif;transition:.18s;
-  border-radius:0;
-}
+/* TOOLBAR */
+.toolbar-band{background:var(--dk);border-top:4px solid var(--red);border-bottom:4px solid var(--red);padding:14px 40px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.search-wrap{flex:1;max-width:360px}
+.search-wrap input{width:100%;background:transparent;border:2.5px solid rgba(240,231,200,.3);color:var(--cream);padding:10px 16px;font-size:.88rem;outline:none;font-family:'Noto Sans TC',sans-serif;transition:.18s}
 .search-wrap input::placeholder{color:rgba(240,231,200,.3)}
 .search-wrap input:focus{border-color:var(--cream);background:rgba(240,231,200,.06)}
 .view-toggle{display:flex;margin-left:auto}
-.vtbtn{
-  font-family:'Anton',sans-serif;
-  background:transparent;border:2.5px solid rgba(240,231,200,.3);
-  color:rgba(240,231,200,.4);padding:8px 20px;cursor:pointer;
-  font-size:.78rem;letter-spacing:.12em;transition:.15s;border-right:none;
-}
+.vtbtn{font-family:'Anton',sans-serif;background:transparent;border:2.5px solid rgba(240,231,200,.3);color:rgba(240,231,200,.4);padding:8px 20px;cursor:pointer;font-size:.78rem;letter-spacing:.12em;transition:.15s;border-right:none}
 .vtbtn:last-child{border-right:2.5px solid rgba(240,231,200,.3)}
 .vtbtn.active{background:var(--red);color:var(--cream);border-color:var(--red)}
 .vtbtn:not(.active):hover{background:rgba(240,231,200,.08);color:var(--cream)}
 
-/* ── SHELF CONTENT ───────────────────── */
+/* SHELF */
 .shelf-wrap{padding:36px 40px}
-
-/* GRID */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:20px}
-.book-card{
-  background:var(--cream);color:var(--dk);
-  border:3px solid var(--cream);
-  cursor:pointer;transition:.22s;position:relative;overflow:hidden;
-}
-.book-card::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
-  background:var(--red);
-}
+.book-card{background:var(--cream);color:var(--dk);border:3px solid var(--cream);cursor:pointer;transition:.22s;position:relative;overflow:hidden}
+.book-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--red)}
 .book-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,.5),0 4px 0 var(--red)}
 .book-cover{width:100%;height:215px;object-fit:cover;display:block}
-.book-cover-ph{
-  width:100%;height:215px;background:var(--red);
-  display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
-}
+.book-cover-ph{width:100%;height:215px;background:var(--red);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .ph-circle{position:absolute;width:160px;height:160px;border-radius:50%;border:30px solid rgba(255,255,255,.1)}
 .ph-circle2{position:absolute;width:240px;height:240px;border-radius:50%;border:20px solid rgba(255,255,255,.06);top:-40px;right:-60px}
 .ph-letter{font-family:'Anton',sans-serif;font-size:5rem;color:rgba(240,231,200,.6);position:relative;z-index:1;letter-spacing:.05em}
 .book-info{padding:12px 14px 14px;background:var(--cream)}
-.book-title{font-weight:900;font-size:.93rem;line-height:1.3;margin-bottom:3px;
-  overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;color:var(--dk)}
+.book-title{font-weight:900;font-size:.93rem;line-height:1.3;margin-bottom:3px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;color:var(--dk)}
 .book-author{font-size:.76rem;color:var(--red2);margin-bottom:8px;font-style:italic}
 .rating-row{display:flex;gap:3px;margin-bottom:3px}
 .rdot{border-radius:50%;flex-shrink:0}
@@ -122,36 +69,19 @@ nav{
 
 /* LIST */
 .list{display:flex;flex-direction:column;gap:8px}
-.list-card{
-  background:rgba(240,231,200,.06);border:2px solid rgba(240,231,200,.12);
-  border-left:5px solid var(--red);
-  display:flex;align-items:center;gap:16px;padding:14px 20px;cursor:pointer;transition:.18s;
-}
+.list-card{background:rgba(240,231,200,.06);border:2px solid rgba(240,231,200,.12);border-left:5px solid var(--red);display:flex;align-items:center;gap:16px;padding:14px 20px;cursor:pointer;transition:.18s}
 .list-card:hover{background:rgba(240,231,200,.1);border-color:rgba(240,231,200,.25);transform:translateX(4px)}
 .list-cover{width:50px;height:68px;object-fit:cover;border:2px solid rgba(240,231,200,.15);flex-shrink:0}
-.list-cover-ph{width:50px;height:68px;background:var(--red);border:2px solid rgba(240,231,200,.1);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:1.4rem;color:rgba(240,231,200,.7);letter-spacing:.04em}
+.list-cover-ph{width:50px;height:68px;background:var(--red);border:2px solid rgba(240,231,200,.1);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:1.4rem;color:rgba(240,231,200,.7)}
 .list-title{font-weight:900;font-size:1rem;color:var(--cream);margin-bottom:2px}
 .list-author{font-size:.8rem;color:rgba(240,231,200,.4);font-style:italic}
 
-/* ── MODAL ───────────────────────────── */
-.overlay{
-  position:fixed;inset:0;background:rgba(60,10,0,.75);backdrop-filter:blur(4px);
-  z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;
-  opacity:0;pointer-events:none;transition:.25s;
-}
+/* MODAL */
+.overlay{position:fixed;inset:0;background:rgba(60,10,0,.75);backdrop-filter:blur(4px);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.25s}
 .overlay.open{opacity:1;pointer-events:all}
-.modal{
-  background:var(--cream);color:var(--dk);
-  border:3px solid var(--red);
-  width:100%;max-width:650px;max-height:90vh;overflow-y:auto;
-  transform:translateY(14px);transition:.25s;
-  box-shadow:8px 8px 0 var(--dk);
-}
+.modal{background:var(--cream);color:var(--dk);border:3px solid var(--red);width:100%;max-width:650px;max-height:90vh;overflow-y:auto;transform:translateY(14px);transition:.25s;box-shadow:8px 8px 0 var(--dk)}
 .overlay.open .modal{transform:translateY(0)}
-.modal-head{
-  padding:18px 24px;display:flex;align-items:center;justify-content:space-between;
-  background:var(--red);border-bottom:3px solid var(--dk);
-}
+.modal-head{padding:18px 24px;display:flex;align-items:center;justify-content:space-between;background:var(--red);border-bottom:3px solid var(--dk)}
 .modal-head h3{font-family:'Anton',sans-serif;font-size:1.4rem;letter-spacing:.15em;color:var(--cream)}
 .close-btn{background:none;border:none;cursor:pointer;font-size:1.3rem;color:rgba(240,231,200,.6);line-height:1}
 .close-btn:hover{color:var(--cream)}
@@ -161,12 +91,8 @@ nav{
 .form-row{display:flex;gap:14px;flex-wrap:wrap}
 .form-group{display:flex;flex-direction:column;gap:5px;flex:1;min-width:155px}
 .form-group label{font-size:.7rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
-.form-group input,.form-group textarea,.form-group select{
-  background:var(--white);border:2px solid rgba(96,17,0,.2);
-  color:var(--dk);padding:10px 12px;font-size:.9rem;outline:none;
-  font-family:'Noto Sans TC',sans-serif;resize:vertical;transition:.18s;
-}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--red)}
+.form-group input,.form-group textarea,.form-group select{background:var(--white);border:2px solid rgba(96,17,0,.2);color:var(--dk);padding:10px 12px;font-size:.9rem;outline:none;font-family:'Noto Sans TC',sans-serif;resize:vertical;transition:.18s}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--red)}
 
 /* STAR */
 .star-pick{display:flex;gap:5px;cursor:pointer;padding-top:4px}
@@ -175,14 +101,16 @@ nav{
 .star-pick span:hover{border-color:var(--red)}
 
 /* NOTE TABS */
-.note-tabs{display:flex;gap:0;border:2.5px solid var(--red);overflow:hidden}
+.note-tabs{display:flex;border:2.5px solid var(--red);overflow:hidden}
 .note-tab{flex:1;border:none;background:rgba(179,32,0,.06);padding:8px 4px;cursor:pointer;font-size:.72rem;font-family:'Noto Sans TC',sans-serif;font-weight:700;letter-spacing:.05em;color:rgba(96,17,0,.5);transition:.15s;border-right:1px solid rgba(179,32,0,.2);text-align:center}
 .note-tab:last-child{border-right:none}
 .note-tab.active{background:var(--red);color:var(--cream)}
 .note-area{display:none}
 .note-area.active{display:flex;flex-direction:column;gap:8px}
-.note-entry{background:var(--white);border:1px solid rgba(179,32,0,.15);border-left:3px solid var(--red);padding:9px 32px 9px 12px;position:relative;font-size:.88rem;line-height:1.75;color:var(--dk)}
-.note-entry .del-note{position:absolute;top:7px;right:9px;background:none;border:none;cursor:pointer;color:rgba(96,17,0,.3);font-size:.85rem;transition:.15px;font-family:inherit}
+.note-entry{border:1px solid rgba(179,32,0,.15);border-left:3px solid var(--red);padding:9px 32px 9px 12px;position:relative;font-size:.88rem;line-height:1.75;color:var(--dk)}
+.note-entry:nth-child(odd){background:var(--nb-a)}
+.note-entry:nth-child(even){background:var(--nb-b)}
+.note-entry .del-note{position:absolute;top:7px;right:9px;background:none;border:none;cursor:pointer;color:rgba(96,17,0,.3);font-size:.85rem;font-family:inherit}
 .note-entry .del-note:hover{color:var(--red)}
 .note-input-row{display:flex;gap:8px}
 .note-input-row textarea{flex:1;background:var(--white);border:2px solid rgba(96,17,0,.18);color:var(--dk);padding:8px 10px;font-size:.88rem;resize:none;outline:none;font-family:inherit;transition:.18s}
@@ -195,7 +123,6 @@ nav{
 .cover-upload:hover{border-color:var(--red)}
 .cover-upload img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .cover-upload .up-label{font-size:.78rem;color:rgba(96,17,0,.4);pointer-events:none;font-weight:900;letter-spacing:.1em;text-transform:uppercase;font-family:'Anton',sans-serif}
-.cover-upload input{position:absolute;inset:0;opacity:0;cursor:pointer}
 
 /* BTN */
 .btn{border:none;cursor:pointer;padding:9px 22px;font-size:.8rem;font-weight:900;font-family:'Anton',sans-serif;letter-spacing:.12em;text-transform:uppercase;transition:.15s}
@@ -208,25 +135,13 @@ nav{
 .btn-sm{padding:6px 14px;font-size:.74rem}
 
 /* EXPORT CARDS */
-.export-card{
-  border:2.5px solid rgba(96,17,0,.2);padding:18px 20px;
-  display:flex;align-items:center;gap:16px;
-  background:rgba(179,32,0,.04);
-  transition:.18s;
-}
+.export-card{border:2.5px solid rgba(96,17,0,.2);padding:18px 20px;display:flex;align-items:center;gap:16px;background:rgba(179,32,0,.04);transition:.18s}
 .export-card:hover{border-color:var(--red);background:rgba(179,32,0,.08)}
-.export-icon{
-  font-family:'Anton',sans-serif;font-size:2rem;
-  color:var(--red);width:48px;text-align:center;flex-shrink:0;line-height:1;
-}
+.export-icon{font-family:'Anton',sans-serif;font-size:2rem;color:var(--red);width:48px;text-align:center;flex-shrink:0;line-height:1}
 .export-info{flex:1}
 .export-title{font-family:'Anton',sans-serif;font-size:.95rem;letter-spacing:.12em;color:var(--dk);margin-bottom:3px}
 .export-desc{font-size:.76rem;color:rgba(96,17,0,.5);line-height:1.5}
-.export-count{
-  font-family:'Anton',sans-serif;font-size:.7rem;letter-spacing:.1em;
-  color:rgba(96,17,0,.35);margin-top:10px;padding-top:10px;
-  border-top:1px solid rgba(96,17,0,.1);
-}
+.export-count{font-family:'Anton',sans-serif;font-size:.7rem;letter-spacing:.1em;color:rgba(96,17,0,.35);margin-top:10px;padding-top:10px;border-top:1px solid rgba(96,17,0,.1)}
 
 /* DETAIL */
 .detail-cover{width:100%;max-height:260px;object-fit:contain;border:2px solid rgba(96,17,0,.15);background:rgba(179,32,0,.06);margin-bottom:6px}
@@ -235,7 +150,27 @@ nav{
 .detail-rule{border:none;border-top:2px solid rgba(96,17,0,.12);margin:0 0 14px}
 .note-sec-title{font-size:.7rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:7px;display:flex;align-items:center;gap:8px;font-family:'Anton',sans-serif}
 .note-sec-title::before{content:'';width:14px;height:2px;background:var(--red)}
-.note-block{background:var(--white);border:1px solid rgba(96,17,0,.1);border-left:3px solid var(--red);padding:9px 12px;font-size:.88rem;line-height:1.75;margin-bottom:5px}
+/* detail note blocks with alternating bg */
+.note-block{border:1px solid rgba(96,17,0,.1);border-left:3px solid var(--red);padding:9px 12px;font-size:.88rem;line-height:1.75;margin-bottom:5px}
+.note-block:nth-child(odd){background:var(--nb-a)}
+.note-block:nth-child(even){background:var(--nb-b)}
+
+/* COMMENTS */
+.comments-section{margin-top:18px;padding-top:14px;border-top:2px solid rgba(96,17,0,.12)}
+.comments-title{font-family:'Anton',sans-serif;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.comments-title::before{content:'';width:14px;height:2px;background:var(--red)}
+.comment-item{padding:10px 12px;margin-bottom:6px;border:1px solid rgba(96,17,0,.1);border-left:3px solid var(--cream3);font-size:.86rem;line-height:1.65}
+.comment-item:nth-child(odd){background:var(--nb-a)}
+.comment-item:nth-child(even){background:var(--nb-b)}
+.comment-name{font-weight:900;font-size:.75rem;color:var(--red2);letter-spacing:.06em;margin-bottom:3px}
+.comment-time{font-size:.68rem;color:rgba(96,17,0,.35);margin-left:8px;font-weight:400}
+.comment-text{color:var(--dk)}
+.comment-form{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.comment-inputs{display:flex;gap:8px;flex-wrap:wrap}
+.comment-inputs input{flex:1;min-width:120px;background:var(--white);border:2px solid rgba(96,17,0,.2);color:var(--dk);padding:8px 10px;font-size:.86rem;outline:none;font-family:inherit;transition:.18s}
+.comment-inputs input:focus{border-color:var(--red)}
+.comment-inputs textarea{width:100%;background:var(--white);border:2px solid rgba(96,17,0,.2);color:var(--dk);padding:8px 10px;font-size:.86rem;outline:none;font-family:inherit;resize:none;transition:.18s}
+.comment-inputs textarea:focus{border-color:var(--red)}
 
 /* EMPTY */
 .empty{text-align:center;padding:90px 20px;color:rgba(240,231,200,.25)}
@@ -247,7 +182,7 @@ nav{
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--red);color:var(--cream);padding:10px 28px;font-size:.82rem;font-weight:900;opacity:0;transition:.3s;z-index:999;pointer-events:none;letter-spacing:.1em;text-transform:uppercase;font-family:'Anton',sans-serif;border:2px solid var(--cream);box-shadow:4px 4px 0 var(--dk)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--dk)}::-webkit-scrollbar-thumb{background:var(--red);border-radius:0}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--dk)}::-webkit-scrollbar-thumb{background:var(--red)}
 
 @media(max-width:600px){
   nav{padding:0 16px;height:56px}
@@ -264,6 +199,7 @@ nav{
   .form-row{flex-direction:column;gap:10px}
   .note-tab{font-size:.62rem;padding:7px 2px}
   .hero-sub{font-size:.82rem}
+  .export-card{flex-wrap:wrap}
 }
 </style>
 </head>
@@ -280,22 +216,18 @@ nav{
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-left">
     <div class="hero-label">MY READING SHELF</div>
     <div class="hero-title">MY<em>BOOKS</em></div>
     <div class="hero-sub">不閱讀不會死，但會變笨。</div>
   </div>
-  <div style="position:relative;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;gap:4px">
+  <div style="position:relative;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end">
     <div style="position:absolute;right:-20px;top:-30px;font-family:'Anton',sans-serif;font-size:14rem;color:var(--red);opacity:.07;line-height:1;pointer-events:none;user-select:none">READ</div>
-    <div class="hero-count" id="hero-count" style="position:relative;z-index:1">
-      0<span>BOOKS READ</span>
-    </div>
+    <div class="hero-count" id="hero-count" style="position:relative;z-index:1">0<span>BOOKS READ</span></div>
   </div>
 </div>
 
-<!-- TOOLBAR -->
 <div class="toolbar-band">
   <div class="search-wrap">
     <input type="text" id="search" placeholder="SEARCH TITLE OR AUTHOR…" oninput="renderShelf()">
@@ -306,11 +238,7 @@ nav{
   </div>
 </div>
 
-<!-- SHELF -->
-<div class="shelf-wrap">
-  <div id="shelf"></div>
-</div>
-
+<div class="shelf-wrap"><div id="shelf"></div></div>
 <div class="toast" id="toast"></div>
 
 <!-- ADD MODAL -->
@@ -323,7 +251,7 @@ nav{
     <div class="modal-body">
       <div class="form-group">
         <label>Cover Image</label>
-        <div class="cover-upload" onclick="document.getElementById('coverInput').click()" style="cursor:pointer">
+        <div class="cover-upload" onclick="document.getElementById('coverInput').click()">
           <img id="coverPreview" src="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
           <span class="up-label" id="coverLabel">Click to Upload</span>
           <input type="file" id="coverInput" accept="image/*" style="display:none" onchange="handleCoverUpload(event)">
@@ -334,13 +262,14 @@ nav{
         <div class="form-group"><label>作者</label><input type="text" id="f-author" placeholder="輸入作者"></div>
       </div>
       <div class="form-row">
+        <div class="form-group"><label>出版年份</label><input type="number" id="f-year" placeholder="例如 2023" min="1000" max="2099" style="appearance:textfield"></div>
         <div class="form-group"><label>閱讀日期</label><input type="date" id="f-date"></div>
-        <div class="form-group">
-          <label>評分</label>
-          <div class="star-pick" id="starPick">
-            <span data-v="1"></span><span data-v="2"></span><span data-v="3"></span>
-            <span data-v="4"></span><span data-v="5"></span>
-          </div>
+      </div>
+      <div class="form-group">
+        <label>評分</label>
+        <div class="star-pick" id="starPick">
+          <span data-v="1"></span><span data-v="2"></span><span data-v="3"></span>
+          <span data-v="4"></span><span data-v="5"></span>
         </div>
       </div>
       <div class="form-group">
@@ -380,39 +309,43 @@ nav{
       <button class="close-btn" onclick="closeExportModal()">✕</button>
     </div>
     <div class="modal-body">
-      <p style="font-size:.82rem;color:rgba(96,17,0,.55);line-height:1.65;letter-spacing:.03em">
-        備份你的閱讀紀錄，以防網站異動或資料遺失。<br>建議定期匯出一份存在本機。
-      </p>
-
-      <!-- CSV -->
+      <p style="font-size:.82rem;color:rgba(96,17,0,.55);line-height:1.65">備份你的閱讀紀錄，以防網站異動或資料遺失。建議定期匯出一份存在本機。</p>
       <div class="export-card">
         <div class="export-icon">CSV</div>
         <div class="export-info">
           <div class="export-title">試算表備份</div>
-          <div class="export-desc">匯出為 .csv 格式，可直接用 Excel、Numbers 或 Google Sheets 開啟。包含書名、作者、日期、評分與四類筆記。</div>
+          <div class="export-desc">匯出為 .csv，可用 Excel、Numbers、Google Sheets 開啟。包含書名、作者、年份、日期、評分與四類筆記。</div>
         </div>
         <button class="btn btn-primary btn-sm" onclick="exportCSV()" style="flex-shrink:0;align-self:center">↓ CSV</button>
       </div>
-
-      <!-- JSON -->
       <div class="export-card">
         <div class="export-icon">JSON</div>
         <div class="export-info">
           <div class="export-title">完整備份</div>
-          <div class="export-desc">匯出所有資料（含封面圖片）為 .json 格式。可作為完整備份，未來也能重新匯入。</div>
+          <div class="export-desc">匯出所有資料（含封面圖片）為 .json 格式，可作為完整備份。</div>
         </div>
         <button class="btn btn-primary btn-sm" onclick="exportJSON()" style="flex-shrink:0;align-self:center">↓ JSON</button>
       </div>
-
+      <hr style="border:none;border-top:2px solid rgba(96,17,0,.12);margin:4px 0">
+      <div class="export-card">
+        <div class="export-icon">↑</div>
+        <div class="export-info">
+          <div class="export-title">匯入備份</div>
+          <div class="export-desc">從之前匯出的 .json 備份檔還原資料。重複的書籍會自動略過，不會覆蓋現有資料。</div>
+        </div>
+        <label class="btn btn-outline btn-sm" style="flex-shrink:0;align-self:center;cursor:pointer">
+          ↑ JSON
+          <input type="file" id="importInput" accept=".json" style="display:none" onchange="importJSON(event)">
+        </label>
+      </div>
       <div class="export-count" id="export-count"></div>
     </div>
   </div>
 </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script>
 const firebaseConfig = {
   apiKey: "AIzaSyAcqo-Hw6RL-JXXqejjMs3X4J5EVENAZoA",
   authDomain: "reading-air.firebaseapp.com",
@@ -421,36 +354,40 @@ const firebaseConfig = {
   messagingSenderId: "492355141405",
   appId: "1:492355141405:web:75f9edd41d8ad33f5eebf4"
 };
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
 let books=[];
-let view='grid',editId=null,currentRating=0,currentCover=null;
+let view='grid', editId=null, currentRating=0, currentCover=null;
 let tmpNotes={句子:[],摘要:[],心得:[],延伸:[]};
+let currentDetailId=null;
 
-async function loadBooks(){
-  const snap = await getDocs(collection(db,'books'));
-  books = snap.docs.map(d=>({id:d.id,...d.data()}));
-  books.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-  renderShelf();
+/* ── REALTIME SYNC ───────────────────── */
+function startSync(){
+  db.collection('books').onSnapshot(snap=>{
+    books = snap.docs.map(d=>({id:d.id,...d.data()}));
+    books.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+    renderShelf();
+    if(currentDetailId){
+      const b=books.find(x=>x.id===currentDetailId);
+      if(b) refreshDetailNotes(b);
+    }
+  });
 }
 
-async function save(b,isEdit){
-  // Firestore doesn't allow 'id' as a field name — strip it before writing
+/* ── SAVE ────────────────────────────── */
+async function save(b, isEdit){
   const {id:_id,...data}=b;
   if(isEdit){
-    const ref=doc(db,'books',b.id);
-    await updateDoc(ref,data);
+    await db.collection('books').doc(b.id).update(data);
   } else {
     data.createdAt=Date.now();
-    const ref=await addDoc(collection(db,'books'),data);
-    b.id=ref.id;
-    b.createdAt=data.createdAt;
-    books.unshift(b);
+    const ref=await db.collection('books').add(data);
+    b.id=ref.id; b.createdAt=data.createdAt;
   }
 }
 
+/* ── RENDER ──────────────────────────── */
 function dotsHTML(r,sz=10){return[1,2,3,4,5].map(i=>`<span class="rdot ${i<=r?'on':'off'}" style="width:${sz}px;height:${sz}px"></span>`).join('')}
 
 function renderShelf(){
@@ -468,16 +405,16 @@ function renderShelf(){
 
 function cardHTML(b){
   const L=(b.title||'?')[0];
-  const cover=b.cover
-    ?`<img class="book-cover" src="${b.cover}" alt="">`
-    :`<div class="book-cover-ph"><div class="ph-circle"></div><div class="ph-circle2"></div><span class="ph-letter">${esc(L)}</span></div>`;
+  const cover=b.cover?`<img class="book-cover" src="${b.cover}" alt="">`:
+    `<div class="book-cover-ph"><div class="ph-circle"></div><div class="ph-circle2"></div><span class="ph-letter">${esc(L)}</span></div>`;
+  const yearStr=b.year?`<span style="font-size:.7rem;color:rgba(96,17,0,.4);letter-spacing:.04em">${b.year}</span>`:'';
   return`<div class="book-card" onclick="openDetail('${b.id}')">
     ${cover}
     <div class="book-info">
       <div class="book-title">${esc(b.title)}</div>
       <div class="book-author">${esc(b.author||'')}</div>
       <div class="rating-row">${dotsHTML(b.rating||0)}</div>
-      <div class="book-date">${b.date||''}</div>
+      <div class="book-date">${b.date||''} ${yearStr}</div>
     </div>
   </div>`;
 }
@@ -487,54 +424,83 @@ function listHTML(b){
   const cover=b.cover?`<img class="list-cover" src="${b.cover}" alt="">`:
     `<div class="list-cover-ph">${esc(L)}</div>`;
   const nc=Object.values(b.notes||{}).flat().length;
+  const yearStr=b.year?` · ${b.year}`:'';
   return`<div class="list-card" onclick="openDetail('${b.id}')">
     ${cover}
     <div style="flex:1;min-width:0">
       <div class="list-title">${esc(b.title)}</div>
-      <div class="list-author">${esc(b.author||'')}${b.date?' · '+b.date:''}</div>
+      <div class="list-author">${esc(b.author||'')}${b.date?' · '+b.date:''}${yearStr}</div>
       <div style="font-size:.72rem;color:rgba(240,231,200,.3);margin-top:3px">${nc} 則筆記</div>
     </div>
-    <div style="flex-shrink:0"><div class="rating-row">${dotsHTML(b.rating||0)}</div></div>
+    <div style="flex-shrink:0">${dotsHTML(b.rating||0)}</div>
   </div>`;
 }
 
 function setView(v){view=v;document.getElementById('vg').classList.toggle('active',v==='grid');document.getElementById('vl').classList.toggle('active',v==='list');renderShelf()}
 
+/* ── ADD / EDIT ──────────────────────── */
 function openAdd(){
   editId=null;currentRating=0;currentCover=null;tmpNotes={句子:[],摘要:[],心得:[],延伸:[]};
   document.getElementById('modal-title').textContent='ADD BOOK';
-  ['f-title','f-author'].forEach(id=>document.getElementById(id).value='');
+  ['f-title','f-author','f-year'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('f-date').value=new Date().toISOString().slice(0,10);
-  document.getElementById('coverPreview').style.display='none';document.getElementById('coverLabel').style.display='';
-  setStars(0);renderNotesAll();document.getElementById('addOverlay').classList.add('open');switchTab('句子');
+  document.getElementById('coverPreview').style.display='none';
+  document.getElementById('coverLabel').style.display='';
+  setStars(0);renderNotesAll();
+  document.getElementById('addOverlay').classList.add('open');
+  switchTab('句子');
 }
 function openEdit(id){
   const b=books.find(x=>x.id===id);if(!b)return;
   editId=id;currentRating=b.rating||0;currentCover=b.cover||null;
-  tmpNotes=JSON.parse(JSON.stringify(b.notes||{}));['句子','摘要','心得','延伸'].forEach(k=>{if(!tmpNotes[k])tmpNotes[k]=[]});
+  tmpNotes=JSON.parse(JSON.stringify(b.notes||{}));
+  ['句子','摘要','心得','延伸'].forEach(k=>{if(!tmpNotes[k])tmpNotes[k]=[]});
   document.getElementById('modal-title').textContent='EDIT BOOK';
-  document.getElementById('f-title').value=b.title;document.getElementById('f-author').value=b.author||'';document.getElementById('f-date').value=b.date||'';
+  document.getElementById('f-title').value=b.title;
+  document.getElementById('f-author').value=b.author||'';
+  document.getElementById('f-year').value=b.year||'';
+  document.getElementById('f-date').value=b.date||'';
   if(b.cover){document.getElementById('coverPreview').src=b.cover;document.getElementById('coverPreview').style.display='block';document.getElementById('coverLabel').style.display='none';}
   else{document.getElementById('coverPreview').style.display='none';document.getElementById('coverLabel').style.display='';}
-  setStars(currentRating);renderNotesAll();document.getElementById('addOverlay').classList.add('open');switchTab('句子');
+  setStars(currentRating);renderNotesAll();
+  document.getElementById('addOverlay').classList.add('open');
+  switchTab('句子');
 }
 function closeAdd(e){if(e.target===document.getElementById('addOverlay'))closeAddModal()}
 function closeAddModal(){document.getElementById('addOverlay').classList.remove('open');editId=null;}
+
 async function saveBook(){
-  const title=document.getElementById('f-title').value.trim();if(!title){toast('請輸入書名');return;}
-  const b={title,author:document.getElementById('f-author').value.trim(),date:document.getElementById('f-date').value,rating:currentRating,cover:currentCover,notes:JSON.parse(JSON.stringify(tmpNotes))};
-  if(editId){
-    b.id=editId;
-    await save(b,true);
-    const i=books.findIndex(x=>x.id===editId);if(i>=0)books[i]=b;
-  } else {
-    await save(b,false);
-  }
-  renderShelf();closeAddModal();toast(editId?'UPDATED':'SAVED');
+  const title=document.getElementById('f-title').value.trim();
+  if(!title){toast('請輸入書名');return;}
+  const yearVal=document.getElementById('f-year').value.trim();
+  const b={
+    title,
+    author:document.getElementById('f-author').value.trim(),
+    year:yearVal?parseInt(yearVal):null,
+    date:document.getElementById('f-date').value,
+    rating:currentRating,
+    cover:currentCover,
+    notes:JSON.parse(JSON.stringify(tmpNotes))
+  };
+  const wasEdit=!!editId;
+  if(wasEdit){b.id=editId;await save(b,true);}
+  else{await save(b,false);}
+  closeAddModal();toast(wasEdit?'UPDATED':'SAVED');
 }
-function handleCoverUpload(e){const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=ev=>{currentCover=ev.target.result;document.getElementById('coverPreview').src=currentCover;document.getElementById('coverPreview').style.display='block';document.getElementById('coverLabel').style.display='none';};r.readAsDataURL(file)}
+
+function handleCoverUpload(e){
+  const file=e.target.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    currentCover=ev.target.result;
+    document.getElementById('coverPreview').src=currentCover;
+    document.getElementById('coverPreview').style.display='block';
+    document.getElementById('coverLabel').style.display='none';
+  };
+  r.readAsDataURL(file);
+}
 function setStars(n){currentRating=n;document.querySelectorAll('#starPick span').forEach((s,i)=>s.classList.toggle('on',i<n))}
-document.getElementById('starPick').addEventListener('click',e=>{const s=e.target.closest('[data-v]');if(s)setStars(+s.dataset.v)});
+document.getElementById('starPick').addEventListener('click',function(e){const s=e.target.closest('[data-v]');if(s)setStars(+s.dataset.v)});
 
 let curTab='句子';
 function switchTab(t){curTab=t;document.querySelectorAll('.note-tab').forEach(b=>b.classList.toggle('active',b.dataset.t===t));document.querySelectorAll('.note-area').forEach(a=>a.classList.toggle('active',a.id==='na-'+t))}
@@ -547,27 +513,95 @@ function renderNoteArea(t){
 function addNote(t){const inp=document.getElementById('ni-'+t);const v=inp.value.trim();if(!v)return;if(!tmpNotes[t])tmpNotes[t]=[];tmpNotes[t].push(v);inp.value='';renderNoteArea(t)}
 function delNote(t,i){tmpNotes[t].splice(i,1);renderNoteArea(t)}
 
+/* ── DETAIL ──────────────────────────── */
 function openDetail(id){
   const b=books.find(x=>x.id===id);if(!b)return;
+  currentDetailId=id;
   document.getElementById('d-title').textContent=b.title;
   const L=(b.title||'?')[0];
   const cover=b.cover?`<img class="detail-cover" src="${b.cover}" alt="">`:
     `<div class="detail-cover-ph"><div class="ph-circle"></div><div class="ph-circle2"></div><span style="font-family:'Anton',sans-serif;font-size:5rem;color:rgba(240,231,200,.5);position:relative;z-index:1">${esc(L)}</span></div>`;
   const types=[{k:'句子',l:'印象句子'},{k:'摘要',l:'內容摘要'},{k:'心得',l:'讀後心得'},{k:'延伸',l:'延伸筆記'}];
-  const notesHTML=types.map(nt=>{const arr=b.notes?.[nt.k]||[];if(!arr.length)return'';return`<div style="margin-bottom:14px"><div class="note-sec-title">${nt.l}</div>${arr.map(n=>`<div class="note-block">${esc(n).replace(/\n/g,'<br>')}</div>`).join('')}</div>`;}).join('');
-  document.getElementById('d-body').innerHTML=`${cover}<div class="detail-meta"><div class="rating-row">${dotsHTML(b.rating||0,13)}</div>${b.author?`<span style="font-size:.85rem;color:rgba(96,17,0,.55);font-style:italic">${esc(b.author)}</span>`:''} ${b.date?`<span style="font-size:.82rem;color:rgba(96,17,0,.4)">${b.date}</span>`:''}</div><hr class="detail-rule">${notesHTML||'<p style="color:rgba(96,17,0,.35);font-size:.88rem;font-style:italic">尚無筆記</p>'}<div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px;padding-top:12px;border-top:1px solid rgba(96,17,0,.1)"><button class="btn btn-outline btn-sm" onclick="openEdit('${b.id}');closeDetailModal()">EDIT</button><button class="btn btn-danger btn-sm" onclick="deleteBook('${b.id}')">DELETE</button></div>`;
+  const notesHTML=types.map(nt=>{
+    const arr=b.notes?.[nt.k]||[];if(!arr.length)return'';
+    return`<div style="margin-bottom:14px"><div class="note-sec-title">${nt.l}</div>${arr.map(n=>`<div class="note-block">${esc(n).replace(/\n/g,'<br>')}</div>`).join('')}</div>`;
+  }).join('');
+  const yearStr=b.year?`<span style="font-size:.82rem;color:rgba(96,17,0,.4)">${b.year}年出版</span>`:'';
+  document.getElementById('d-body').innerHTML=`
+    ${cover}
+    <div class="detail-meta">
+      <div class="rating-row">${dotsHTML(b.rating||0,13)}</div>
+      ${b.author?`<span style="font-size:.85rem;color:rgba(96,17,0,.55);font-style:italic">${esc(b.author)}</span>`:''}
+      ${b.date?`<span style="font-size:.82rem;color:rgba(96,17,0,.4)">${b.date}</span>`:''}
+      ${yearStr}
+    </div>
+    <hr class="detail-rule">
+    <div id="detail-notes">${notesHTML||'<p style="color:rgba(96,17,0,.35);font-size:.88rem;font-style:italic">尚無筆記</p>'}</div>
+    <div class="comments-section">
+      <div class="comments-title">讀者留言</div>
+      <div id="comments-list">載入中…</div>
+      <div class="comment-form">
+        <div class="comment-inputs"><input type="text" id="c-name" placeholder="你的名字" maxlength="30"></div>
+        <div class="comment-inputs"><textarea id="c-text" rows="2" placeholder="留下你的想法…" maxlength="500"></textarea></div>
+        <div style="display:flex;justify-content:flex-end">
+          <button class="btn btn-primary btn-sm" onclick="submitComment('${id}')">留言</button>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px;padding-top:12px;border-top:1px solid rgba(96,17,0,.1)">
+      <button class="btn btn-outline btn-sm" onclick="openEdit('${id}');closeDetailModal()">EDIT</button>
+      <button class="btn btn-danger btn-sm" onclick="deleteBook('${id}')">DELETE</button>
+    </div>`;
   document.getElementById('detailOverlay').classList.add('open');
-}
-function closeDetail(e){if(e.target===document.getElementById('detailOverlay'))closeDetailModal()}
-function closeDetailModal(){document.getElementById('detailOverlay').classList.remove('open')}
-async function deleteBook(id){
-  if(!confirm('確定要刪除這本書嗎？'))return;
-  await deleteDoc(doc(db,'books',id));
-  books=books.filter(b=>b.id!==id);
-  renderShelf();closeDetailModal();toast('DELETED');
+  loadComments(id);
 }
 
-/* ── EXPORT ─────────────────────────── */
+function refreshDetailNotes(b){
+  const el=document.getElementById('detail-notes');if(!el)return;
+  const types=[{k:'句子',l:'印象句子'},{k:'摘要',l:'內容摘要'},{k:'心得',l:'讀後心得'},{k:'延伸',l:'延伸筆記'}];
+  const notesHTML=types.map(nt=>{
+    const arr=b.notes?.[nt.k]||[];if(!arr.length)return'';
+    return`<div style="margin-bottom:14px"><div class="note-sec-title">${nt.l}</div>${arr.map(n=>`<div class="note-block">${esc(n).replace(/\n/g,'<br>')}</div>`).join('')}</div>`;
+  }).join('');
+  el.innerHTML=notesHTML||'<p style="color:rgba(96,17,0,.35);font-size:.88rem;font-style:italic">尚無筆記</p>';
+}
+
+function closeDetail(e){if(e.target===document.getElementById('detailOverlay'))closeDetailModal()}
+function closeDetailModal(){document.getElementById('detailOverlay').classList.remove('open');currentDetailId=null;}
+
+function deleteBook(id){
+  if(!confirm('確定要刪除這本書嗎？'))return;
+  db.collection('books').doc(id).delete();
+  closeDetailModal();toast('DELETED');
+}
+
+/* ── COMMENTS ────────────────────────── */
+let commentsUnsub=null;
+function loadComments(bookId){
+  if(commentsUnsub)commentsUnsub();
+  commentsUnsub=db.collection('comments').where('bookId','==',bookId).onSnapshot(snap=>{
+    const list=document.getElementById('comments-list');if(!list)return;
+    const items=snap.docs.map(d=>({id:d.id,...d.data()}));
+    items.sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+    if(!items.length){list.innerHTML='<p style="font-size:.82rem;color:rgba(96,17,0,.35);font-style:italic;margin-bottom:8px">還沒有留言，來第一個吧！</p>';return;}
+    list.innerHTML=items.map(c=>{
+      const d=c.createdAt?new Date(c.createdAt).toLocaleDateString('zh-TW'):'';
+      return`<div class="comment-item"><div class="comment-name">${esc(c.name||'匿名')}<span class="comment-time">${d}</span></div><div class="comment-text">${esc(c.text).replace(/\n/g,'<br>')}</div></div>`;
+    }).join('');
+  });
+}
+
+function submitComment(bookId){
+  const name=(document.getElementById('c-name').value.trim())||'匿名';
+  const text=document.getElementById('c-text').value.trim();
+  if(!text){toast('請輸入留言內容');return;}
+  db.collection('comments').add({bookId,name,text,createdAt:Date.now()});
+  document.getElementById('c-name').value='';
+  document.getElementById('c-text').value='';
+  toast('留言成功');
+}
+
+/* ── EXPORT / IMPORT ─────────────────── */
 function openExport(){
   const n=books.length;
   const nc=books.reduce((s,b)=>s+Object.values(b.notes||{}).flat().length,0);
@@ -577,63 +611,57 @@ function openExport(){
 function closeExport(e){if(e.target===document.getElementById('exportOverlay'))closeExportModal()}
 function closeExportModal(){document.getElementById('exportOverlay').classList.remove('open')}
 
-function csvCell(v){
-  const s=String(v==null?'':v);
-  // wrap in quotes if contains comma, newline, or quote
-  if(s.includes(',')||s.includes('\n')||s.includes('"'))
-    return '"'+s.replace(/"/g,'""')+'"';
-  return s;
-}
-
+function csvCell(v){const s=String(v==null?'':v);if(s.includes(',')||s.includes('\n')||s.includes('"'))return'"'+s.replace(/"/g,'""')+'"';return s;}
 function exportCSV(){
   if(!books.length){toast('尚無書籍資料');return;}
-  const headers=['書名','作者','閱讀日期','評分（/5）','印象句子','內容摘要','讀後心得','延伸筆記'];
-  const rows=books.map(b=>[
-    b.title||'',
-    b.author||'',
-    b.date||'',
-    b.rating||0,
-    (b.notes?.['句子']||[]).join(' ／ '),
-    (b.notes?.['摘要']||[]).join(' ／ '),
-    (b.notes?.['心得']||[]).join(' ／ '),
-    (b.notes?.['延伸']||[]).join(' ／ ')
-  ]);
+  const headers=['書名','作者','出版年份','閱讀日期','評分（/5）','印象句子','內容摘要','讀後心得','延伸筆記'];
+  const rows=books.map(b=>[b.title||'',b.author||'',b.year||'',b.date||'',b.rating||0,
+    (b.notes?.['句子']||[]).join(' ／ '),(b.notes?.['摘要']||[]).join(' ／ '),
+    (b.notes?.['心得']||[]).join(' ／ '),(b.notes?.['延伸']||[]).join(' ／ ')]);
   const csv='\uFEFF'+[headers,...rows].map(r=>r.map(csvCell).join(',')).join('\r\n');
-  const date=new Date().toISOString().slice(0,10);
-  downloadBlob(new Blob([csv],{type:'text/csv;charset=utf-8'}),`reading-air-${date}.csv`);
+  downloadBlob(new Blob([csv],{type:'text/csv;charset=utf-8'}),`reading-air-${today()}.csv`);
   toast('CSV 匯出完成');
 }
-
 function exportJSON(){
   if(!books.length){toast('尚無書籍資料');return;}
-  const payload={exportedAt:new Date().toISOString(),count:books.length,books:books};
-  const json=JSON.stringify(payload,null,2);
-  const date=new Date().toISOString().slice(0,10);
-  downloadBlob(new Blob([json],{type:'application/json'}),`reading-air-${date}.json`);
+  downloadBlob(new Blob([JSON.stringify({exportedAt:new Date().toISOString(),count:books.length,books},null,2)],{type:'application/json'}),`reading-air-${today()}.json`);
   toast('JSON 備份完成');
 }
-
+function importJSON(e){
+  const file=e.target.files[0];if(!file)return;
+  e.target.value='';
+  const reader=new FileReader();
+  reader.onload=function(ev){
+    let payload;
+    try{payload=JSON.parse(ev.target.result);}catch(err){toast('無法讀取檔案');return;}
+    const incoming=payload.books||payload;
+    if(!Array.isArray(incoming)||!incoming.length){toast('找不到書籍資料');return;}
+    const existingKeys=new Set(books.map(b=>b.title+'|'+(b.author||'')));
+    let added=0,skipped=0,i=0;
+    function next(){
+      if(i>=incoming.length){toast('匯入完成：'+added+' 本新增，'+skipped+' 本略過');return;}
+      const b=incoming[i++];
+      const key=b.title+'|'+(b.author||'');
+      if(existingKeys.has(key)){skipped++;next();return;}
+      const data=Object.assign({},b);delete data.id;
+      data.createdAt=Date.now()+i;
+      db.collection('books').add(data).then(function(){existingKeys.add(key);added++;next();});
+    }
+    next();
+  };
+  reader.readAsText(file);
+}
+function today(){return new Date().toISOString().slice(0,10)}
 function downloadBlob(blob,filename){
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;a.download=filename;
-  document.body.appendChild(a);a.click();
-  setTimeout(()=>{URL.revokeObjectURL(url);a.remove()},200);
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');
+  a.href=url;a.download=filename;document.body.appendChild(a);a.click();
+  setTimeout(function(){URL.revokeObjectURL(url);a.remove()},200);
 }
 
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2400)}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show')},2400)}
 
-// expose to global scope BEFORE loadBooks so onclick handlers work immediately
-window.openAdd=openAdd;window.openEdit=openEdit;window.closeAddModal=closeAddModal;
-window.saveBook=saveBook;window.closeDetailModal=closeDetailModal;window.closeDetail=closeDetail;
-window.openDetail=openDetail;window.deleteBook=deleteBook;
-window.openExport=openExport;window.closeExportModal=closeExportModal;window.closeExport=closeExport;
-window.exportCSV=exportCSV;window.exportJSON=exportJSON;
-window.setView=setView;window.switchTab=switchTab;window.addNote=addNote;window.delNote=delNote;
-window.handleCoverUpload=handleCoverUpload;
-
-loadBooks();
+startSync();
 </script>
 </body>
 </html>
