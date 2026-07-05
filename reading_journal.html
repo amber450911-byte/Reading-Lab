@@ -10,6 +10,8 @@
   --dk:#601100;--red:#B32000;--cream:#F0E7C8;--white:#FFFFFF;
   --cream2:#e8dbb8;--cream3:#d8cba8;--red2:#8a1800;
   --nb-a:#F0E7C8;--nb-b:#E6D9B0;
+  /* note type accent colors */
+  --c-句子:#B32000;--c-摘要:#8B5A2B;--c-心得:#5C3317;--c-延伸:#6B6B3A;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--dk);color:var(--cream);font-family:'Noto Sans TC',sans-serif;min-height:100vh;overflow-x:hidden}
@@ -148,12 +150,25 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 .detail-cover-ph{width:100%;height:160px;background:var(--red);display:flex;align-items:center;justify-content:center;margin-bottom:6px;position:relative;overflow:hidden}
 .detail-meta{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 14px}
 .detail-rule{border:none;border-top:2px solid rgba(96,17,0,.12);margin:0 0 14px}
-.note-sec-title{font-size:.7rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:7px;display:flex;align-items:center;gap:8px;font-family:'Anton',sans-serif}
-.note-sec-title::before{content:'';width:14px;height:2px;background:var(--red)}
-/* detail note blocks with alternating bg */
+.note-sec-title{font-size:.7rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:0;display:flex;align-items:center;gap:8px;font-family:'Anton',sans-serif;cursor:pointer;padding:8px 0;user-select:none}
+.note-sec-title::before{content:'';width:14px;height:2px;background:currentColor}
+.note-sec-title .toggle-arrow{margin-left:auto;font-size:.65rem;transition:.2s;opacity:.6}
+.note-sec-title.collapsed .toggle-arrow{transform:rotate(-90deg)}
+.note-sec-body{overflow:hidden;transition:max-height .25s ease;max-height:2000px}
+.note-sec-body.collapsed{max-height:0}
+/* detail note blocks with colored left border per type */
 .note-block{border:1px solid rgba(96,17,0,.1);border-left:3px solid var(--red);padding:9px 12px;font-size:.88rem;line-height:1.75;margin-bottom:5px}
 .note-block:nth-child(odd){background:var(--nb-a)}
 .note-block:nth-child(even){background:var(--nb-b)}
+/* per-type border colors */
+.note-sec-句子 .note-block{border-left-color:var(--c-句子)}
+.note-sec-摘要 .note-block{border-left-color:var(--c-摘要)}
+.note-sec-心得 .note-block{border-left-color:var(--c-心得)}
+.note-sec-延伸 .note-block{border-left-color:var(--c-延伸)}
+.note-sec-句子 .note-sec-title{color:var(--c-句子)}
+.note-sec-摘要 .note-sec-title{color:var(--c-摘要)}
+.note-sec-心得 .note-sec-title{color:var(--c-心得)}
+.note-sec-延伸 .note-sec-title{color:var(--c-延伸)}
 
 /* COMMENTS */
 .comments-section{margin-top:18px;padding-top:14px;border-top:2px solid rgba(96,17,0,.12)}
@@ -522,10 +537,7 @@ function openDetail(id){
   const cover=b.cover?`<img class="detail-cover" src="${b.cover}" alt="">`:
     `<div class="detail-cover-ph"><div class="ph-circle"></div><div class="ph-circle2"></div><span style="font-family:'Anton',sans-serif;font-size:5rem;color:rgba(240,231,200,.5);position:relative;z-index:1">${esc(L)}</span></div>`;
   const types=[{k:'句子',l:'印象句子'},{k:'摘要',l:'內容摘要'},{k:'心得',l:'讀後心得'},{k:'延伸',l:'延伸筆記'}];
-  const notesHTML=types.map(nt=>{
-    const arr=b.notes?.[nt.k]||[];if(!arr.length)return'';
-    return`<div style="margin-bottom:14px"><div class="note-sec-title">${nt.l}</div>${arr.map(n=>`<div class="note-block">${esc(n).replace(/\n/g,'<br>')}</div>`).join('')}</div>`;
-  }).join('');
+  const notesHTML=buildNotesHTML(b);
   const yearStr=b.year?`<span style="font-size:.82rem;color:rgba(96,17,0,.4)">${b.year}年出版</span>`:'';
   document.getElementById('d-body').innerHTML=`
     ${cover}
@@ -556,14 +568,22 @@ function openDetail(id){
   loadComments(id);
 }
 
-function refreshDetailNotes(b){
-  const el=document.getElementById('detail-notes');if(!el)return;
-  const types=[{k:'句子',l:'印象句子'},{k:'摘要',l:'內容摘要'},{k:'心得',l:'讀後心得'},{k:'延伸',l:'延伸筆記'}];
-  const notesHTML=types.map(nt=>{
-    const arr=b.notes?.[nt.k]||[];if(!arr.length)return'';
-    return`<div style="margin-bottom:14px"><div class="note-sec-title">${nt.l}</div>${arr.map(n=>`<div class="note-block">${esc(n).replace(/\n/g,'<br>')}</div>`).join('')}</div>`;
+function buildNotesHTML(b){
+  var types=[{k:'句子',l:'印象句子'},{k:'摘要',l:'內容摘要'},{k:'心得',l:'讀後心得'},{k:'延伸',l:'延伸筆記'}];
+  return types.map(function(nt){
+    var arr=(b.notes&&b.notes[nt.k])||[];if(!arr.length)return'';
+    var blocks=arr.map(function(n){return'<div class="note-block">'+esc(n).replace(/\n/g,'<br>')+'</div>';}).join('');
+    return'<div class="note-sec-wrap note-sec-'+nt.k+'" style="margin-bottom:10px"><div class="note-sec-title" onclick="toggleNoteSection(this)">'+nt.l+'<span class="toggle-arrow">▼</span></div><div class="note-sec-body" style="padding-top:6px">'+blocks+'</div></div>';
   }).join('');
-  el.innerHTML=notesHTML||'<p style="color:rgba(96,17,0,.35);font-size:.88rem;font-style:italic">尚無筆記</p>';
+}
+function refreshDetailNotes(b){
+  var el=document.getElementById('detail-notes');if(!el)return;
+  el.innerHTML=buildNotesHTML(b)||'<p style="color:rgba(96,17,0,.35);font-size:.88rem;font-style:italic">尚無筆記</p>';
+}
+function toggleNoteSection(title){
+  title.classList.toggle('collapsed');
+  var body=title.nextElementSibling;
+  body.classList.toggle('collapsed');
 }
 
 function closeDetail(e){if(e.target===document.getElementById('detailOverlay'))closeDetailModal()}
