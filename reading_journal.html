@@ -519,7 +519,7 @@ function openEdit(id){
   setStars(currentRating);renderNotesAll();document.getElementById('addOverlay').classList.add('open');switchTab('句子');
 }
 function closeAdd(e){if(e.target===document.getElementById('addOverlay'))closeAddModal()}
-function closeAddModal(){document.getElementById('addOverlay').classList.remove('open')}
+function closeAddModal(){document.getElementById('addOverlay').classList.remove('open');editId=null;}
 async function saveBook(){
   const title=document.getElementById('f-title').value.trim();if(!title){toast('請輸入書名');return;}
   const b={title,author:document.getElementById('f-author').value.trim(),date:document.getElementById('f-date').value,rating:currentRating,cover:currentCover,notes:JSON.parse(JSON.stringify(tmpNotes))};
