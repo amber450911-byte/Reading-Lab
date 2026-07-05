@@ -456,15 +456,7 @@ function saveBook(){
   const title=document.getElementById('f-title').value.trim();if(!title){toast('請輸入書名');return;}
   const b={id:editId||Date.now().toString(),title,author:document.getElementById('f-author').value.trim(),date:document.getElementById('f-date').value,rating:currentRating,cover:currentCover,notes:JSON.parse(JSON.stringify(tmpNotes))};
   if(editId){const i=books.findIndex(x=>x.id===editId);if(i>=0)books[i]=b;}else books.unshift(b);
-  save();renderShelf();
-
-// Load hero image from uploaded file via drag or auto if cached
-(function(){
-  // Try to load from localStorage cache
-  const cached = localStorage.getItem('heroImg');
-  if(cached) document.getElementById('heroImg').src = cached;
-})();
-closeAddModal();toast(editId?'UPDATED':'SAVED');
+  save();renderShelf();closeAddModal();toast(editId?'UPDATED':'SAVED');
 }
 function handleCoverUpload(e){const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=ev=>{currentCover=ev.target.result;document.getElementById('coverPreview').src=currentCover;document.getElementById('coverPreview').style.display='block';document.getElementById('coverLabel').style.display='none';};r.readAsDataURL(file)}
 function setStars(n){currentRating=n;document.querySelectorAll('#starPick span').forEach((s,i)=>s.classList.toggle('on',i<n))}
