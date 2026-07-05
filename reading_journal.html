@@ -294,10 +294,10 @@ nav{
     <div class="modal-body">
       <div class="form-group">
         <label>Cover Image</label>
-        <div class="cover-upload" onclick="document.getElementById('coverInput').click()">
-          <img id="coverPreview" src="" style="display:none">
+        <div class="cover-upload" onclick="document.getElementById('coverInput').click()" style="cursor:pointer">
+          <img id="coverPreview" src="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
           <span class="up-label" id="coverLabel">Click to Upload</span>
-          <input type="file" id="coverInput" accept="image/*" onchange="handleCoverUpload(event)">
+          <input type="file" id="coverInput" accept="image/*" style="display:none" onchange="handleCoverUpload(event)">
         </div>
       </div>
       <div class="form-row">
