@@ -358,19 +358,28 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
   </div>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js" crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js" crossorigin="anonymous"></script>
 <script>
-const firebaseConfig = {
-  apiKey: "AIzaSyAcqo-Hw6RL-JXXqejjMs3X4J5EVENAZoA",
-  authDomain: "reading-air.firebaseapp.com",
-  projectId: "reading-air",
-  storageBucket: "reading-air.firebasestorage.app",
-  messagingSenderId: "492355141405",
-  appId: "1:492355141405:web:75f9edd41d8ad33f5eebf4"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+var db;
+window.addEventListener('load', function(){
+  try {
+    var firebaseConfig = {
+      apiKey: "AIzaSyAcqo-Hw6RL-JXXqejjMs3X4J5EVENAZoA",
+      authDomain: "reading-air.firebaseapp.com",
+      projectId: "reading-air",
+      storageBucket: "reading-air.firebasestorage.app",
+      messagingSenderId: "492355141405",
+      appId: "1:492355141405:web:75f9edd41d8ad33f5eebf4"
+    };
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+    startSync();
+    document.getElementById('starPick').addEventListener('click',function(e){var s=e.target.closest('[data-v]');if(s)setStars(+s.dataset.v)});
+  } catch(e) {
+    alert('Firebase 載入失敗，請重新整理頁面。錯誤：' + e.message);
+  }
+});
 
 let books=[];
 let view='grid', editId=null, currentRating=0, currentCover=null;
@@ -515,7 +524,7 @@ function handleCoverUpload(e){
   r.readAsDataURL(file);
 }
 function setStars(n){currentRating=n;document.querySelectorAll('#starPick span').forEach((s,i)=>s.classList.toggle('on',i<n))}
-document.getElementById('starPick').addEventListener('click',function(e){const s=e.target.closest('[data-v]');if(s)setStars(+s.dataset.v)});
+
 
 let curTab='句子';
 function switchTab(t){curTab=t;document.querySelectorAll('.note-tab').forEach(b=>b.classList.toggle('active',b.dataset.t===t));document.querySelectorAll('.note-area').forEach(a=>a.classList.toggle('active',a.id==='na-'+t))}
@@ -681,7 +690,6 @@ function downloadBlob(blob,filename){
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show')},2400)}
 
-startSync();
 </script>
 </body>
 </html>
