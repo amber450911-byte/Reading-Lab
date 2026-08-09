@@ -10,13 +10,10 @@
   --dk:#601100;--red:#B32000;--cream:#F0E7C8;--white:#FFFFFF;
   --cream2:#e8dbb8;--cream3:#d8cba8;--red2:#8a1800;
   --nb-a:#F0E7C8;--nb-b:#E6D9B0;
-  /* note type accent colors */
   --c-句子:#B32000;--c-摘要:#8B5A2B;--c-心得:#5C3317;--c-延伸:#6B6B3A;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--dk);color:var(--cream);font-family:'Noto Sans TC',sans-serif;min-height:100vh;overflow-x:hidden}
-
-/* NAV */
 nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:center;justify-content:space-between;border-bottom:5px solid var(--cream);position:relative;z-index:10}
 .logo-wrap{display:flex;flex-direction:column;line-height:1}
 .logo-en{font-family:'Anton',sans-serif;font-size:1.9rem;letter-spacing:.12em;color:var(--cream);line-height:1}
@@ -26,8 +23,6 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 .nav-btn:hover{background:var(--cream);color:var(--red)}
 .nav-btn.accent{background:var(--cream);color:var(--red)}
 .nav-btn.accent:hover{background:var(--cream2)}
-
-/* HERO */
 .hero{background:var(--cream);color:var(--dk);padding:48px 40px 40px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden}
 .hero-left{position:relative;z-index:1}
 .hero-label{font-family:'Anton',sans-serif;font-size:.75rem;letter-spacing:.3em;color:var(--red);margin-bottom:8px}
@@ -36,8 +31,6 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 .hero-sub{font-size:.9rem;color:var(--red2);margin-top:14px;letter-spacing:.06em;max-width:340px;line-height:1.6}
 .hero-count{font-family:'Anton',sans-serif;font-size:5rem;color:var(--red);line-height:1;text-align:right;position:relative;z-index:1}
 .hero-count span{display:block;font-size:.75rem;letter-spacing:.2em;color:var(--dk);margin-top:2px}
-
-/* TOOLBAR */
 .toolbar-band{background:var(--dk);border-top:4px solid var(--red);border-bottom:4px solid var(--red);padding:14px 40px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .search-wrap{flex:1;max-width:360px}
 .search-wrap input{width:100%;background:transparent;border:2.5px solid rgba(240,231,200,.3);color:var(--cream);padding:10px 16px;font-size:.88rem;outline:none;font-family:'Noto Sans TC',sans-serif;transition:.18s}
@@ -48,8 +41,6 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 .vtbtn:last-child{border-right:2.5px solid rgba(240,231,200,.3)}
 .vtbtn.active{background:var(--red);color:var(--cream);border-color:var(--red)}
 .vtbtn:not(.active):hover{background:rgba(240,231,200,.08);color:var(--cream)}
-
-/* SHELF */
 .shelf-wrap{padding:36px 40px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:20px}
 .book-card{background:var(--cream);color:var(--dk);border:3px solid var(--cream);cursor:pointer;transition:.22s;position:relative;overflow:hidden}
@@ -68,8 +59,6 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 .rdot.on{background:var(--red)}
 .rdot.off{background:rgba(96,17,0,.18)}
 .book-date{font-size:.7rem;color:rgba(96,17,0,.45);letter-spacing:.05em}
-
-/* LIST */
 .list{display:flex;flex-direction:column;gap:8px}
 .list-card{background:rgba(240,231,200,.06);border:2px solid rgba(240,231,200,.12);border-left:5px solid var(--red);display:flex;align-items:center;gap:16px;padding:14px 20px;cursor:pointer;transition:.18s}
 .list-card:hover{background:rgba(240,231,200,.1);border-color:rgba(240,231,200,.25);transform:translateX(4px)}
@@ -77,8 +66,6 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 .list-cover-ph{width:50px;height:68px;background:var(--red);border:2px solid rgba(240,231,200,.1);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:1.4rem;color:rgba(240,231,200,.7)}
 .list-title{font-weight:900;font-size:1rem;color:var(--cream);margin-bottom:2px}
 .list-author{font-size:.8rem;color:rgba(240,231,200,.4);font-style:italic}
-
-/* MODAL */
 .overlay{position:fixed;inset:0;background:rgba(60,10,0,.75);backdrop-filter:blur(4px);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.25s}
 .overlay.open{opacity:1;pointer-events:all}
 .modal{background:var(--cream);color:var(--dk);border:3px solid var(--red);width:100%;max-width:650px;max-height:90vh;overflow-y:auto;transform:translateY(14px);transition:.25s;box-shadow:8px 8px 0 var(--dk)}
@@ -88,21 +75,14 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 .close-btn{background:none;border:none;cursor:pointer;font-size:1.3rem;color:rgba(240,231,200,.6);line-height:1}
 .close-btn:hover{color:var(--cream)}
 .modal-body{padding:24px;display:flex;flex-direction:column;gap:16px}
-
-/* FORM */
 .form-row{display:flex;gap:14px;flex-wrap:wrap}
 .form-group{display:flex;flex-direction:column;gap:5px;flex:1;min-width:155px}
 .form-group label{font-size:.7rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
-.form-group input,.form-group textarea,.form-group select{background:var(--white);border:2px solid rgba(96,17,0,.2);color:var(--dk);padding:10px 12px;font-size:.9rem;outline:none;font-family:'Noto Sans TC',sans-serif;resize:vertical;transition:.18s}
+.form-group input,.form-group textarea{background:var(--white);border:2px solid rgba(96,17,0,.2);color:var(--dk);padding:10px 12px;font-size:.9rem;outline:none;font-family:'Noto Sans TC',sans-serif;resize:vertical;transition:.18s}
 .form-group input:focus,.form-group textarea:focus{border-color:var(--red)}
-
-/* STAR */
 .star-pick{display:flex;gap:5px;cursor:pointer;padding-top:4px}
 .star-pick span{width:22px;height:22px;border-radius:50%;border:2px solid rgba(96,17,0,.2);background:#fff;transition:.15s}
 .star-pick span.on{background:var(--red);border-color:var(--red)}
-.star-pick span:hover{border-color:var(--red)}
-
-/* NOTE TABS */
 .note-tabs{display:flex;border:2.5px solid var(--red);overflow:hidden}
 .note-tab{flex:1;border:none;background:rgba(179,32,0,.06);padding:8px 4px;cursor:pointer;font-size:.72rem;font-family:'Noto Sans TC',sans-serif;font-weight:700;letter-spacing:.05em;color:rgba(96,17,0,.5);transition:.15s;border-right:1px solid rgba(179,32,0,.2);text-align:center}
 .note-tab:last-child{border-right:none}
@@ -119,14 +99,10 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 .note-input-row textarea:focus{border-color:var(--red)}
 .note-input-row button{align-self:flex-end;padding:9px 16px;border:2.5px solid var(--red);background:transparent;color:var(--red);cursor:pointer;font-weight:900;font-family:'Anton',sans-serif;font-size:.8rem;letter-spacing:.1em;transition:.15s}
 .note-input-row button:hover{background:var(--red);color:var(--cream)}
-
-/* COVER UPLOAD */
 .cover-upload{width:100%;height:130px;border:2.5px dashed rgba(179,32,0,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:.18s;position:relative;overflow:hidden;background:rgba(179,32,0,.04)}
 .cover-upload:hover{border-color:var(--red)}
 .cover-upload img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .cover-upload .up-label{font-size:.78rem;color:rgba(96,17,0,.4);pointer-events:none;font-weight:900;letter-spacing:.1em;text-transform:uppercase;font-family:'Anton',sans-serif}
-
-/* BTN */
 .btn{border:none;cursor:pointer;padding:9px 22px;font-size:.8rem;font-weight:900;font-family:'Anton',sans-serif;letter-spacing:.12em;text-transform:uppercase;transition:.15s}
 .btn-primary{background:var(--red);color:var(--cream);border:2.5px solid var(--red)}
 .btn-primary:hover{background:var(--red2)}
@@ -135,8 +111,6 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 .btn-danger{background:transparent;border:2.5px solid var(--red);color:var(--red)}
 .btn-danger:hover{background:var(--red);color:var(--cream)}
 .btn-sm{padding:6px 14px;font-size:.74rem}
-
-/* EXPORT CARDS */
 .export-card{border:2.5px solid rgba(96,17,0,.2);padding:18px 20px;display:flex;align-items:center;gap:16px;background:rgba(179,32,0,.04);transition:.18s}
 .export-card:hover{border-color:var(--red);background:rgba(179,32,0,.08)}
 .export-icon{font-family:'Anton',sans-serif;font-size:2rem;color:var(--red);width:48px;text-align:center;flex-shrink:0;line-height:1}
@@ -144,23 +118,19 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 .export-title{font-family:'Anton',sans-serif;font-size:.95rem;letter-spacing:.12em;color:var(--dk);margin-bottom:3px}
 .export-desc{font-size:.76rem;color:rgba(96,17,0,.5);line-height:1.5}
 .export-count{font-family:'Anton',sans-serif;font-size:.7rem;letter-spacing:.1em;color:rgba(96,17,0,.35);margin-top:10px;padding-top:10px;border-top:1px solid rgba(96,17,0,.1)}
-
-/* DETAIL */
 .detail-cover{width:100%;max-height:260px;object-fit:contain;border:2px solid rgba(96,17,0,.15);background:rgba(179,32,0,.06);margin-bottom:6px}
 .detail-cover-ph{width:100%;height:160px;background:var(--red);display:flex;align-items:center;justify-content:center;margin-bottom:6px;position:relative;overflow:hidden}
 .detail-meta{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 14px}
 .detail-rule{border:none;border-top:2px solid rgba(96,17,0,.12);margin:0 0 14px}
-.note-sec-title{font-size:.7rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:0;display:flex;align-items:center;gap:8px;font-family:'Anton',sans-serif;cursor:pointer;padding:8px 0;user-select:none}
+.note-sec-title{font-size:.7rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:0;display:flex;align-items:center;gap:8px;font-family:'Anton',sans-serif;cursor:pointer;padding:8px 0;user-select:none}
 .note-sec-title::before{content:'';width:14px;height:2px;background:currentColor}
 .note-sec-title .toggle-arrow{margin-left:auto;font-size:.65rem;transition:.2s;opacity:.6}
 .note-sec-title.collapsed .toggle-arrow{transform:rotate(-90deg)}
-.note-sec-body{overflow:hidden;transition:max-height .25s ease;max-height:2000px}
-.note-sec-body.collapsed{max-height:0}
-/* detail note blocks with colored left border per type */
+.note-sec-body{overflow:hidden;transition:max-height .25s ease;max-height:2000px;padding-top:6px}
+.note-sec-body.collapsed{max-height:0;padding-top:0}
 .note-block{border:1px solid rgba(96,17,0,.1);border-left:3px solid var(--red);padding:9px 12px;font-size:.88rem;line-height:1.75;margin-bottom:5px}
 .note-block:nth-child(odd){background:var(--nb-a)}
 .note-block:nth-child(even){background:var(--nb-b)}
-/* per-type border colors */
 .note-sec-句子 .note-block{border-left-color:var(--c-句子)}
 .note-sec-摘要 .note-block{border-left-color:var(--c-摘要)}
 .note-sec-心得 .note-block{border-left-color:var(--c-心得)}
@@ -169,8 +139,6 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 .note-sec-摘要 .note-sec-title{color:var(--c-摘要)}
 .note-sec-心得 .note-sec-title{color:var(--c-心得)}
 .note-sec-延伸 .note-sec-title{color:var(--c-延伸)}
-
-/* COMMENTS */
 .comments-section{margin-top:18px;padding-top:14px;border-top:2px solid rgba(96,17,0,.12)}
 .comments-title{font-family:'Anton',sans-serif;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .comments-title::before{content:'';width:14px;height:2px;background:var(--red)}
@@ -181,40 +149,22 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 .comment-time{font-size:.68rem;color:rgba(96,17,0,.35);margin-left:8px;font-weight:400}
 .comment-text{color:var(--dk)}
 .comment-form{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-.comment-inputs{display:flex;gap:8px;flex-wrap:wrap}
-.comment-inputs input{flex:1;min-width:120px;background:var(--white);border:2px solid rgba(96,17,0,.2);color:var(--dk);padding:8px 10px;font-size:.86rem;outline:none;font-family:inherit;transition:.18s}
-.comment-inputs input:focus{border-color:var(--red)}
-.comment-inputs textarea{width:100%;background:var(--white);border:2px solid rgba(96,17,0,.2);color:var(--dk);padding:8px 10px;font-size:.86rem;outline:none;font-family:inherit;resize:none;transition:.18s}
-.comment-inputs textarea:focus{border-color:var(--red)}
-
-/* EMPTY */
+.comment-inputs input,.comment-inputs textarea{width:100%;background:var(--white);border:2px solid rgba(96,17,0,.2);color:var(--dk);padding:8px 10px;font-size:.86rem;outline:none;font-family:inherit;resize:none;transition:.18s;margin-bottom:6px}
+.comment-inputs input:focus,.comment-inputs textarea:focus{border-color:var(--red)}
 .empty{text-align:center;padding:90px 20px;color:rgba(240,231,200,.25)}
 .empty .big{font-family:'Anton',sans-serif;font-size:7rem;letter-spacing:.15em;color:var(--red);opacity:.2;margin-bottom:16px;line-height:1}
 .empty p{font-size:.95rem;letter-spacing:.06em}
 .empty strong{color:var(--cream)}
-
-/* TOAST */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--red);color:var(--cream);padding:10px 28px;font-size:.82rem;font-weight:900;opacity:0;transition:.3s;z-index:999;pointer-events:none;letter-spacing:.1em;text-transform:uppercase;font-family:'Anton',sans-serif;border:2px solid var(--cream);box-shadow:4px 4px 0 var(--dk)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--dk)}::-webkit-scrollbar-thumb{background:var(--red)}
-
 @media(max-width:600px){
-  nav{padding:0 16px;height:56px}
-  .logo-en{font-size:1.3rem}
-  .nav-btn{padding:5px 10px;font-size:.72rem}
-  .hero{padding:28px 16px 24px;flex-direction:column;align-items:flex-start}
-  .hero-title{font-size:3.2rem}
-  .hero-count{font-size:3rem}
-  .toolbar-band{padding:10px 16px}
-  .shelf-wrap{padding:20px 16px}
+  nav{padding:0 16px;height:56px}.logo-en{font-size:1.3rem}.nav-btn{padding:5px 10px;font-size:.72rem}
+  .hero{padding:28px 16px 24px;flex-direction:column;align-items:flex-start}.hero-title{font-size:3.2rem}.hero-count{font-size:3rem}
+  .toolbar-band{padding:10px 16px}.shelf-wrap{padding:20px 16px}
   .grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px}
-  .modal{max-height:95vh}
-  .modal-body{padding:16px}
-  .form-row{flex-direction:column;gap:10px}
-  .note-tab{font-size:.62rem;padding:7px 2px}
-  .hero-sub{font-size:.82rem}
-  .export-card{flex-wrap:wrap}
+  .modal{max-height:95vh}.modal-body{padding:16px}.form-row{flex-direction:column;gap:10px}
+  .note-tab{font-size:.62rem;padding:7px 2px}.export-card{flex-wrap:wrap}
 }
 </style>
 </head>
@@ -226,8 +176,8 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
     <div class="logo-zh">閱讀空氣 · My Reading Journal</div>
   </div>
   <div class="nav-right">
-    <button class="nav-btn" onclick="openAdd()">+ NEW BOOK</button>
-    <button class="nav-btn accent" onclick="openExport()">EXPORT</button>
+    <button class="nav-btn" id="btn-add">+ NEW BOOK</button>
+    <button class="nav-btn accent" id="btn-export">EXPORT</button>
   </div>
 </nav>
 
@@ -244,12 +194,10 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 </div>
 
 <div class="toolbar-band">
-  <div class="search-wrap">
-    <input type="text" id="search" placeholder="SEARCH TITLE OR AUTHOR…" oninput="renderShelf()">
-  </div>
+  <div class="search-wrap"><input type="text" id="search" placeholder="SEARCH TITLE OR AUTHOR…"></div>
   <div class="view-toggle">
-    <button class="vtbtn active" id="vg" onclick="setView('grid')">COVER</button>
-    <button class="vtbtn" id="vl" onclick="setView('list')">LIST</button>
+    <button class="vtbtn active" id="vg">COVER</button>
+    <button class="vtbtn" id="vl">LIST</button>
   </div>
 </div>
 
@@ -257,19 +205,19 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 <div class="toast" id="toast"></div>
 
 <!-- ADD MODAL -->
-<div class="overlay" id="addOverlay" onclick="closeAdd(event)">
-  <div class="modal" onclick="event.stopPropagation()">
+<div class="overlay" id="addOverlay">
+  <div class="modal">
     <div class="modal-head">
       <h3 id="modal-title">ADD BOOK</h3>
-      <button class="close-btn" onclick="closeAddModal()">✕</button>
+      <button class="close-btn" id="btn-close-add">✕</button>
     </div>
     <div class="modal-body">
       <div class="form-group">
         <label>Cover Image</label>
-        <div class="cover-upload" onclick="document.getElementById('coverInput').click()">
+        <div class="cover-upload" id="cover-upload-area">
           <img id="coverPreview" src="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
           <span class="up-label" id="coverLabel">Click to Upload</span>
-          <input type="file" id="coverInput" accept="image/*" style="display:none" onchange="handleCoverUpload(event)">
+          <input type="file" id="coverInput" accept="image/*" style="display:none">
         </div>
       </div>
       <div class="form-row">
@@ -277,7 +225,7 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
         <div class="form-group"><label>作者</label><input type="text" id="f-author" placeholder="輸入作者"></div>
       </div>
       <div class="form-row">
-        <div class="form-group"><label>出版年份</label><input type="number" id="f-year" placeholder="例如 2023" min="1000" max="2099" style="appearance:textfield"></div>
+        <div class="form-group"><label>出版年份</label><input type="number" id="f-year" placeholder="例如 2023" min="1000" max="2099"></div>
         <div class="form-group"><label>閱讀日期</label><input type="date" id="f-date"></div>
       </div>
       <div class="form-group">
@@ -290,10 +238,10 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
       <div class="form-group">
         <label>筆記</label>
         <div class="note-tabs">
-          <button class="note-tab active" data-t="句子" onclick="switchTab('句子')">印象句子</button>
-          <button class="note-tab" data-t="摘要" onclick="switchTab('摘要')">內容摘要</button>
-          <button class="note-tab" data-t="心得" onclick="switchTab('心得')">讀後心得</button>
-          <button class="note-tab" data-t="延伸" onclick="switchTab('延伸')">延伸筆記</button>
+          <button class="note-tab active" data-t="句子">印象句子</button>
+          <button class="note-tab" data-t="摘要">內容摘要</button>
+          <button class="note-tab" data-t="心得">讀後心得</button>
+          <button class="note-tab" data-t="延伸">延伸筆記</button>
         </div>
         <div id="na-句子" class="note-area active"></div>
         <div id="na-摘要" class="note-area"></div>
@@ -301,27 +249,27 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
         <div id="na-延伸" class="note-area"></div>
       </div>
       <div style="display:flex;gap:10px;justify-content:flex-end">
-        <button class="btn btn-outline" onclick="closeAddModal()">CANCEL</button>
-        <button class="btn btn-primary" onclick="saveBook()">SAVE BOOK</button>
+        <button class="btn btn-outline" id="btn-cancel-add">CANCEL</button>
+        <button class="btn btn-primary" id="btn-save-book">SAVE BOOK</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- DETAIL MODAL -->
-<div class="overlay" id="detailOverlay" onclick="closeDetail(event)">
-  <div class="modal" onclick="event.stopPropagation()">
-    <div class="modal-head"><h3 id="d-title"></h3><button class="close-btn" onclick="closeDetailModal()">✕</button></div>
+<div class="overlay" id="detailOverlay">
+  <div class="modal">
+    <div class="modal-head"><h3 id="d-title"></h3><button class="close-btn" id="btn-close-detail">✕</button></div>
     <div class="modal-body" id="d-body"></div>
   </div>
 </div>
 
 <!-- EXPORT MODAL -->
-<div class="overlay" id="exportOverlay" onclick="closeExport(event)">
-  <div class="modal" onclick="event.stopPropagation()">
+<div class="overlay" id="exportOverlay">
+  <div class="modal">
     <div class="modal-head">
       <h3>EXPORT DATA</h3>
-      <button class="close-btn" onclick="closeExportModal()">✕</button>
+      <button class="close-btn" id="btn-close-export">✕</button>
     </div>
     <div class="modal-body">
       <p style="font-size:.82rem;color:rgba(96,17,0,.55);line-height:1.65">備份你的閱讀紀錄，以防網站異動或資料遺失。建議定期匯出一份存在本機。</p>
@@ -329,28 +277,27 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
         <div class="export-icon">CSV</div>
         <div class="export-info">
           <div class="export-title">試算表備份</div>
-          <div class="export-desc">匯出為 .csv，可用 Excel、Numbers、Google Sheets 開啟。包含書名、作者、年份、日期、評分與四類筆記。</div>
+          <div class="export-desc">匯出為 .csv，可用 Excel、Numbers、Google Sheets 開啟。</div>
         </div>
-        <button class="btn btn-primary btn-sm" onclick="exportCSV()" style="flex-shrink:0;align-self:center">↓ CSV</button>
+        <button class="btn btn-primary btn-sm" id="btn-csv" style="flex-shrink:0;align-self:center">↓ CSV</button>
       </div>
       <div class="export-card">
         <div class="export-icon">JSON</div>
         <div class="export-info">
           <div class="export-title">完整備份</div>
-          <div class="export-desc">匯出所有資料（含封面圖片）為 .json 格式，可作為完整備份。</div>
+          <div class="export-desc">匯出所有資料（含封面）為 .json 格式。</div>
         </div>
-        <button class="btn btn-primary btn-sm" onclick="exportJSON()" style="flex-shrink:0;align-self:center">↓ JSON</button>
+        <button class="btn btn-primary btn-sm" id="btn-json" style="flex-shrink:0;align-self:center">↓ JSON</button>
       </div>
       <hr style="border:none;border-top:2px solid rgba(96,17,0,.12);margin:4px 0">
       <div class="export-card">
         <div class="export-icon">↑</div>
         <div class="export-info">
           <div class="export-title">匯入備份</div>
-          <div class="export-desc">從之前匯出的 .json 備份檔還原資料。重複的書籍會自動略過，不會覆蓋現有資料。</div>
+          <div class="export-desc">從 .json 備份檔還原資料，重複書籍自動略過。</div>
         </div>
         <label class="btn btn-outline btn-sm" style="flex-shrink:0;align-self:center;cursor:pointer">
-          ↑ JSON
-          <input type="file" id="importInput" accept=".json" style="display:none" onchange="importJSON(event)">
+          ↑ JSON<input type="file" id="importInput" accept=".json" style="display:none">
         </label>
       </div>
       <div class="export-count" id="export-count"></div>
@@ -358,338 +305,418 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
   </div>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js" crossorigin="anonymous"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js" crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <script>
-var db;
-window.addEventListener('load', function(){
-  try {
-    var firebaseConfig = {
-      apiKey: "AIzaSyAcqo-Hw6RL-JXXqejjMs3X4J5EVENAZoA",
-      authDomain: "reading-air.firebaseapp.com",
-      projectId: "reading-air",
-      storageBucket: "reading-air.firebasestorage.app",
-      messagingSenderId: "492355141405",
-      appId: "1:492355141405:web:75f9edd41d8ad33f5eebf4"
-    };
-    firebase.initializeApp(firebaseConfig);
-    db = firebase.firestore();
+(function(){
+  // ── STATE ──
+  var db;
+  var books=[], view='grid', editId=null, currentRating=0, currentCover=null;
+  var tmpNotes={句子:[],摘要:[],心得:[],延伸:[]};
+  var currentDetailId=null;
+  var curTab='句子';
+  var commentsUnsub=null;
+
+  // ── INIT ──
+  window.addEventListener('load', function(){
+    try {
+      firebase.initializeApp({
+        apiKey:"AIzaSyAcqo-Hw6RL-JXXqejjMs3X4J5EVENAZoA",
+        authDomain:"reading-air.firebaseapp.com",
+        projectId:"reading-air",
+        storageBucket:"reading-air.firebasestorage.app",
+        messagingSenderId:"492355141405",
+        appId:"1:492355141405:web:75f9edd41d8ad33f5eebf4"
+      });
+      db = firebase.firestore();
+    } catch(e) {
+      toast('Firebase 初始化失敗: '+e.message);
+      return;
+    }
+
+    // bind all buttons via addEventListener — no onclick attributes
+    ge('btn-add').addEventListener('click', openAdd);
+    ge('btn-export').addEventListener('click', openExport);
+    ge('btn-close-add').addEventListener('click', closeAddModal);
+    ge('btn-cancel-add').addEventListener('click', closeAddModal);
+    ge('btn-save-book').addEventListener('click', saveBook);
+    ge('btn-close-detail').addEventListener('click', closeDetailModal);
+    ge('btn-close-export').addEventListener('click', closeExportModal);
+    ge('btn-csv').addEventListener('click', exportCSV);
+    ge('btn-json').addEventListener('click', exportJSON);
+    ge('vg').addEventListener('click', function(){ setView('grid'); });
+    ge('vl').addEventListener('click', function(){ setView('list'); });
+    ge('search').addEventListener('input', renderShelf);
+    ge('starPick').addEventListener('click', function(e){
+      var s=e.target.closest('[data-v]'); if(s) setStars(+s.dataset.v);
+    });
+    ge('cover-upload-area').addEventListener('click', function(){ ge('coverInput').click(); });
+    ge('coverInput').addEventListener('change', handleCoverUpload);
+    ge('importInput').addEventListener('change', importJSON);
+    ge('addOverlay').addEventListener('click', function(e){ if(e.target===this) closeAddModal(); });
+    ge('detailOverlay').addEventListener('click', function(e){ if(e.target===this) closeDetailModal(); });
+    ge('exportOverlay').addEventListener('click', function(e){ if(e.target===this) closeExportModal(); });
+    document.querySelectorAll('.note-tab').forEach(function(btn){
+      btn.addEventListener('click', function(){ switchTab(this.dataset.t); });
+    });
+
     startSync();
-    document.getElementById('starPick').addEventListener('click',function(e){var s=e.target.closest('[data-v]');if(s)setStars(+s.dataset.v)});
-  } catch(e) {
-    alert('Firebase 載入失敗，請重新整理頁面。錯誤：' + e.message);
-  }
-});
-
-let books=[];
-let view='grid', editId=null, currentRating=0, currentCover=null;
-let tmpNotes={句子:[],摘要:[],心得:[],延伸:[]};
-let currentDetailId=null;
-
-/* ── REALTIME SYNC ───────────────────── */
-function startSync(){
-  db.collection('books').onSnapshot(snap=>{
-    books = snap.docs.map(d=>({id:d.id,...d.data()}));
-    books.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-    renderShelf();
-    if(currentDetailId){
-      const b=books.find(x=>x.id===currentDetailId);
-      if(b) refreshDetailNotes(b);
-    }
   });
-}
 
-/* ── SAVE ────────────────────────────── */
-async function save(b, isEdit){
-  const {id:_id,...data}=b;
-  if(isEdit){
-    await db.collection('books').doc(b.id).update(data);
-  } else {
-    data.createdAt=Date.now();
-    const ref=await db.collection('books').add(data);
-    b.id=ref.id; b.createdAt=data.createdAt;
+  function ge(id){ return document.getElementById(id); }
+
+  // ── SYNC ──
+  function startSync(){
+    db.collection('books').onSnapshot(function(snap){
+      books = snap.docs.map(function(d){ return Object.assign({id:d.id},d.data()); });
+      books.sort(function(a,b){ return (b.createdAt||0)-(a.createdAt||0); });
+      renderShelf();
+      if(currentDetailId){
+        var b=books.find(function(x){ return x.id===currentDetailId; });
+        if(b) ge('detail-notes').innerHTML = buildNotesHTML(b) || '<p style="color:rgba(96,17,0,.35);font-size:.88rem;font-style:italic">尚無筆記</p>';
+      }
+    }, function(err){ toast('載入失敗: '+err.message); });
   }
-}
 
-/* ── RENDER ──────────────────────────── */
-function dotsHTML(r,sz=10){return[1,2,3,4,5].map(i=>`<span class="rdot ${i<=r?'on':'off'}" style="width:${sz}px;height:${sz}px"></span>`).join('')}
-
-function renderShelf(){
-  const q=(document.getElementById('search').value||'').toLowerCase();
-  const f=books.filter(b=>b.title.toLowerCase().includes(q)||(b.author||'').toLowerCase().includes(q));
-  document.getElementById('hero-count').innerHTML=`${books.length}<span>BOOKS READ</span>`;
-  const shelf=document.getElementById('shelf');
-  if(!f.length){
-    shelf.innerHTML=`<div class="empty"><div class="big">EMPTY</div><p>${q?'No results found':'No books yet — click <strong>+ NEW BOOK</strong> to start'}</p></div>`;
-    shelf.className='';return;
-  }
-  if(view==='grid'){shelf.className='grid';shelf.innerHTML=f.map(cardHTML).join('');}
-  else{shelf.className='list';shelf.innerHTML=f.map(listHTML).join('');}
-}
-
-function cardHTML(b){
-  const L=(b.title||'?')[0];
-  const cover=b.cover?`<img class="book-cover" src="${b.cover}" alt="">`:
-    `<div class="book-cover-ph"><div class="ph-circle"></div><div class="ph-circle2"></div><span class="ph-letter">${esc(L)}</span></div>`;
-  const yearStr=b.year?`<span style="font-size:.7rem;color:rgba(96,17,0,.4);letter-spacing:.04em">${b.year}</span>`:'';
-  return`<div class="book-card" onclick="openDetail('${b.id}')">
-    ${cover}
-    <div class="book-info">
-      <div class="book-title">${esc(b.title)}</div>
-      <div class="book-author">${esc(b.author||'')}</div>
-      <div class="rating-row">${dotsHTML(b.rating||0)}</div>
-      <div class="book-date">${b.date||''} ${yearStr}</div>
-    </div>
-  </div>`;
-}
-
-function listHTML(b){
-  const L=(b.title||'?')[0];
-  const cover=b.cover?`<img class="list-cover" src="${b.cover}" alt="">`:
-    `<div class="list-cover-ph">${esc(L)}</div>`;
-  const nc=Object.values(b.notes||{}).flat().length;
-  const yearStr=b.year?` · ${b.year}`:'';
-  return`<div class="list-card" onclick="openDetail('${b.id}')">
-    ${cover}
-    <div style="flex:1;min-width:0">
-      <div class="list-title">${esc(b.title)}</div>
-      <div class="list-author">${esc(b.author||'')}${b.date?' · '+b.date:''}${yearStr}</div>
-      <div style="font-size:.72rem;color:rgba(240,231,200,.3);margin-top:3px">${nc} 則筆記</div>
-    </div>
-    <div style="flex-shrink:0">${dotsHTML(b.rating||0)}</div>
-  </div>`;
-}
-
-function setView(v){view=v;document.getElementById('vg').classList.toggle('active',v==='grid');document.getElementById('vl').classList.toggle('active',v==='list');renderShelf()}
-
-/* ── ADD / EDIT ──────────────────────── */
-function openAdd(){
-  editId=null;currentRating=0;currentCover=null;tmpNotes={句子:[],摘要:[],心得:[],延伸:[]};
-  document.getElementById('modal-title').textContent='ADD BOOK';
-  ['f-title','f-author','f-year'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('f-date').value=new Date().toISOString().slice(0,10);
-  document.getElementById('coverPreview').style.display='none';
-  document.getElementById('coverLabel').style.display='';
-  setStars(0);renderNotesAll();
-  document.getElementById('addOverlay').classList.add('open');
-  switchTab('句子');
-}
-function openEdit(id){
-  const b=books.find(x=>x.id===id);if(!b)return;
-  editId=id;currentRating=b.rating||0;currentCover=b.cover||null;
-  tmpNotes=JSON.parse(JSON.stringify(b.notes||{}));
-  ['句子','摘要','心得','延伸'].forEach(k=>{if(!tmpNotes[k])tmpNotes[k]=[]});
-  document.getElementById('modal-title').textContent='EDIT BOOK';
-  document.getElementById('f-title').value=b.title;
-  document.getElementById('f-author').value=b.author||'';
-  document.getElementById('f-year').value=b.year||'';
-  document.getElementById('f-date').value=b.date||'';
-  if(b.cover){document.getElementById('coverPreview').src=b.cover;document.getElementById('coverPreview').style.display='block';document.getElementById('coverLabel').style.display='none';}
-  else{document.getElementById('coverPreview').style.display='none';document.getElementById('coverLabel').style.display='';}
-  setStars(currentRating);renderNotesAll();
-  document.getElementById('addOverlay').classList.add('open');
-  switchTab('句子');
-}
-function closeAdd(e){if(e.target===document.getElementById('addOverlay'))closeAddModal()}
-function closeAddModal(){document.getElementById('addOverlay').classList.remove('open');editId=null;}
-
-async function saveBook(){
-  const title=document.getElementById('f-title').value.trim();
-  if(!title){toast('請輸入書名');return;}
-  const yearVal=document.getElementById('f-year').value.trim();
-  const b={
-    title,
-    author:document.getElementById('f-author').value.trim(),
-    year:yearVal?parseInt(yearVal):null,
-    date:document.getElementById('f-date').value,
-    rating:currentRating,
-    cover:currentCover,
-    notes:JSON.parse(JSON.stringify(tmpNotes))
-  };
-  const wasEdit=!!editId;
-  if(wasEdit){b.id=editId;await save(b,true);}
-  else{await save(b,false);}
-  closeAddModal();toast(wasEdit?'UPDATED':'SAVED');
-}
-
-function handleCoverUpload(e){
-  const file=e.target.files[0];if(!file)return;
-  const r=new FileReader();
-  r.onload=ev=>{
-    currentCover=ev.target.result;
-    document.getElementById('coverPreview').src=currentCover;
-    document.getElementById('coverPreview').style.display='block';
-    document.getElementById('coverLabel').style.display='none';
-  };
-  r.readAsDataURL(file);
-}
-function setStars(n){currentRating=n;document.querySelectorAll('#starPick span').forEach((s,i)=>s.classList.toggle('on',i<n))}
-
-
-let curTab='句子';
-function switchTab(t){curTab=t;document.querySelectorAll('.note-tab').forEach(b=>b.classList.toggle('active',b.dataset.t===t));document.querySelectorAll('.note-area').forEach(a=>a.classList.toggle('active',a.id==='na-'+t))}
-function renderNotesAll(){['句子','摘要','心得','延伸'].forEach(t=>renderNoteArea(t))}
-function renderNoteArea(t){
-  const el=document.getElementById('na-'+t);
-  const entries=(tmpNotes[t]||[]).map((n,i)=>`<div class="note-entry">${esc(n).replace(/\n/g,'<br>')}<button class="del-note" onclick="delNote('${t}',${i})">✕</button></div>`).join('');
-  el.innerHTML=entries+`<div class="note-input-row"><textarea id="ni-${t}" rows="2" placeholder="新增筆記…"></textarea><button onclick="addNote('${t}')">ADD</button></div>`;
-}
-function addNote(t){const inp=document.getElementById('ni-'+t);const v=inp.value.trim();if(!v)return;if(!tmpNotes[t])tmpNotes[t]=[];tmpNotes[t].push(v);inp.value='';renderNoteArea(t)}
-function delNote(t,i){tmpNotes[t].splice(i,1);renderNoteArea(t)}
-
-/* ── DETAIL ──────────────────────────── */
-function openDetail(id){
-  const b=books.find(x=>x.id===id);if(!b)return;
-  currentDetailId=id;
-  document.getElementById('d-title').textContent=b.title;
-  const L=(b.title||'?')[0];
-  const cover=b.cover?`<img class="detail-cover" src="${b.cover}" alt="">`:
-    `<div class="detail-cover-ph"><div class="ph-circle"></div><div class="ph-circle2"></div><span style="font-family:'Anton',sans-serif;font-size:5rem;color:rgba(240,231,200,.5);position:relative;z-index:1">${esc(L)}</span></div>`;
-  const types=[{k:'句子',l:'印象句子'},{k:'摘要',l:'內容摘要'},{k:'心得',l:'讀後心得'},{k:'延伸',l:'延伸筆記'}];
-  const notesHTML=buildNotesHTML(b);
-  const yearStr=b.year?`<span style="font-size:.82rem;color:rgba(96,17,0,.4)">${b.year}年出版</span>`:'';
-  document.getElementById('d-body').innerHTML=`
-    ${cover}
-    <div class="detail-meta">
-      <div class="rating-row">${dotsHTML(b.rating||0,13)}</div>
-      ${b.author?`<span style="font-size:.85rem;color:rgba(96,17,0,.55);font-style:italic">${esc(b.author)}</span>`:''}
-      ${b.date?`<span style="font-size:.82rem;color:rgba(96,17,0,.4)">${b.date}</span>`:''}
-      ${yearStr}
-    </div>
-    <hr class="detail-rule">
-    <div id="detail-notes">${notesHTML||'<p style="color:rgba(96,17,0,.35);font-size:.88rem;font-style:italic">尚無筆記</p>'}</div>
-    <div class="comments-section">
-      <div class="comments-title">讀者留言</div>
-      <div id="comments-list">載入中…</div>
-      <div class="comment-form">
-        <div class="comment-inputs"><input type="text" id="c-name" placeholder="你的名字" maxlength="30"></div>
-        <div class="comment-inputs"><textarea id="c-text" rows="2" placeholder="留下你的想法…" maxlength="500"></textarea></div>
-        <div style="display:flex;justify-content:flex-end">
-          <button class="btn btn-primary btn-sm" onclick="submitComment('${id}')">留言</button>
-        </div>
-      </div>
-    </div>
-    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px;padding-top:12px;border-top:1px solid rgba(96,17,0,.1)">
-      <button class="btn btn-outline btn-sm" onclick="openEdit('${id}');closeDetailModal()">EDIT</button>
-      <button class="btn btn-danger btn-sm" onclick="deleteBook('${id}')">DELETE</button>
-    </div>`;
-  document.getElementById('detailOverlay').classList.add('open');
-  loadComments(id);
-}
-
-function buildNotesHTML(b){
-  var types=[{k:'句子',l:'印象句子'},{k:'摘要',l:'內容摘要'},{k:'心得',l:'讀後心得'},{k:'延伸',l:'延伸筆記'}];
-  return types.map(function(nt){
-    var arr=(b.notes&&b.notes[nt.k])||[];if(!arr.length)return'';
-    var blocks=arr.map(function(n){return'<div class="note-block">'+esc(n).replace(/\n/g,'<br>')+'</div>';}).join('');
-    return'<div class="note-sec-wrap note-sec-'+nt.k+'" style="margin-bottom:10px"><div class="note-sec-title" onclick="toggleNoteSection(this)">'+nt.l+'<span class="toggle-arrow">▼</span></div><div class="note-sec-body" style="padding-top:6px">'+blocks+'</div></div>';
-  }).join('');
-}
-function refreshDetailNotes(b){
-  var el=document.getElementById('detail-notes');if(!el)return;
-  el.innerHTML=buildNotesHTML(b)||'<p style="color:rgba(96,17,0,.35);font-size:.88rem;font-style:italic">尚無筆記</p>';
-}
-function toggleNoteSection(title){
-  title.classList.toggle('collapsed');
-  var body=title.nextElementSibling;
-  body.classList.toggle('collapsed');
-}
-
-function closeDetail(e){if(e.target===document.getElementById('detailOverlay'))closeDetailModal()}
-function closeDetailModal(){document.getElementById('detailOverlay').classList.remove('open');currentDetailId=null;}
-
-function deleteBook(id){
-  if(!confirm('確定要刪除這本書嗎？'))return;
-  db.collection('books').doc(id).delete();
-  closeDetailModal();toast('DELETED');
-}
-
-/* ── COMMENTS ────────────────────────── */
-let commentsUnsub=null;
-function loadComments(bookId){
-  if(commentsUnsub)commentsUnsub();
-  commentsUnsub=db.collection('comments').where('bookId','==',bookId).onSnapshot(snap=>{
-    const list=document.getElementById('comments-list');if(!list)return;
-    const items=snap.docs.map(d=>({id:d.id,...d.data()}));
-    items.sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
-    if(!items.length){list.innerHTML='<p style="font-size:.82rem;color:rgba(96,17,0,.35);font-style:italic;margin-bottom:8px">還沒有留言，來第一個吧！</p>';return;}
-    list.innerHTML=items.map(c=>{
-      const d=c.createdAt?new Date(c.createdAt).toLocaleDateString('zh-TW'):'';
-      return`<div class="comment-item"><div class="comment-name">${esc(c.name||'匿名')}<span class="comment-time">${d}</span></div><div class="comment-text">${esc(c.text).replace(/\n/g,'<br>')}</div></div>`;
+  // ── RENDER ──
+  function dotsHTML(r,sz){
+    sz=sz||10;
+    return [1,2,3,4,5].map(function(i){
+      return '<span class="rdot '+(i<=r?'on':'off')+'" style="width:'+sz+'px;height:'+sz+'px"></span>';
     }).join('');
-  });
-}
+  }
 
-function submitComment(bookId){
-  const name=(document.getElementById('c-name').value.trim())||'匿名';
-  const text=document.getElementById('c-text').value.trim();
-  if(!text){toast('請輸入留言內容');return;}
-  db.collection('comments').add({bookId,name,text,createdAt:Date.now()});
-  document.getElementById('c-name').value='';
-  document.getElementById('c-text').value='';
-  toast('留言成功');
-}
-
-/* ── EXPORT / IMPORT ─────────────────── */
-function openExport(){
-  const n=books.length;
-  const nc=books.reduce((s,b)=>s+Object.values(b.notes||{}).flat().length,0);
-  document.getElementById('export-count').textContent=`目前共 ${n} 本書 · ${nc} 則筆記`;
-  document.getElementById('exportOverlay').classList.add('open');
-}
-function closeExport(e){if(e.target===document.getElementById('exportOverlay'))closeExportModal()}
-function closeExportModal(){document.getElementById('exportOverlay').classList.remove('open')}
-
-function csvCell(v){const s=String(v==null?'':v);if(s.includes(',')||s.includes('\n')||s.includes('"'))return'"'+s.replace(/"/g,'""')+'"';return s;}
-function exportCSV(){
-  if(!books.length){toast('尚無書籍資料');return;}
-  const headers=['書名','作者','出版年份','閱讀日期','評分（/5）','印象句子','內容摘要','讀後心得','延伸筆記'];
-  const rows=books.map(b=>[b.title||'',b.author||'',b.year||'',b.date||'',b.rating||0,
-    (b.notes?.['句子']||[]).join(' ／ '),(b.notes?.['摘要']||[]).join(' ／ '),
-    (b.notes?.['心得']||[]).join(' ／ '),(b.notes?.['延伸']||[]).join(' ／ ')]);
-  const csv='\uFEFF'+[headers,...rows].map(r=>r.map(csvCell).join(',')).join('\r\n');
-  downloadBlob(new Blob([csv],{type:'text/csv;charset=utf-8'}),`reading-air-${today()}.csv`);
-  toast('CSV 匯出完成');
-}
-function exportJSON(){
-  if(!books.length){toast('尚無書籍資料');return;}
-  downloadBlob(new Blob([JSON.stringify({exportedAt:new Date().toISOString(),count:books.length,books},null,2)],{type:'application/json'}),`reading-air-${today()}.json`);
-  toast('JSON 備份完成');
-}
-function importJSON(e){
-  const file=e.target.files[0];if(!file)return;
-  e.target.value='';
-  const reader=new FileReader();
-  reader.onload=function(ev){
-    let payload;
-    try{payload=JSON.parse(ev.target.result);}catch(err){toast('無法讀取檔案');return;}
-    const incoming=payload.books||payload;
-    if(!Array.isArray(incoming)||!incoming.length){toast('找不到書籍資料');return;}
-    const existingKeys=new Set(books.map(b=>b.title+'|'+(b.author||'')));
-    let added=0,skipped=0,i=0;
-    function next(){
-      if(i>=incoming.length){toast('匯入完成：'+added+' 本新增，'+skipped+' 本略過');return;}
-      const b=incoming[i++];
-      const key=b.title+'|'+(b.author||'');
-      if(existingKeys.has(key)){skipped++;next();return;}
-      const data=Object.assign({},b);delete data.id;
-      data.createdAt=Date.now()+i;
-      db.collection('books').add(data).then(function(){existingKeys.add(key);added++;next();});
+  function renderShelf(){
+    var q=(ge('search').value||'').toLowerCase();
+    var f=books.filter(function(b){ return b.title.toLowerCase().indexOf(q)>=0||(b.author||'').toLowerCase().indexOf(q)>=0; });
+    ge('hero-count').innerHTML=books.length+'<span>BOOKS READ</span>';
+    var shelf=ge('shelf');
+    if(!f.length){
+      shelf.innerHTML='<div class="empty"><div class="big">EMPTY</div><p>'+(q?'No results found':'No books yet — click <strong>+ NEW BOOK</strong> to start')+'</p></div>';
+      shelf.className=''; return;
     }
-    next();
-  };
-  reader.readAsText(file);
-}
-function today(){return new Date().toISOString().slice(0,10)}
-function downloadBlob(blob,filename){
-  const url=URL.createObjectURL(blob);const a=document.createElement('a');
-  a.href=url;a.download=filename;document.body.appendChild(a);a.click();
-  setTimeout(function(){URL.revokeObjectURL(url);a.remove()},200);
-}
+    if(view==='grid'){ shelf.className='grid'; shelf.innerHTML=f.map(cardHTML).join(''); }
+    else { shelf.className='list'; shelf.innerHTML=f.map(listHTML).join(''); }
+  }
 
-function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show')},2400)}
+  function cardHTML(b){
+    var L=(b.title||'?')[0];
+    var cover=b.cover?'<img class="book-cover" src="'+b.cover+'" alt="">':
+      '<div class="book-cover-ph"><div class="ph-circle"></div><div class="ph-circle2"></div><span class="ph-letter">'+esc(L)+'</span></div>';
+    var yr=b.year?'<span style="font-size:.7rem;color:rgba(96,17,0,.4)">'+b.year+'</span>':'';
+    return '<div class="book-card" data-id="'+b.id+'">'+cover+
+      '<div class="book-info">'+
+      '<div class="book-title">'+esc(b.title)+'</div>'+
+      '<div class="book-author">'+esc(b.author||'')+'</div>'+
+      '<div class="rating-row">'+dotsHTML(b.rating||0)+'</div>'+
+      '<div class="book-date">'+(b.date||'')+' '+yr+'</div>'+
+      '</div></div>';
+  }
 
+  function listHTML(b){
+    var L=(b.title||'?')[0];
+    var cover=b.cover?'<img class="list-cover" src="'+b.cover+'" alt="">':
+      '<div class="list-cover-ph">'+esc(L)+'</div>';
+    var nc=Object.values(b.notes||{}).reduce(function(s,a){ return s+a.length; },0);
+    var yr=b.year?' · '+b.year:'';
+    return '<div class="list-card" data-id="'+b.id+'">'+cover+
+      '<div style="flex:1;min-width:0">'+
+      '<div class="list-title">'+esc(b.title)+'</div>'+
+      '<div class="list-author">'+esc(b.author||'')+(b.date?' · '+b.date:'')+yr+'</div>'+
+      '<div style="font-size:.72rem;color:rgba(240,231,200,.3);margin-top:3px">'+nc+' 則筆記</div>'+
+      '</div><div style="flex-shrink:0">'+dotsHTML(b.rating||0)+'</div></div>';
+  }
+
+  // delegate click on shelf items
+  ge('shelf').addEventListener('click', function(e){
+    var card=e.target.closest('[data-id]');
+    if(card) openDetail(card.dataset.id);
+  });
+
+  function setView(v){
+    view=v;
+    ge('vg').classList.toggle('active',v==='grid');
+    ge('vl').classList.toggle('active',v==='list');
+    renderShelf();
+  }
+
+  // ── ADD/EDIT ──
+  function openAdd(){
+    editId=null; currentRating=0; currentCover=null;
+    tmpNotes={句子:[],摘要:[],心得:[],延伸:[]};
+    ge('modal-title').textContent='ADD BOOK';
+    ['f-title','f-author','f-year'].forEach(function(id){ ge(id).value=''; });
+    ge('f-date').value=new Date().toISOString().slice(0,10);
+    ge('coverPreview').style.display='none';
+    ge('coverLabel').style.display='';
+    setStars(0); renderNotesAll(); switchTab('句子');
+    ge('addOverlay').classList.add('open');
+  }
+
+  function openEdit(id){
+    var b=books.find(function(x){ return x.id===id; }); if(!b) return;
+    editId=id; currentRating=b.rating||0; currentCover=b.cover||null;
+    tmpNotes=JSON.parse(JSON.stringify(b.notes||{}));
+    ['句子','摘要','心得','延伸'].forEach(function(k){ if(!tmpNotes[k]) tmpNotes[k]=[]; });
+    ge('modal-title').textContent='EDIT BOOK';
+    ge('f-title').value=b.title;
+    ge('f-author').value=b.author||'';
+    ge('f-year').value=b.year||'';
+    ge('f-date').value=b.date||'';
+    if(b.cover){ ge('coverPreview').src=b.cover; ge('coverPreview').style.display='block'; ge('coverLabel').style.display='none'; }
+    else { ge('coverPreview').style.display='none'; ge('coverLabel').style.display=''; }
+    setStars(currentRating); renderNotesAll(); switchTab('句子');
+    ge('addOverlay').classList.add('open');
+  }
+
+  function closeAddModal(){ ge('addOverlay').classList.remove('open'); editId=null; }
+
+  function saveBook(){
+    var title=ge('f-title').value.trim();
+    if(!title){ toast('請輸入書名'); return; }
+    var wasEdit=!!editId;
+    var savedEditId=editId;
+    var yearVal=ge('f-year').value.trim();
+    var data={
+      title:title,
+      author:ge('f-author').value.trim(),
+      year:yearVal?parseInt(yearVal):null,
+      date:ge('f-date').value,
+      rating:currentRating,
+      cover:currentCover,
+      notes:JSON.parse(JSON.stringify(tmpNotes))
+    };
+    closeAddModal();
+    if(wasEdit){
+      db.collection('books').doc(savedEditId).update(data)
+        .then(function(){ toast('UPDATED'); })
+        .catch(function(e){ toast('儲存失敗: '+e.message); });
+    } else {
+      data.createdAt=Date.now();
+      db.collection('books').add(data)
+        .then(function(){ toast('SAVED'); })
+        .catch(function(e){ toast('儲存失敗: '+e.message); });
+    }
+  }
+
+  function handleCoverUpload(e){
+    var file=e.target.files[0]; if(!file) return;
+    var r=new FileReader();
+    r.onload=function(ev){
+      currentCover=ev.target.result;
+      ge('coverPreview').src=currentCover;
+      ge('coverPreview').style.display='block';
+      ge('coverLabel').style.display='none';
+    };
+    r.readAsDataURL(file);
+  }
+
+  function setStars(n){
+    currentRating=n;
+    document.querySelectorAll('#starPick span').forEach(function(s,i){ s.classList.toggle('on',i<n); });
+  }
+
+  function switchTab(t){
+    curTab=t;
+    document.querySelectorAll('.note-tab').forEach(function(b){ b.classList.toggle('active',b.dataset.t===t); });
+    document.querySelectorAll('.note-area').forEach(function(a){ a.classList.toggle('active',a.id==='na-'+t); });
+  }
+
+  function renderNotesAll(){ ['句子','摘要','心得','延伸'].forEach(renderNoteArea); }
+
+  function renderNoteArea(t){
+    var el=ge('na-'+t);
+    var entries=(tmpNotes[t]||[]).map(function(n,i){
+      return '<div class="note-entry">'+esc(n).replace(/\n/g,'<br>')+
+        '<button class="del-note" data-t="'+t+'" data-i="'+i+'">✕</button></div>';
+    }).join('');
+    el.innerHTML=entries+'<div class="note-input-row"><textarea id="ni-'+t+'" rows="2" placeholder="新增筆記…"></textarea>'+
+      '<button class="add-note-btn" data-t="'+t+'">ADD</button></div>';
+    el.querySelectorAll('.del-note').forEach(function(btn){
+      btn.addEventListener('click', function(){ delNote(this.dataset.t, +this.dataset.i); });
+    });
+    el.querySelectorAll('.add-note-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){ addNote(this.dataset.t); });
+    });
+  }
+
+  function addNote(t){
+    var inp=ge('ni-'+t); var v=inp.value.trim(); if(!v) return;
+    if(!tmpNotes[t]) tmpNotes[t]=[];
+    tmpNotes[t].push(v); inp.value=''; renderNoteArea(t);
+  }
+
+  function delNote(t,i){ tmpNotes[t].splice(i,1); renderNoteArea(t); }
+
+  // ── DETAIL ──
+  function openDetail(id){
+    var b=books.find(function(x){ return x.id===id; }); if(!b) return;
+    currentDetailId=id;
+    ge('d-title').textContent=b.title;
+    var L=(b.title||'?')[0];
+    var cover=b.cover?'<img class="detail-cover" src="'+b.cover+'" alt="">':
+      '<div class="detail-cover-ph"><div class="ph-circle"></div><div class="ph-circle2"></div>'+
+      '<span style="font-family:Anton,sans-serif;font-size:5rem;color:rgba(240,231,200,.5);position:relative;z-index:1">'+esc(L)+'</span></div>';
+    var notesHTML=buildNotesHTML(b);
+    var yr=b.year?'<span style="font-size:.82rem;color:rgba(96,17,0,.4)">'+b.year+'年出版</span>':'';
+    ge('d-body').innerHTML=cover+
+      '<div class="detail-meta"><div class="rating-row">'+dotsHTML(b.rating||0,13)+'</div>'+
+      (b.author?'<span style="font-size:.85rem;color:rgba(96,17,0,.55);font-style:italic">'+esc(b.author)+'</span>':'')+
+      (b.date?'<span style="font-size:.82rem;color:rgba(96,17,0,.4)">'+b.date+'</span>':'')+yr+'</div>'+
+      '<hr class="detail-rule">'+
+      '<div id="detail-notes">'+(notesHTML||'<p style="color:rgba(96,17,0,.35);font-size:.88rem;font-style:italic">尚無筆記</p>')+'</div>'+
+      '<div class="comments-section">'+
+        '<div class="comments-title">讀者留言</div>'+
+        '<div id="comments-list">載入中…</div>'+
+        '<div class="comment-form">'+
+          '<div class="comment-inputs"><input type="text" id="c-name" placeholder="你的名字" maxlength="30"></div>'+
+          '<div class="comment-inputs"><textarea id="c-text" rows="2" placeholder="留下你的想法…" maxlength="500"></textarea></div>'+
+          '<div style="display:flex;justify-content:flex-end"><button class="btn btn-primary btn-sm" id="btn-comment">留言</button></div>'+
+        '</div>'+
+      '</div>'+
+      '<div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px;padding-top:12px;border-top:1px solid rgba(96,17,0,.1)">'+
+        '<button class="btn btn-outline btn-sm" id="btn-edit-from-detail">EDIT</button>'+
+        '<button class="btn btn-danger btn-sm" id="btn-delete">DELETE</button>'+
+      '</div>';
+
+    ge('btn-edit-from-detail').addEventListener('click', function(){ openEdit(id); closeDetailModal(); });
+    ge('btn-delete').addEventListener('click', function(){ deleteBook(id); });
+    ge('btn-comment').addEventListener('click', function(){ submitComment(id); });
+    ge('d-body').querySelectorAll('.note-sec-title').forEach(function(el){
+      el.addEventListener('click', function(){ toggleNoteSection(this); });
+    });
+
+    ge('detailOverlay').classList.add('open');
+    loadComments(id);
+  }
+
+  function buildNotesHTML(b){
+    var types=[{k:'句子',l:'印象句子'},{k:'摘要',l:'內容摘要'},{k:'心得',l:'讀後心得'},{k:'延伸',l:'延伸筆記'}];
+    return types.map(function(nt){
+      var arr=(b.notes&&b.notes[nt.k])||[]; if(!arr.length) return '';
+      var blocks=arr.map(function(n){
+        return '<div class="note-block">'+esc(n).replace(/\n/g,'<br>')+'</div>';
+      }).join('');
+      return '<div class="note-sec-wrap note-sec-'+nt.k+'" style="margin-bottom:10px">'+
+        '<div class="note-sec-title">'+nt.l+'<span class="toggle-arrow">▼</span></div>'+
+        '<div class="note-sec-body">'+blocks+'</div></div>';
+    }).join('');
+  }
+
+  function toggleNoteSection(title){
+    title.classList.toggle('collapsed');
+    title.nextElementSibling.classList.toggle('collapsed');
+  }
+
+  function closeDetailModal(){
+    ge('detailOverlay').classList.remove('open');
+    currentDetailId=null;
+    if(commentsUnsub){ commentsUnsub(); commentsUnsub=null; }
+  }
+
+  function deleteBook(id){
+    if(!confirm('確定要刪除這本書嗎？')) return;
+    db.collection('books').doc(id).delete();
+    closeDetailModal(); toast('DELETED');
+  }
+
+  // ── COMMENTS ──
+  function loadComments(bookId){
+    if(commentsUnsub) commentsUnsub();
+    commentsUnsub=db.collection('comments').where('bookId','==',bookId).onSnapshot(function(snap){
+      var list=ge('comments-list'); if(!list) return;
+      var items=snap.docs.map(function(d){ return Object.assign({id:d.id},d.data()); });
+      items.sort(function(a,b){ return (a.createdAt||0)-(b.createdAt||0); });
+      if(!items.length){ list.innerHTML='<p style="font-size:.82rem;color:rgba(96,17,0,.35);font-style:italic;margin-bottom:8px">還沒有留言，來第一個吧！</p>'; return; }
+      list.innerHTML=items.map(function(c){
+        var d=c.createdAt?new Date(c.createdAt).toLocaleDateString('zh-TW'):'';
+        return '<div class="comment-item"><div class="comment-name">'+esc(c.name||'匿名')+'<span class="comment-time">'+d+'</span></div>'+
+          '<div class="comment-text">'+esc(c.text).replace(/\n/g,'<br>')+'</div></div>';
+      }).join('');
+    });
+  }
+
+  function submitComment(bookId){
+    var name=(ge('c-name').value.trim())||'匿名';
+    var text=ge('c-text').value.trim();
+    if(!text){ toast('請輸入留言內容'); return; }
+    db.collection('comments').add({bookId:bookId,name:name,text:text,createdAt:Date.now()});
+    ge('c-name').value=''; ge('c-text').value='';
+    toast('留言成功');
+  }
+
+  // ── EXPORT/IMPORT ──
+  function openExport(){
+    var n=books.length;
+    var nc=books.reduce(function(s,b){ return s+Object.values(b.notes||{}).reduce(function(x,a){ return x+a.length; },0); },0);
+    ge('export-count').textContent='目前共 '+n+' 本書 · '+nc+' 則筆記';
+    ge('exportOverlay').classList.add('open');
+  }
+  function closeExportModal(){ ge('exportOverlay').classList.remove('open'); }
+
+  function csvCell(v){
+    var s=String(v==null?'':v);
+    if(s.indexOf(',')>=0||s.indexOf('\n')>=0||s.indexOf('"')>=0) return '"'+s.replace(/"/g,'""')+'"';
+    return s;
+  }
+
+  function exportCSV(){
+    if(!books.length){ toast('尚無書籍資料'); return; }
+    var headers=['書名','作者','出版年份','閱讀日期','評分（/5）','印象句子','內容摘要','讀後心得','延伸筆記'];
+    var rows=books.map(function(b){
+      return [b.title||'',b.author||'',b.year||'',b.date||'',b.rating||0,
+        (b.notes&&b.notes['句子']||[]).join(' ／ '),(b.notes&&b.notes['摘要']||[]).join(' ／ '),
+        (b.notes&&b.notes['心得']||[]).join(' ／ '),(b.notes&&b.notes['延伸']||[]).join(' ／ ')];
+    });
+    var csv='\uFEFF'+[headers].concat(rows).map(function(r){ return r.map(csvCell).join(','); }).join('\r\n');
+    downloadBlob(new Blob([csv],{type:'text/csv;charset=utf-8'}),'reading-air-'+today()+'.csv');
+    toast('CSV 匯出完成');
+  }
+
+  function exportJSON(){
+    if(!books.length){ toast('尚無書籍資料'); return; }
+    downloadBlob(new Blob([JSON.stringify({exportedAt:new Date().toISOString(),count:books.length,books:books},null,2)],{type:'application/json'}),'reading-air-'+today()+'.json');
+    toast('JSON 備份完成');
+  }
+
+  function importJSON(e){
+    var file=e.target.files[0]; if(!file) return;
+    e.target.value='';
+    var reader=new FileReader();
+    reader.onload=function(ev){
+      var payload;
+      try{ payload=JSON.parse(ev.target.result); }catch(err){ toast('無法讀取檔案'); return; }
+      var incoming=payload.books||payload;
+      if(!Array.isArray(incoming)||!incoming.length){ toast('找不到書籍資料'); return; }
+      var existingKeys=new Set(books.map(function(b){ return b.title+'|'+(b.author||''); }));
+      var added=0,skipped=0,i=0;
+      function next(){
+        if(i>=incoming.length){ toast('匯入完成：'+added+' 本新增，'+skipped+' 本略過'); return; }
+        var b=incoming[i++];
+        var key=b.title+'|'+(b.author||'');
+        if(existingKeys.has(key)){ skipped++; next(); return; }
+        var data=Object.assign({},b); delete data.id;
+        data.createdAt=Date.now()+i;
+        db.collection('books').add(data).then(function(){ existingKeys.add(key); added++; next(); });
+      }
+      next();
+    };
+    reader.readAsText(file);
+  }
+
+  function today(){ return new Date().toISOString().slice(0,10); }
+  function downloadBlob(blob,filename){
+    var url=URL.createObjectURL(blob); var a=document.createElement('a');
+    a.href=url; a.download=filename; document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); },200);
+  }
+
+  function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function toast(msg){
+    var t=ge('toast'); t.textContent=msg; t.classList.add('show');
+    clearTimeout(t._t); t._t=setTimeout(function(){ t.classList.remove('show'); },2400);
+  }
+})();
 </script>
 </body>
 </html>
