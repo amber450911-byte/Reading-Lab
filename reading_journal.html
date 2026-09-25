@@ -2,22 +2,30 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>閱讀空氣</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Cliché</title>
+<meta name="theme-color" content="#003153">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cliché">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --dk:#601100;--red:#B32000;--cream:#F0E7C8;--white:#FFFFFF;
-  --cream2:#e8dbb8;--cream3:#d8cba8;--red2:#8a1800;
-  --nb-a:#F0E7C8;--nb-b:#E6D9B0;
-  --c-句子:#B32000;--c-摘要:#8B5A2B;--c-心得:#5C3317;--c-延伸:#6B6B3A;
+  --dk:#0B1C2C;--red:#003153;--cream:#F2EEE4;--white:#FFFFFF;--sky:#8DB0CB;
+  --cream2:#E6E0D1;--cream3:#CFC8B6;--red2:#335A78;
+  --nb-a:#F7F4EC;--nb-b:#EEE9DC;
+  --c-句子:#003153;--c-摘要:#4F7391;--c-心得:#2F4F4A;--c-延伸:#8A7355;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--dk);color:var(--cream);font-family:'Noto Sans TC',sans-serif;min-height:100vh;overflow-x:hidden}
-nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:center;justify-content:space-between;border-bottom:5px solid var(--cream);position:relative;z-index:10}
+nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70px;display:flex;align-items:center;justify-content:space-between;border-bottom:5px solid var(--cream);position:relative;z-index:10}
 .logo-wrap{display:flex;flex-direction:column;line-height:1}
 .logo-en{font-family:'Anton',sans-serif;font-size:1.9rem;letter-spacing:.12em;color:var(--cream);line-height:1}
-.logo-zh{font-size:.62rem;letter-spacing:.35em;color:rgba(240,231,200,.55);font-weight:700;text-transform:uppercase;margin-top:1px}
+.logo-zh{font-size:.62rem;letter-spacing:.35em;color:rgba(242,238,228,.55);font-weight:700;text-transform:uppercase;margin-top:1px}
 .nav-right{display:flex;gap:10px;align-items:center}
 .nav-btn{font-family:'Anton',sans-serif;background:transparent;border:2.5px solid var(--cream);color:var(--cream);padding:7px 20px;cursor:pointer;font-size:.85rem;letter-spacing:.12em;transition:.15s}
 .nav-btn:hover{background:var(--cream);color:var(--red)}
@@ -33,14 +41,14 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 .hero-count span{display:block;font-size:.75rem;letter-spacing:.2em;color:var(--dk);margin-top:2px}
 .toolbar-band{background:var(--dk);border-top:4px solid var(--red);border-bottom:4px solid var(--red);padding:14px 40px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .search-wrap{flex:1;max-width:360px}
-.search-wrap input{width:100%;background:transparent;border:2.5px solid rgba(240,231,200,.3);color:var(--cream);padding:10px 16px;font-size:.88rem;outline:none;font-family:'Noto Sans TC',sans-serif;transition:.18s}
-.search-wrap input::placeholder{color:rgba(240,231,200,.3)}
-.search-wrap input:focus{border-color:var(--cream);background:rgba(240,231,200,.06)}
+.search-wrap input{width:100%;background:transparent;border:2.5px solid rgba(242,238,228,.3);color:var(--cream);padding:10px 16px;font-size:.88rem;outline:none;font-family:'Noto Sans TC',sans-serif;transition:.18s}
+.search-wrap input::placeholder{color:rgba(242,238,228,.3)}
+.search-wrap input:focus{border-color:var(--cream);background:rgba(242,238,228,.06)}
 .view-toggle{display:flex;margin-left:auto}
-.vtbtn{font-family:'Anton',sans-serif;background:transparent;border:2.5px solid rgba(240,231,200,.3);color:rgba(240,231,200,.4);padding:8px 20px;cursor:pointer;font-size:.78rem;letter-spacing:.12em;transition:.15s;border-right:none}
-.vtbtn:last-child{border-right:2.5px solid rgba(240,231,200,.3)}
-.vtbtn.active{background:var(--red);color:var(--cream);border-color:var(--red)}
-.vtbtn:not(.active):hover{background:rgba(240,231,200,.08);color:var(--cream)}
+.vtbtn{font-family:'Anton',sans-serif;background:transparent;border:2.5px solid rgba(242,238,228,.3);color:rgba(242,238,228,.4);padding:8px 20px;cursor:pointer;font-size:.78rem;letter-spacing:.12em;transition:.15s;border-right:none}
+.vtbtn:last-child{border-right:2.5px solid rgba(242,238,228,.3)}
+.vtbtn.active{background:var(--cream);color:var(--red);border-color:var(--cream)}
+.vtbtn:not(.active):hover{background:rgba(242,238,228,.08);color:var(--cream)}
 .shelf-wrap{padding:36px 40px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:20px}
 .book-card{background:var(--cream);color:var(--dk);border:3px solid var(--cream);cursor:pointer;transition:.22s;position:relative;overflow:hidden}
@@ -50,85 +58,166 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 .book-cover-ph{width:100%;height:215px;background:var(--red);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .ph-circle{position:absolute;width:160px;height:160px;border-radius:50%;border:30px solid rgba(255,255,255,.1)}
 .ph-circle2{position:absolute;width:240px;height:240px;border-radius:50%;border:20px solid rgba(255,255,255,.06);top:-40px;right:-60px}
-.ph-letter{font-family:'Anton',sans-serif;font-size:5rem;color:rgba(240,231,200,.6);position:relative;z-index:1;letter-spacing:.05em}
+.ph-letter{font-family:'Anton',sans-serif;font-size:5rem;color:rgba(242,238,228,.6);position:relative;z-index:1;letter-spacing:.05em}
 .book-info{padding:12px 14px 14px;background:var(--cream)}
 .book-title{font-weight:900;font-size:.93rem;line-height:1.3;margin-bottom:3px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;color:var(--dk)}
 .book-author{font-size:.76rem;color:var(--red2);margin-bottom:8px;font-style:italic}
 .rating-row{display:flex;gap:3px;margin-bottom:3px}
 .rdot{border-radius:50%;flex-shrink:0}
 .rdot.on{background:var(--red)}
-.rdot.off{background:rgba(96,17,0,.18)}
-.book-date{font-size:.7rem;color:rgba(96,17,0,.45);letter-spacing:.05em}
+.rdot.off{background:rgba(11,28,44,.18)}
+.book-date{font-size:.7rem;color:rgba(11,28,44,.5);letter-spacing:.03em}
+.no-rating{font-size:.68rem;color:rgba(11,28,44,.4);letter-spacing:.08em;line-height:10px}
+.genre-tag{display:inline-block;font-size:.64rem;letter-spacing:.08em;color:var(--red2);border:1px solid rgba(0,49,83,.25);padding:1px 6px;margin-bottom:6px}
+.watermark{position:absolute;right:-10px;top:-18px;font-family:'Anton',sans-serif;font-size:9rem;color:var(--red);opacity:.05;line-height:1;pointer-events:none;user-select:none;z-index:0}
+.short{display:none}
+/* status */
+.book-card.st-dnf .book-cover,.book-card.st-dnf .book-cover-ph{filter:grayscale(1);opacity:.5}
+.list-card.st-dnf .list-cover{filter:grayscale(1);opacity:.5}
+.badge{font-family:'Anton',sans-serif;font-size:.66rem;letter-spacing:.14em;padding:3px 8px;font-weight:400;vertical-align:middle}
+.book-card .badge{position:absolute;top:8px;left:8px;z-index:2}
+.badge-reading{background:var(--sky);color:var(--dk)}
+.badge-dnf{background:var(--dk);color:var(--cream)}
+#toolbar-left{display:flex;gap:14px;align-items:center;flex-wrap:wrap;flex:1}
+#toolbar-left.hide{display:none}
+.filter-chips{display:flex;gap:4px;flex-shrink:0}
+.chip{white-space:nowrap;background:transparent;border:none;color:rgba(242,238,228,.45);font-family:inherit;font-size:.82rem;padding:6px 10px;cursor:pointer;border-bottom:2px solid transparent}
+.chip.on{color:var(--cream);border-bottom-color:var(--sky)}
+.seg-pick{display:flex;border:2px solid rgba(11,28,44,.2)}
+.seg-pick button{flex:1;background:#fff;border:none;padding:9px 4px;font-family:inherit;font-size:.86rem;cursor:pointer;color:rgba(11,28,44,.55);border-right:1px solid rgba(11,28,44,.12)}
+.seg-pick button:last-child{border-right:none}
+.seg-pick button.on{background:var(--red);color:var(--cream)}
+/* stats */
+.stats{display:flex;flex-direction:column;gap:18px}
+.year-pick{display:flex;gap:6px;flex-wrap:wrap}
+.year-pick button{font-family:'Anton',sans-serif;background:transparent;border:2px solid rgba(242,238,228,.25);color:rgba(242,238,228,.55);padding:5px 14px;cursor:pointer;letter-spacing:.1em;font-size:.8rem}
+.year-pick button.on{background:var(--cream);color:var(--red);border-color:var(--cream)}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.tile{background:var(--cream);color:var(--dk);padding:16px 18px}
+.tile .n{font-family:'Anton',sans-serif;font-size:2.6rem;line-height:1;color:var(--red)}
+.tile .l{font-size:.72rem;letter-spacing:.12em;color:rgba(11,28,44,.55);margin-top:6px}
+.panel{background:var(--cream);color:var(--dk);padding:18px 20px}
+.panel h4{font-family:'Anton',sans-serif;font-size:.8rem;letter-spacing:.2em;color:var(--red);margin-bottom:14px;font-weight:400}
+.months{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;align-items:end;height:130px;border-bottom:1px solid rgba(11,28,44,.2)}
+.mcol{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.mcol .v{font-size:.7rem;color:rgba(11,28,44,.6);margin-bottom:3px}
+.mcol .stack{width:60%;max-width:22px;display:flex;flex-direction:column;gap:2px}
+.seg{min-height:0}.seg:first-child{border-radius:4px 4px 0 0}
+.seg-done{background:var(--red)}.seg-dnf{background:#7FA2BF}
+.mcol:hover .seg-done{background:var(--red2)}
+.ph{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.legend{display:flex;gap:14px;font-size:.72rem;color:rgba(11,28,44,.6)}
+.legend span{display:flex;align-items:center;gap:5px}
+.sw{width:10px;height:10px;display:inline-block;border-radius:2px}.sw-done{background:var(--red)}.sw-dnf{background:#7FA2BF}
+.muted{font-size:.8rem;color:rgba(11,28,44,.5);line-height:1.6}
+.genre-wrap{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:28px;align-items:center}
+.radar{width:100%;max-width:520px;height:auto;display:block;margin:0 auto;overflow:visible}
+.radar .ring{fill:none;stroke:rgba(11,28,44,.1);stroke-width:1}
+.radar .axis{stroke:rgba(11,28,44,.1);stroke-width:1}
+.radar .shape{fill:rgba(0,49,83,.22);stroke:var(--red);stroke-width:2;stroke-linejoin:round}
+.radar .dot{fill:var(--red);stroke:var(--cream);stroke-width:2}
+.radar .hit{fill:transparent}
+.radar .pt:hover .dot{r:6}
+.radar .lbl{font-size:12px;fill:var(--dk);font-family:'Noto Sans TC',sans-serif;font-weight:700}
+.radar .lbl.zero{fill:rgba(11,28,44,.35);font-weight:400}
+.radar .num{fill:var(--red2);font-weight:400}
+.gitem{padding:9px 0;border-bottom:1px solid rgba(11,28,44,.08)}
+.gitem:last-child{border-bottom:none}
+.gh{display:flex;justify-content:space-between;align-items:baseline}
+.gh .gn{font-size:.86rem;font-weight:700}
+.gh .gc{font-family:'Anton',sans-serif;font-size:1.1rem;color:var(--red)}
+.gitem .gbooks{font-size:.74rem;color:rgba(11,28,44,.55);line-height:1.6;margin-top:2px}
+.drow{display:grid;grid-template-columns:minmax(0,200px) 1fr 52px;gap:12px;align-items:center;padding:5px 0}
+.drow .dn{font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drow .dn em{font-style:normal;font-size:.66rem;background:var(--dk);color:var(--cream);padding:0 4px;margin-left:2px}
+.drow .dt{height:10px;background:rgba(11,28,44,.07)}
+.drow .db{height:100%;background:var(--red);border-radius:0 4px 4px 0}
+.drow .db.dnf{background:#7FA2BF}
+.drow .dc{font-size:.78rem;text-align:right;color:rgba(11,28,44,.6)}
+.mlabels{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin-top:6px}
+.mlabels span{text-align:center;font-size:.64rem;color:rgba(11,28,44,.45)}
+.grow{display:grid;grid-template-columns:88px 1fr 28px;gap:10px;align-items:center;padding:6px 0}
+.grow .gn{font-size:.82rem;font-weight:700}
+.grow .gt{height:10px;background:rgba(11,28,44,.07)}
+.grow .gb{height:100%;background:var(--red);border-radius:0 4px 4px 0}
+.grow .gc{font-size:.8rem;text-align:right;color:rgba(11,28,44,.6)}
+.grow .gbooks{grid-column:1/-1;font-size:.72rem;color:rgba(11,28,44,.5);margin-top:-2px;line-height:1.5}
+.stats-note{font-size:.72rem;color:rgba(242,238,228,.4);line-height:1.6}
+.more-btn{background:none;border:none;color:var(--red2);font-size:.78rem;cursor:pointer;padding:2px 0 8px;font-family:inherit;text-decoration:underline;text-underline-offset:3px}
+.head-actions{display:flex;gap:8px;align-items:center;flex-shrink:0}
+.head-btn{font-family:'Anton',sans-serif;background:transparent;border:1.5px solid rgba(242,238,228,.5);color:var(--cream);padding:4px 10px;font-size:.7rem;letter-spacing:.12em;cursor:pointer}
+.head-btn:hover{background:var(--cream);color:var(--red)}
+.modal-head h3{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:12px}
 .list{display:flex;flex-direction:column;gap:8px}
-.list-card{background:rgba(240,231,200,.06);border:2px solid rgba(240,231,200,.12);border-left:5px solid var(--red);display:flex;align-items:center;gap:16px;padding:14px 20px;cursor:pointer;transition:.18s}
-.list-card:hover{background:rgba(240,231,200,.1);border-color:rgba(240,231,200,.25);transform:translateX(4px)}
-.list-cover{width:50px;height:68px;object-fit:cover;border:2px solid rgba(240,231,200,.15);flex-shrink:0}
-.list-cover-ph{width:50px;height:68px;background:var(--red);border:2px solid rgba(240,231,200,.1);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:1.4rem;color:rgba(240,231,200,.7)}
+.list-card{background:rgba(242,238,228,.06);border:2px solid rgba(242,238,228,.12);border-left:5px solid var(--red);display:flex;align-items:center;gap:16px;padding:14px 20px;cursor:pointer;transition:.18s}
+.list-card:hover{background:rgba(242,238,228,.1);border-color:rgba(242,238,228,.25);transform:translateX(4px)}
+.list-cover{width:50px;height:68px;object-fit:cover;border:2px solid rgba(242,238,228,.15);flex-shrink:0}
+.list-cover-ph{width:50px;height:68px;background:var(--red);border:2px solid rgba(242,238,228,.1);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:1.4rem;color:rgba(242,238,228,.7)}
 .list-title{font-weight:900;font-size:1rem;color:var(--cream);margin-bottom:2px}
-.list-author{font-size:.8rem;color:rgba(240,231,200,.4);font-style:italic}
-.overlay{position:fixed;inset:0;background:rgba(60,10,0,.75);backdrop-filter:blur(4px);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.25s}
+.list-author{font-size:.8rem;color:rgba(242,238,228,.4);font-style:italic}
+.overlay{position:fixed;inset:0;background:rgba(6,16,26,.72);backdrop-filter:blur(4px);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.25s}
 .overlay.open{opacity:1;pointer-events:all}
 .modal{background:var(--cream);color:var(--dk);border:3px solid var(--red);width:100%;max-width:650px;max-height:90vh;overflow-y:auto;transform:translateY(14px);transition:.25s;box-shadow:8px 8px 0 var(--dk)}
 .overlay.open .modal{transform:translateY(0)}
 .modal-head{padding:18px 24px;display:flex;align-items:center;justify-content:space-between;background:var(--red);border-bottom:3px solid var(--dk)}
 .modal-head h3{font-family:'Anton',sans-serif;font-size:1.4rem;letter-spacing:.15em;color:var(--cream)}
-.close-btn{background:none;border:none;cursor:pointer;font-size:1.3rem;color:rgba(240,231,200,.6);line-height:1}
+.close-btn{background:none;border:none;cursor:pointer;font-size:1.3rem;color:rgba(242,238,228,.6);line-height:1}
 .close-btn:hover{color:var(--cream)}
 .modal-body{padding:24px;display:flex;flex-direction:column;gap:16px}
 .form-row{display:flex;gap:14px;flex-wrap:wrap}
 .form-group{display:flex;flex-direction:column;gap:5px;flex:1;min-width:155px}
 .form-group label{font-size:.7rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
-.form-group input,.form-group textarea{background:var(--white);border:2px solid rgba(96,17,0,.2);color:var(--dk);padding:10px 12px;font-size:.9rem;outline:none;font-family:'Noto Sans TC',sans-serif;resize:vertical;transition:.18s}
+.form-group input,.form-group textarea{background:var(--white);border:2px solid rgba(11,28,44,.2);color:var(--dk);padding:10px 12px;font-size:.9rem;outline:none;font-family:'Noto Sans TC',sans-serif;resize:vertical;transition:.18s}
 .form-group input:focus,.form-group textarea:focus{border-color:var(--red)}
 .star-pick{display:flex;gap:5px;cursor:pointer;padding-top:4px}
-.star-pick span{width:22px;height:22px;border-radius:50%;border:2px solid rgba(96,17,0,.2);background:#fff;transition:.15s}
+.star-pick span{width:22px;height:22px;border-radius:50%;border:2px solid rgba(11,28,44,.2);background:#fff;transition:.15s}
 .star-pick span.on{background:var(--red);border-color:var(--red)}
 .note-tabs{display:flex;border:2.5px solid var(--red);overflow:hidden}
-.note-tab{flex:1;border:none;background:rgba(179,32,0,.06);padding:8px 4px;cursor:pointer;font-size:.72rem;font-family:'Noto Sans TC',sans-serif;font-weight:700;letter-spacing:.05em;color:rgba(96,17,0,.5);transition:.15s;border-right:1px solid rgba(179,32,0,.2);text-align:center}
+.note-tab{flex:1;border:none;background:rgba(0,49,83,.06);padding:8px 4px;cursor:pointer;font-size:.72rem;font-family:'Noto Sans TC',sans-serif;font-weight:700;letter-spacing:.05em;color:rgba(11,28,44,.5);transition:.15s;border-right:1px solid rgba(0,49,83,.2);text-align:center}
 .note-tab:last-child{border-right:none}
 .note-tab.active{background:var(--red);color:var(--cream)}
 .note-area{display:none}
 .note-area.active{display:flex;flex-direction:column;gap:8px}
-.note-entry{border:1px solid rgba(179,32,0,.15);border-left:3px solid var(--red);padding:9px 32px 9px 12px;position:relative;font-size:.88rem;line-height:1.75;color:var(--dk)}
+.note-entry{border:1px solid rgba(0,49,83,.15);border-left:3px solid var(--red);padding:9px 32px 9px 12px;position:relative;font-size:.88rem;line-height:1.75;color:var(--dk)}
 .note-entry:nth-child(odd){background:var(--nb-a)}
 .note-entry:nth-child(even){background:var(--nb-b)}
-.note-entry .del-note{position:absolute;top:7px;right:9px;background:none;border:none;cursor:pointer;color:rgba(96,17,0,.3);font-size:.85rem;font-family:inherit}
+.note-entry .del-note{position:absolute;top:7px;right:9px;background:none;border:none;cursor:pointer;color:rgba(11,28,44,.3);font-size:.85rem;font-family:inherit}
 .note-entry .del-note:hover{color:var(--red)}
 .note-input-row{display:flex;gap:8px}
-.note-input-row textarea{flex:1;background:var(--white);border:2px solid rgba(96,17,0,.18);color:var(--dk);padding:8px 10px;font-size:.88rem;resize:none;outline:none;font-family:inherit;transition:.18s}
+.note-input-row textarea{flex:1;background:var(--white);border:2px solid rgba(11,28,44,.18);color:var(--dk);padding:8px 10px;font-size:.88rem;resize:none;outline:none;font-family:inherit;transition:.18s}
 .note-input-row textarea:focus{border-color:var(--red)}
 .note-input-row button{align-self:flex-end;padding:9px 16px;border:2.5px solid var(--red);background:transparent;color:var(--red);cursor:pointer;font-weight:900;font-family:'Anton',sans-serif;font-size:.8rem;letter-spacing:.1em;transition:.15s}
 .note-input-row button:hover{background:var(--red);color:var(--cream)}
-.cover-upload{width:100%;height:130px;border:2.5px dashed rgba(179,32,0,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:.18s;position:relative;overflow:hidden;background:rgba(179,32,0,.04)}
+.cover-upload{width:100%;height:130px;border:2.5px dashed rgba(0,49,83,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:.18s;position:relative;overflow:hidden;background:rgba(0,49,83,.04)}
 .cover-upload:hover{border-color:var(--red)}
 .cover-upload img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.cover-upload .up-label{font-size:.78rem;color:rgba(96,17,0,.4);pointer-events:none;font-weight:900;letter-spacing:.1em;text-transform:uppercase;font-family:'Anton',sans-serif}
+.cover-upload .up-label{font-size:.78rem;color:rgba(11,28,44,.4);pointer-events:none;font-weight:900;letter-spacing:.1em;text-transform:uppercase;font-family:'Anton',sans-serif}
 .btn{border:none;cursor:pointer;padding:9px 22px;font-size:.8rem;font-weight:900;font-family:'Anton',sans-serif;letter-spacing:.12em;text-transform:uppercase;transition:.15s}
 .btn-primary{background:var(--red);color:var(--cream);border:2.5px solid var(--red)}
 .btn-primary:hover{background:var(--red2)}
-.btn-outline{background:transparent;border:2.5px solid rgba(96,17,0,.3);color:var(--dk)}
+.btn-outline{background:transparent;border:2.5px solid rgba(11,28,44,.3);color:var(--dk)}
 .btn-outline:hover{border-color:var(--red);color:var(--red)}
 .btn-danger{background:transparent;border:2.5px solid var(--red);color:var(--red)}
 .btn-danger:hover{background:var(--red);color:var(--cream)}
 .btn-sm{padding:6px 14px;font-size:.74rem}
-.export-card{border:2.5px solid rgba(96,17,0,.2);padding:18px 20px;display:flex;align-items:center;gap:16px;background:rgba(179,32,0,.04);transition:.18s}
-.export-card:hover{border-color:var(--red);background:rgba(179,32,0,.08)}
+.export-card{border:2.5px solid rgba(11,28,44,.2);padding:18px 20px;display:flex;align-items:center;gap:16px;background:rgba(0,49,83,.04);transition:.18s}
+.export-card:hover{border-color:var(--red);background:rgba(0,49,83,.08)}
 .export-icon{font-family:'Anton',sans-serif;font-size:2rem;color:var(--red);width:48px;text-align:center;flex-shrink:0;line-height:1}
 .export-info{flex:1}
 .export-title{font-family:'Anton',sans-serif;font-size:.95rem;letter-spacing:.12em;color:var(--dk);margin-bottom:3px}
-.export-desc{font-size:.76rem;color:rgba(96,17,0,.5);line-height:1.5}
-.export-count{font-family:'Anton',sans-serif;font-size:.7rem;letter-spacing:.1em;color:rgba(96,17,0,.35);margin-top:10px;padding-top:10px;border-top:1px solid rgba(96,17,0,.1)}
-.detail-cover{width:100%;max-height:260px;object-fit:contain;border:2px solid rgba(96,17,0,.15);background:rgba(179,32,0,.06);margin-bottom:6px}
+.export-desc{font-size:.76rem;color:rgba(11,28,44,.5);line-height:1.5}
+.export-count{font-family:'Anton',sans-serif;font-size:.7rem;letter-spacing:.1em;color:rgba(11,28,44,.35);margin-top:10px;padding-top:10px;border-top:1px solid rgba(11,28,44,.1)}
+.detail-cover{width:100%;max-height:260px;object-fit:contain;border:2px solid rgba(11,28,44,.15);background:rgba(0,49,83,.06);margin-bottom:6px}
 .detail-cover-ph{width:100%;height:160px;background:var(--red);display:flex;align-items:center;justify-content:center;margin-bottom:6px;position:relative;overflow:hidden}
 .detail-meta{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 14px}
-.detail-rule{border:none;border-top:2px solid rgba(96,17,0,.12);margin:0 0 14px}
+.detail-rule{border:none;border-top:2px solid rgba(11,28,44,.12);margin:0 0 14px}
 .note-sec-title{font-size:.7rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:0;display:flex;align-items:center;gap:8px;font-family:'Anton',sans-serif;cursor:pointer;padding:8px 0;user-select:none}
 .note-sec-title::before{content:'';width:14px;height:2px;background:currentColor}
 .note-sec-title .toggle-arrow{margin-left:auto;font-size:.65rem;transition:.2s;opacity:.6}
 .note-sec-title.collapsed .toggle-arrow{transform:rotate(-90deg)}
 .note-sec-body{overflow:hidden;transition:max-height .25s ease;max-height:2000px;padding-top:6px}
 .note-sec-body.collapsed{max-height:0;padding-top:0}
-.note-block{border:1px solid rgba(96,17,0,.1);border-left:3px solid var(--red);padding:9px 12px;font-size:.88rem;line-height:1.75;margin-bottom:5px}
+.note-block{border:1px solid rgba(11,28,44,.1);border-left:3px solid var(--red);padding:9px 12px;font-size:.88rem;line-height:1.75;margin-bottom:5px}
 .note-block:nth-child(odd){background:var(--nb-a)}
 .note-block:nth-child(even){background:var(--nb-b)}
 .note-sec-句子 .note-block{border-left-color:var(--c-句子)}
@@ -139,19 +228,19 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 .note-sec-摘要 .note-sec-title{color:var(--c-摘要)}
 .note-sec-心得 .note-sec-title{color:var(--c-心得)}
 .note-sec-延伸 .note-sec-title{color:var(--c-延伸)}
-.comments-section{margin-top:18px;padding-top:14px;border-top:2px solid rgba(96,17,0,.12)}
+.comments-section{margin-top:18px;padding-top:14px;border-top:2px solid rgba(11,28,44,.12)}
 .comments-title{font-family:'Anton',sans-serif;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .comments-title::before{content:'';width:14px;height:2px;background:var(--red)}
-.comment-item{padding:10px 12px;margin-bottom:6px;border:1px solid rgba(96,17,0,.1);border-left:3px solid var(--cream3);font-size:.86rem;line-height:1.65}
+.comment-item{padding:10px 12px;margin-bottom:6px;border:1px solid rgba(11,28,44,.1);border-left:3px solid var(--cream3);font-size:.86rem;line-height:1.65}
 .comment-item:nth-child(odd){background:var(--nb-a)}
 .comment-item:nth-child(even){background:var(--nb-b)}
 .comment-name{font-weight:900;font-size:.75rem;color:var(--red2);letter-spacing:.06em;margin-bottom:3px}
-.comment-time{font-size:.68rem;color:rgba(96,17,0,.35);margin-left:8px;font-weight:400}
+.comment-time{font-size:.68rem;color:rgba(11,28,44,.35);margin-left:8px;font-weight:400}
 .comment-text{color:var(--dk)}
 .comment-form{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-.comment-inputs input,.comment-inputs textarea{width:100%;background:var(--white);border:2px solid rgba(96,17,0,.2);color:var(--dk);padding:8px 10px;font-size:.86rem;outline:none;font-family:inherit;resize:none;transition:.18s;margin-bottom:6px}
+.comment-inputs input,.comment-inputs textarea{width:100%;background:var(--white);border:2px solid rgba(11,28,44,.2);color:var(--dk);padding:8px 10px;font-size:.86rem;outline:none;font-family:inherit;resize:none;transition:.18s;margin-bottom:6px}
 .comment-inputs input:focus,.comment-inputs textarea:focus{border-color:var(--red)}
-.empty{text-align:center;padding:90px 20px;color:rgba(240,231,200,.25)}
+.empty{text-align:center;padding:90px 20px;color:rgba(242,238,228,.25)}
 .empty .big{font-family:'Anton',sans-serif;font-size:7rem;letter-spacing:.15em;color:var(--red);opacity:.2;margin-bottom:16px;line-height:1}
 .empty p{font-size:.95rem;letter-spacing:.06em}
 .empty strong{color:var(--cream)}
@@ -159,7 +248,11 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--dk)}::-webkit-scrollbar-thumb{background:var(--red)}
 @media(max-width:600px){
-  nav{padding:0 16px;height:56px}.logo-en{font-size:1.3rem}.nav-btn{padding:5px 10px;font-size:.72rem}
+  nav{padding:env(safe-area-inset-top) 16px 0;min-height:56px}.logo-en{font-size:1.5rem}.logo-zh{display:none}
+  .nav-btn{padding:4px 14px;font-size:1rem}.long{display:none}.short{display:inline}
+  .watermark{display:none}.tiles{grid-template-columns:repeat(2,1fr)}.genre-wrap{grid-template-columns:1fr;gap:8px}
+  .drow{grid-template-columns:minmax(0,110px) 1fr 44px;gap:8px}.chip{padding:6px 8px}.modal-head{padding:14px 16px}.modal-head h3{font-size:1.05rem;white-space:normal;line-height:1.3}.tiles{gap:8px}.tile{padding:12px}.tile .n{font-size:1.9rem}.panel{padding:16px 14px}
+  .search-wrap{max-width:none;flex-basis:100%}#toolbar-left{flex:1 1 100%;gap:8px}.view-toggle{margin-left:0}.vtbtn{padding:7px 16px}
   .hero{padding:28px 16px 24px;flex-direction:column;align-items:flex-start}.hero-title{font-size:3.2rem}.hero-count{font-size:3rem}
   .toolbar-band{padding:10px 16px}.shelf-wrap{padding:20px 16px}
   .grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px}
@@ -172,32 +265,41 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 
 <nav>
   <div class="logo-wrap">
-    <div class="logo-en">READING AIR</div>
-    <div class="logo-zh">閱讀空氣 · My Reading Journal</div>
+    <div class="logo-en">CLICHÉ</div>
+    <div class="logo-zh">a hopeless romance with books</div>
   </div>
   <div class="nav-right">
-    <button class="nav-btn" id="btn-add">+ NEW BOOK</button>
-    <button class="nav-btn accent" id="btn-export">EXPORT</button>
+    <button class="nav-btn" id="btn-add"><span class="long">+ NEW BOOK</span><span class="short">+</span></button>
+    <button class="nav-btn accent" id="btn-export"><span class="long">DATA</span><span class="short">⋯</span></button>
   </div>
 </nav>
 
 <div class="hero">
   <div class="hero-left">
-    <div class="hero-label">MY READING SHELF</div>
-    <div class="hero-title">MY<em>BOOKS</em></div>
+    <div class="hero-label">READING JOURNAL</div>
+    <div class="hero-title">CLICHÉ</div>
     <div class="hero-sub">不閱讀不會死，但會變笨。</div>
   </div>
   <div style="position:relative;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end">
-    <div style="position:absolute;right:-20px;top:-30px;font-family:'Anton',sans-serif;font-size:14rem;color:var(--red);opacity:.07;line-height:1;pointer-events:none;user-select:none">READ</div>
+    <div class="watermark">READ</div>
     <div class="hero-count" id="hero-count" style="position:relative;z-index:1">0<span>BOOKS READ</span></div>
   </div>
 </div>
 
 <div class="toolbar-band">
-  <div class="search-wrap"><input type="text" id="search" placeholder="SEARCH TITLE OR AUTHOR…"></div>
+  <div id="toolbar-left">
+    <div class="search-wrap"><input type="text" id="search" placeholder="搜尋書名／作者"></div>
+    <div class="filter-chips" id="filterChips">
+      <button class="chip on" data-f="all">全部</button>
+      <button class="chip" data-f="reading">在讀</button>
+      <button class="chip" data-f="read">讀完</button>
+      <button class="chip" data-f="dnf">棄書</button>
+    </div>
+  </div>
   <div class="view-toggle">
     <button class="vtbtn active" id="vg">COVER</button>
     <button class="vtbtn" id="vl">LIST</button>
+    <button class="vtbtn" id="vs">YEAR</button>
   </div>
 </div>
 
@@ -225,8 +327,18 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
         <div class="form-group"><label>作者</label><input type="text" id="f-author" placeholder="輸入作者"></div>
       </div>
       <div class="form-row">
+        <div class="form-group"><label>狀態</label>
+          <div class="seg-pick" id="statusPick">
+            <button type="button" data-s="reading">在讀</button>
+            <button type="button" data-s="read">讀完</button>
+            <button type="button" data-s="dnf">棄書</button>
+          </div>
+        </div>
         <div class="form-group"><label>出版年份</label><input type="number" id="f-year" placeholder="例如 2023" min="1000" max="2099"></div>
-        <div class="form-group"><label>閱讀日期</label><input type="date" id="f-date"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>開始日期</label><input type="date" id="f-start"></div>
+        <div class="form-group" id="endGroup"><label id="endLabel">讀完日期</label><input type="date" id="f-date"></div>
       </div>
       <div class="form-group">
         <label>評分</label>
@@ -259,7 +371,13 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 <!-- DETAIL MODAL -->
 <div class="overlay" id="detailOverlay">
   <div class="modal">
-    <div class="modal-head"><h3 id="d-title"></h3><button class="close-btn" id="btn-close-detail">✕</button></div>
+    <div class="modal-head"><h3 id="d-title"></h3>
+      <div class="head-actions">
+        <button class="head-btn" id="d-edit">EDIT</button>
+        <button class="head-btn" id="d-del">DELETE</button>
+        <button class="close-btn" id="btn-close-detail">✕</button>
+      </div>
+    </div>
     <div class="modal-body" id="d-body"></div>
   </div>
 </div>
@@ -268,11 +386,11 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 <div class="overlay" id="exportOverlay">
   <div class="modal">
     <div class="modal-head">
-      <h3>EXPORT DATA</h3>
+      <h3>DATA</h3>
       <button class="close-btn" id="btn-close-export">✕</button>
     </div>
     <div class="modal-body">
-      <p style="font-size:.82rem;color:rgba(96,17,0,.55);line-height:1.65">備份你的閱讀紀錄，以防網站異動或資料遺失。建議定期匯出一份存在本機。</p>
+      <p style="font-size:.82rem;color:rgba(11,28,44,.55);line-height:1.65">備份你的閱讀紀錄，以防網站異動或資料遺失。建議定期匯出一份存在本機。</p>
       <div class="export-card">
         <div class="export-icon">CSV</div>
         <div class="export-info">
@@ -289,7 +407,7 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
         </div>
         <button class="btn btn-primary btn-sm" id="btn-json" style="flex-shrink:0;align-self:center">↓ JSON</button>
       </div>
-      <hr style="border:none;border-top:2px solid rgba(96,17,0,.12);margin:4px 0">
+      <hr style="border:none;border-top:2px solid rgba(11,28,44,.12);margin:4px 0">
       <div class="export-card">
         <div class="export-icon">↑</div>
         <div class="export-info">
@@ -299,6 +417,14 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
         <label class="btn btn-outline btn-sm" style="flex-shrink:0;align-self:center;cursor:pointer">
           ↑ JSON<input type="file" id="importInput" accept=".json" style="display:none">
         </label>
+      </div>
+      <div class="export-card">
+        <div class="export-icon">◧</div>
+        <div class="export-info">
+          <div class="export-title">壓縮封面</div>
+          <div class="export-desc">把過大的舊封面縮小，讓網站更快。新上傳的封面會自動壓縮，不用再按。</div>
+        </div>
+        <button class="btn btn-outline btn-sm" id="btn-compress" style="flex-shrink:0;align-self:center">壓縮</button>
       </div>
       <div class="export-count" id="export-count"></div>
     </div>
@@ -311,7 +437,7 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 (function(){
   // ── STATE ──
   var db;
-  var books=[], view='grid', editId=null, currentRating=0, currentCover=null;
+  var books=[], view='grid', shelfFilter='all', formStatus='read', statYear=new Date().getFullYear(), editId=null, currentRating=0, currentCover=null;
   var tmpNotes={句子:[],摘要:[],心得:[],延伸:[]};
   var currentDetailId=null;
   var curTab='句子';
@@ -346,6 +472,22 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
     ge('btn-json').addEventListener('click', exportJSON);
     ge('vg').addEventListener('click', function(){ setView('grid'); });
     ge('vl').addEventListener('click', function(){ setView('list'); });
+    ge('vs').addEventListener('click', function(){ setView('stats'); });
+    ge('btn-compress').addEventListener('click', compressAll);
+    ge('statusPick').addEventListener('click', function(e){
+      var b=e.target.closest('[data-s]'); if(b) setStatus(b.dataset.s);
+    });
+    ge('filterChips').addEventListener('click', function(e){
+      var c=e.target.closest('[data-f]'); if(!c) return;
+      shelfFilter=c.dataset.f;
+      this.querySelectorAll('.chip').forEach(function(x){ x.classList.toggle('on',x===c); });
+      renderShelf();
+    });
+    ge('d-edit').addEventListener('click', function(){ var id=currentDetailId; closeDetailModal(); openEdit(id); });
+    ge('d-del').addEventListener('click', function(){ deleteBook(currentDetailId); });
+    ge('shelf').addEventListener('click', function(e){
+      var y=e.target.closest('[data-year]'); if(y){ statYear=+y.dataset.year; renderShelf(); }
+    });
     ge('search').addEventListener('input', renderShelf);
     ge('starPick').addEventListener('click', function(e){
       var s=e.target.closest('[data-v]'); if(s) setStars(+s.dataset.v);
@@ -373,7 +515,7 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
       renderShelf();
       if(currentDetailId){
         var b=books.find(function(x){ return x.id===currentDetailId; });
-        if(b) ge('detail-notes').innerHTML = buildNotesHTML(b) || '<p style="color:rgba(96,17,0,.35);font-size:.88rem;font-style:italic">尚無筆記</p>';
+        if(b){ ge('detail-notes').innerHTML = buildNotesHTML(b) || '<p style="color:rgba(11,28,44,.35);font-size:.88rem;font-style:italic">尚無筆記</p>'; bindNoteSections(); }
       }
     }, function(err){ toast('載入失敗: '+err.message); });
   }
@@ -386,13 +528,52 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
     }).join('');
   }
 
+  function ratingHTML(r,sz){
+    return r?dotsHTML(r,sz):'<span class="no-rating">未評分</span>';
+  }
+  function fmtDate(d){ return (d||'').replace(/-/g,'/'); }
+  function statusOf(b){ return b.status||'read'; }
+  var STATUS_LABEL={reading:'在讀',read:'讀完',dnf:'棄書'};
+  // 從開始到結束（在讀中則到今天）共幾天，含頭尾
+  function daysOf(b){
+    if(!b.startDate) return null;
+    var end=statusOf(b)==='reading'?today():b.date;
+    if(!end) return null;
+    var d=Math.round((new Date(end)-new Date(b.startDate))/86400000)+1;
+    return d>0?d:null;
+  }
+  function metaLine(b){
+    var parts=[], st=statusOf(b), d=daysOf(b);
+    if(st==='reading') parts.push(b.startDate?'開始 '+fmtDate(b.startDate)+(d?' · 第 '+d+' 天':''):'在讀');
+    else if(b.date) parts.push((st==='dnf'?'棄書 ':'讀完 ')+fmtDate(b.date)+(d?' · '+d+' 天':''));
+    if(b.year) parts.push(b.year+' 年出版');
+    return esc(parts.join(' · '));
+  }
+  // 歸在哪一年：讀完／棄書看結束日，在讀看開始日
+  function readYear(b){
+    var d=statusOf(b)==='reading'?(b.startDate||today()):(b.date||b.startDate);
+    if(d) return +d.slice(0,4);
+    return b.createdAt?new Date(b.createdAt).getFullYear():null;
+  }
+  function badgeHTML(b){
+    var st=statusOf(b);
+    return st==='read'?'':'<span class="badge badge-'+st+'">'+STATUS_LABEL[st]+'</span>';
+  }
+
   function renderShelf(){
     var q=(ge('search').value||'').toLowerCase();
-    var f=books.filter(function(b){ return b.title.toLowerCase().indexOf(q)>=0||(b.author||'').toLowerCase().indexOf(q)>=0; });
-    ge('hero-count').innerHTML=books.length+'<span>BOOKS READ</span>';
+    var f=books.filter(function(b){
+      if(shelfFilter!=='all'&&statusOf(b)!==shelfFilter) return false;
+      return b.title.toLowerCase().indexOf(q)>=0||(b.author||'').toLowerCase().indexOf(q)>=0;
+    });
+    var thisYear=new Date().getFullYear();
+    var nThis=books.filter(function(b){ return statusOf(b)==='read'&&readYear(b)===thisYear; }).length;
+    ge('hero-count').innerHTML=nThis+'<span>BOOKS IN '+thisYear+'</span>';
     var shelf=ge('shelf');
+    ge('toolbar-left').classList.toggle('hide',view==='stats');
+    if(view==='stats'){ shelf.className=''; shelf.innerHTML=statsHTML(); return; }
     if(!f.length){
-      shelf.innerHTML='<div class="empty"><div class="big">EMPTY</div><p>'+(q?'No results found':'No books yet — click <strong>+ NEW BOOK</strong> to start')+'</p></div>';
+      shelf.innerHTML='<div class="empty"><div class="big">EMPTY</div><p>'+(q||shelfFilter!=='all'?'沒有符合的書':'No books yet — click <strong>+ NEW BOOK</strong> to start')+'</p></div>';
       shelf.className=''; return;
     }
     if(view==='grid'){ shelf.className='grid'; shelf.innerHTML=f.map(cardHTML).join(''); }
@@ -401,30 +582,29 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 
   function cardHTML(b){
     var L=(b.title||'?')[0];
-    var cover=b.cover?'<img class="book-cover" src="'+b.cover+'" alt="">':
+    var cover=b.cover?'<img class="book-cover" src="'+esc(b.cover)+'" alt="" loading="lazy">':
       '<div class="book-cover-ph"><div class="ph-circle"></div><div class="ph-circle2"></div><span class="ph-letter">'+esc(L)+'</span></div>';
-    var yr=b.year?'<span style="font-size:.7rem;color:rgba(96,17,0,.4)">'+b.year+'</span>':'';
-    return '<div class="book-card" data-id="'+b.id+'">'+cover+
+    return '<div class="book-card st-'+statusOf(b)+'" data-id="'+esc(b.id)+'">'+badgeHTML(b)+cover+
       '<div class="book-info">'+
       '<div class="book-title">'+esc(b.title)+'</div>'+
       '<div class="book-author">'+esc(b.author||'')+'</div>'+
-      '<div class="rating-row">'+dotsHTML(b.rating||0)+'</div>'+
-      '<div class="book-date">'+(b.date||'')+' '+yr+'</div>'+
+      (b.genre?'<div class="genre-tag">'+esc(b.genre)+'</div>':'')+
+      '<div class="rating-row">'+ratingHTML(b.rating||0)+'</div>'+
+      '<div class="book-date">'+metaLine(b)+'</div>'+
       '</div></div>';
   }
 
   function listHTML(b){
     var L=(b.title||'?')[0];
-    var cover=b.cover?'<img class="list-cover" src="'+b.cover+'" alt="">':
+    var cover=b.cover?'<img class="list-cover" src="'+esc(b.cover)+'" alt="" loading="lazy">':
       '<div class="list-cover-ph">'+esc(L)+'</div>';
     var nc=Object.values(b.notes||{}).reduce(function(s,a){ return s+a.length; },0);
-    var yr=b.year?' · '+b.year:'';
-    return '<div class="list-card" data-id="'+b.id+'">'+cover+
+    return '<div class="list-card st-'+statusOf(b)+'" data-id="'+esc(b.id)+'">'+cover+
       '<div style="flex:1;min-width:0">'+
-      '<div class="list-title">'+esc(b.title)+'</div>'+
-      '<div class="list-author">'+esc(b.author||'')+(b.date?' · '+b.date:'')+yr+'</div>'+
-      '<div style="font-size:.72rem;color:rgba(240,231,200,.3);margin-top:3px">'+nc+' 則筆記</div>'+
-      '</div><div style="flex-shrink:0">'+dotsHTML(b.rating||0)+'</div></div>';
+      '<div class="list-title">'+esc(b.title)+' '+badgeHTML(b)+'</div>'+
+      '<div class="list-author">'+esc(b.author||'')+'</div>'+
+      '<div style="font-size:.72rem;color:rgba(242,238,228,.45);margin-top:3px">'+metaLine(b)+(b.genre?' · '+esc(b.genre):'')+' · '+nc+' 則筆記</div>'+
+      '</div><div style="flex-shrink:0" class="rating-row">'+ratingHTML(b.rating||0).replace('no-rating','no-rating" style="color:rgba(242,238,228,.35)')+'</div></div>';
   }
 
   // delegate click on shelf items
@@ -433,10 +613,120 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
     if(card) openDetail(card.dataset.id);
   });
 
+  // ── YEAR STATS ──
+  // 類型固定這 8 類，雷達圖的軸才會穩定
+  var GENRES=['文學小說','歷史','紀實探險','社會人文','心理勵志','商業理財','自然科普','藝術生活'];
+
+  function radarSVG(counts, titles){
+    var n=GENRES.length, R=92, max=Math.max.apply(null,counts), top=Math.max(2,max);
+    var rings=top<=5?top:5;
+    function pt(i,r){ var a=-Math.PI/2+i*2*Math.PI/n; return [Math.cos(a)*r, Math.sin(a)*r]; }
+    var s='<svg class="radar" viewBox="-170 -122 340 244" role="img" aria-label="閱讀類型雷達圖">';
+    for(var k=1;k<=rings;k++){
+      var rr=R*k/rings;
+      s+='<polygon class="ring" points="'+GENRES.map(function(_,i){ return pt(i,rr).join(','); }).join(' ')+'"/>';
+    }
+    GENRES.forEach(function(g,i){
+      var p=pt(i,R); s+='<line class="axis" x1="0" y1="0" x2="'+p[0]+'" y2="'+p[1]+'"/>';
+    });
+    var poly=counts.map(function(c,i){ return pt(i,R*c/top).join(','); }).join(' ');
+    s+='<polygon class="shape" points="'+poly+'"/>';
+    GENRES.forEach(function(g,i){
+      var c=counts[i], p=pt(i,R*c/top), lp=pt(i,R+16);
+      var anchor=Math.abs(lp[0])<4?'middle':(lp[0]>0?'start':'end');
+      var tip=g+'：'+c+' 本'+(c?'\n'+titles[i].map(function(t){ return '《'+t+'》'; }).join('\n'):'');
+      s+='<g class="pt"><title>'+esc(tip)+'</title>'+
+        '<circle class="hit" cx="'+p[0]+'" cy="'+p[1]+'" r="12"/>'+
+        (c?'<circle class="dot" cx="'+p[0]+'" cy="'+p[1]+'" r="4.5"/>':'')+
+        '<text class="lbl'+(c?'':' zero')+'" x="'+lp[0]+'" y="'+(lp[1]+4)+'" text-anchor="'+anchor+'">'+g+(c?' <tspan class="num">'+c+'</tspan>':'')+'</text></g>';
+    });
+    return s+'</svg>';
+  }
+
+  function statsHTML(){
+    var years=[];
+    books.forEach(function(b){ var y=readYear(b); if(y&&years.indexOf(y)<0) years.push(y); });
+    years.sort(function(a,b){ return b-a; });
+    if(!years.length) return '<div class="empty"><div class="big">EMPTY</div><p>還沒有書</p></div>';
+    if(years.indexOf(statYear)<0) statYear=years[0];
+    var yb=books.filter(function(b){ return readYear(b)===statYear; });
+    var done=yb.filter(function(b){ return statusOf(b)==='read'; });
+    var dnf=yb.filter(function(b){ return statusOf(b)==='dnf'; });
+    var reading=yb.filter(function(b){ return statusOf(b)==='reading'; });
+    var quotes=yb.reduce(function(s,b){ return s+((b.notes&&b.notes['句子'])||[]).length; },0);
+    var rated=done.filter(function(b){ return b.rating; });
+    var avg=rated.length?(rated.reduce(function(s,b){ return s+b.rating; },0)/rated.length).toFixed(1):'–';
+
+    // 每月：讀完與棄書疊在一起
+    var mDone=[0,0,0,0,0,0,0,0,0,0,0,0], mDnf=mDone.slice(), mT=[[],[],[],[],[],[],[],[],[],[],[],[]];
+    done.concat(dnf).forEach(function(b){
+      if(!b.date) return; var m=+b.date.slice(5,7)-1;
+      (statusOf(b)==='dnf'?mDnf:mDone)[m]++; mT[m].push((statusOf(b)==='dnf'?'✕ ':'')+b.title);
+    });
+    var mmax=Math.max.apply(null,mDone.map(function(v,i){ return v+mDnf[i]; }))||1;
+    var cols=mDone.map(function(n,i){
+      var t=n+mDnf[i];
+      var tip=(i+1)+' 月：讀完 '+n+' 本'+(mDnf[i]?'、棄書 '+mDnf[i]+' 本':'')+(t?'\n'+mT[i].join('\n'):'');
+      return '<div class="mcol" title="'+esc(tip)+'">'+(t?'<span class="v">'+t+'</span>':'')+
+        '<div class="stack" style="height:'+(t/mmax*82)+'%">'+
+          (mDnf[i]?'<div class="seg seg-dnf" style="flex:'+mDnf[i]+'"></div>':'')+
+          (n?'<div class="seg seg-done" style="flex:'+n+'"></div>':'')+
+        '</div></div>';
+    }).join('');
+    var labels=mDone.map(function(_,i){ return '<span>'+(i+1)+'</span>'; }).join('');
+
+    // 類型（含在讀與棄書，看的是興趣分布）
+    var counts=GENRES.map(function(){ return 0; }), titles=GENRES.map(function(){ return []; }), un=[];
+    yb.forEach(function(b){
+      var i=GENRES.indexOf(b.genre);
+      if(i<0) un.push(b.title); else { counts[i]++; titles[i].push(b.title); }
+    });
+    var order=GENRES.map(function(g,i){ return i; }).filter(function(i){ return counts[i]; })
+      .sort(function(a,b){ return counts[b]-counts[a]; });
+    var glist=order.map(function(i){
+      return '<div class="gitem"><div class="gh"><span class="gn">'+GENRES[i]+'</span><span class="gc">'+counts[i]+'</span></div>'+
+        '<div class="gbooks">'+titles[i].map(function(t){ return '《'+esc(t)+'》'; }).join('')+'</div></div>';
+    }).join('')+(un.length?'<div class="gitem"><div class="gh"><span class="gn" style="opacity:.5">分析中</span><span class="gc">'+un.length+'</span></div>'+
+        '<div class="gbooks">'+un.map(function(t){ return '《'+esc(t)+'》'; }).join('')+'</div></div>':'');
+    var genrePanel=order.length?
+      '<div class="genre-wrap">'+radarSVG(counts,titles)+'<div class="glist">'+glist+'</div></div>':
+      '<p class="muted">類型分析完成後會顯示在這裡。</p>';
+
+    // 閱讀時長
+    var timed=done.concat(dnf).map(function(b){ return {b:b,d:daysOf(b)}; }).filter(function(x){ return x.d; })
+      .sort(function(a,b){ return b.d-a.d; });
+    var dmax=timed.length?timed[0].d:1;
+    var avgDays=timed.length?Math.round(timed.reduce(function(s,x){ return s+x.d; },0)/timed.length):null;
+    var drows=timed.map(function(x){
+      return '<div class="drow"><span class="dn">'+esc(x.b.title)+(statusOf(x.b)==='dnf'?' <em>棄</em>':'')+'</span>'+
+        '<div class="dt"><div class="db'+(statusOf(x.b)==='dnf'?' dnf':'')+'" style="width:'+(x.d/dmax*100)+'%"></div></div>'+
+        '<span class="dc">'+x.d+' 天</span></div>';
+    }).join('');
+
+    return '<div class="stats">'+
+      (years.length>1?'<div class="year-pick">'+years.map(function(y){
+        return '<button data-year="'+y+'" class="'+(y===statYear?'on':'')+'">'+y+'</button>'; }).join('')+'</div>':'')+
+      '<div class="tiles">'+
+        '<div class="tile"><div class="n">'+done.length+'</div><div class="l">本讀完</div></div>'+
+        '<div class="tile"><div class="n">'+dnf.length+'</div><div class="l">本棄書'+(reading.length?' · '+reading.length+' 本在讀':'')+'</div></div>'+
+        '<div class="tile"><div class="n">'+quotes+'</div><div class="l">句子收藏</div></div>'+
+        '<div class="tile"><div class="n">'+(avgDays||avg)+'</div><div class="l">'+(avgDays?'平均每本天數':'平均評分')+'</div></div>'+
+      '</div>'+
+      '<div class="panel"><h4>閱讀類型</h4>'+genrePanel+'</div>'+
+      '<div class="panel"><div class="ph"><h4>'+statYear+' 每月閱讀</h4>'+
+        '<div class="legend"><span><i class="sw sw-done"></i>讀完</span><span><i class="sw sw-dnf"></i>棄書</span></div></div>'+
+        '<div class="months">'+cols+'</div><div class="mlabels">'+labels+'</div></div>'+
+      '<div class="panel"><h4>一本書讀多久</h4>'+
+        (timed.length?drows:'<p class="muted">新增或編輯書時填上「開始日期」，這裡就會顯示每本書讀了幾天。</p>')+
+      '</div>'+
+    '</div>';
+  }
+
   function setView(v){
     view=v;
     ge('vg').classList.toggle('active',v==='grid');
     ge('vl').classList.toggle('active',v==='list');
+    ge('vs').classList.toggle('active',v==='stats');
     renderShelf();
   }
 
@@ -445,8 +735,9 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
     editId=null; currentRating=0; currentCover=null;
     tmpNotes={句子:[],摘要:[],心得:[],延伸:[]};
     ge('modal-title').textContent='ADD BOOK';
-    ['f-title','f-author','f-year'].forEach(function(id){ ge(id).value=''; });
-    ge('f-date').value=new Date().toISOString().slice(0,10);
+    ['f-title','f-author','f-year','f-start'].forEach(function(id){ ge(id).value=''; });
+    ge('f-date').value=today();
+    setStatus('read');
     ge('coverPreview').style.display='none';
     ge('coverLabel').style.display='';
     setStars(0); renderNotesAll(); switchTab('句子');
@@ -463,6 +754,8 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
     ge('f-author').value=b.author||'';
     ge('f-year').value=b.year||'';
     ge('f-date').value=b.date||'';
+    ge('f-start').value=b.startDate||'';
+    setStatus(statusOf(b));
     if(b.cover){ ge('coverPreview').src=b.cover; ge('coverPreview').style.display='block'; ge('coverLabel').style.display='none'; }
     else { ge('coverPreview').style.display='none'; ge('coverLabel').style.display=''; }
     setStars(currentRating); renderNotesAll(); switchTab('句子');
@@ -481,7 +774,9 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
       title:title,
       author:ge('f-author').value.trim(),
       year:yearVal?parseInt(yearVal):null,
-      date:ge('f-date').value,
+      status:formStatus,
+      startDate:ge('f-start').value,
+      date:formStatus==='reading'?'':ge('f-date').value,
       rating:currentRating,
       cover:currentCover,
       notes:JSON.parse(JSON.stringify(tmpNotes))
@@ -503,12 +798,61 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
     var file=e.target.files[0]; if(!file) return;
     var r=new FileReader();
     r.onload=function(ev){
-      currentCover=ev.target.result;
-      ge('coverPreview').src=currentCover;
-      ge('coverPreview').style.display='block';
-      ge('coverLabel').style.display='none';
+      compressImage(ev.target.result, function(small){
+        currentCover=small;
+        ge('coverPreview').src=currentCover;
+        ge('coverPreview').style.display='block';
+        ge('coverLabel').style.display='none';
+      });
     };
     r.readAsDataURL(file);
+    e.target.value='';
+  }
+
+  // 縮到最寬 480px、最高 720px 的 JPEG，一張約 30–80KB
+  function compressImage(src, cb){
+    var img=new Image();
+    img.onload=function(){
+      var k=Math.min(1,480/img.width,720/img.height);
+      var c=document.createElement('canvas');
+      c.width=Math.round(img.width*k); c.height=Math.round(img.height*k);
+      var x=c.getContext('2d');
+      x.fillStyle='#fff'; x.fillRect(0,0,c.width,c.height);
+      x.drawImage(img,0,0,c.width,c.height);
+      var out=c.toDataURL('image/jpeg',0.82);
+      cb(out.length<src.length?out:src);
+    };
+    img.onerror=function(){ toast('無法讀取這張圖片'); };
+    img.src=src;
+  }
+
+  function compressAll(){
+    var big=books.filter(function(b){ return b.cover&&b.cover.length>120000; });
+    if(!big.length){ toast('封面都已經夠小了'); return; }
+    var btn=ge('btn-compress'); btn.disabled=true;
+    var i=0, saved=0;
+    (function next(){
+      if(i>=big.length){
+        btn.disabled=false; btn.textContent='壓縮';
+        toast('已壓縮 '+big.length+' 張，省下 '+Math.round(saved/1024)+' KB'); return;
+      }
+      var b=big[i++]; btn.textContent=i+'/'+big.length;
+      compressImage(b.cover, function(small){
+        if(small.length>=b.cover.length){ next(); return; }
+        saved+=b.cover.length-small.length;
+        db.collection('books').doc(b.id).update({cover:small}).then(next)
+          .catch(function(e){ toast('壓縮失敗: '+e.message); btn.disabled=false; btn.textContent='壓縮'; });
+      });
+    })();
+  }
+
+  function setStatus(st){
+    var prev=formStatus; formStatus=st;
+    ge('statusPick').querySelectorAll('button').forEach(function(b){ b.classList.toggle('on',b.dataset.s===st); });
+    ge('endGroup').style.display=st==='reading'?'none':'';
+    ge('endLabel').textContent=st==='dnf'?'放棄日期':'讀完日期';
+    if(prev==='reading'&&st!=='reading'&&!ge('f-date').value) ge('f-date').value=today();
+    if(st==='reading'&&!ge('f-start').value) ge('f-start').value=today();
   }
 
   function setStars(n){
@@ -554,17 +898,17 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
     currentDetailId=id;
     ge('d-title').textContent=b.title;
     var L=(b.title||'?')[0];
-    var cover=b.cover?'<img class="detail-cover" src="'+b.cover+'" alt="">':
+    var cover=b.cover?'<img class="detail-cover" src="'+esc(b.cover)+'" alt="">':
       '<div class="detail-cover-ph"><div class="ph-circle"></div><div class="ph-circle2"></div>'+
-      '<span style="font-family:Anton,sans-serif;font-size:5rem;color:rgba(240,231,200,.5);position:relative;z-index:1">'+esc(L)+'</span></div>';
+      '<span style="font-family:Anton,sans-serif;font-size:5rem;color:rgba(242,238,228,.5);position:relative;z-index:1">'+esc(L)+'</span></div>';
     var notesHTML=buildNotesHTML(b);
-    var yr=b.year?'<span style="font-size:.82rem;color:rgba(96,17,0,.4)">'+b.year+'年出版</span>':'';
     ge('d-body').innerHTML=cover+
-      '<div class="detail-meta"><div class="rating-row">'+dotsHTML(b.rating||0,13)+'</div>'+
-      (b.author?'<span style="font-size:.85rem;color:rgba(96,17,0,.55);font-style:italic">'+esc(b.author)+'</span>':'')+
-      (b.date?'<span style="font-size:.82rem;color:rgba(96,17,0,.4)">'+b.date+'</span>':'')+yr+'</div>'+
+      '<div class="detail-meta">'+badgeHTML(b)+'<div class="rating-row">'+ratingHTML(b.rating||0,13)+'</div>'+
+      (b.author?'<span style="font-size:.85rem;color:rgba(11,28,44,.6);font-style:italic">'+esc(b.author)+'</span>':'')+
+      (b.genre?'<span class="genre-tag" style="margin:0">'+esc(b.genre)+'</span>':'')+
+      '<span style="font-size:.82rem;color:rgba(11,28,44,.45)">'+metaLine(b)+'</span></div>'+
       '<hr class="detail-rule">'+
-      '<div id="detail-notes">'+(notesHTML||'<p style="color:rgba(96,17,0,.35);font-size:.88rem;font-style:italic">尚無筆記</p>')+'</div>'+
+      '<div id="detail-notes">'+(notesHTML||'<p style="color:rgba(11,28,44,.35);font-size:.88rem;font-style:italic">尚無筆記</p>')+'</div>'+
       '<div class="comments-section">'+
         '<div class="comments-title">讀者留言</div>'+
         '<div id="comments-list">載入中…</div>'+
@@ -573,33 +917,42 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
           '<div class="comment-inputs"><textarea id="c-text" rows="2" placeholder="留下你的想法…" maxlength="500"></textarea></div>'+
           '<div style="display:flex;justify-content:flex-end"><button class="btn btn-primary btn-sm" id="btn-comment">留言</button></div>'+
         '</div>'+
-      '</div>'+
-      '<div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px;padding-top:12px;border-top:1px solid rgba(96,17,0,.1)">'+
-        '<button class="btn btn-outline btn-sm" id="btn-edit-from-detail">EDIT</button>'+
-        '<button class="btn btn-danger btn-sm" id="btn-delete">DELETE</button>'+
       '</div>';
 
-    ge('btn-edit-from-detail').addEventListener('click', function(){ openEdit(id); closeDetailModal(); });
-    ge('btn-delete').addEventListener('click', function(){ deleteBook(id); });
     ge('btn-comment').addEventListener('click', function(){ submitComment(id); });
-    ge('d-body').querySelectorAll('.note-sec-title').forEach(function(el){
-      el.addEventListener('click', function(){ toggleNoteSection(this); });
-    });
+    bindNoteSections();
 
     ge('detailOverlay').classList.add('open');
     loadComments(id);
   }
 
+  function bindNoteSections(){
+    ge('d-body').querySelectorAll('.note-sec-title').forEach(function(el){
+      el.addEventListener('click', function(){ toggleNoteSection(this); });
+    });
+    ge('d-body').querySelectorAll('.more-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        this.parentNode.querySelectorAll('.note-block.extra').forEach(function(n){ n.style.display=''; });
+        this.remove();
+      });
+    });
+  }
+
   function buildNotesHTML(b){
     var types=[{k:'句子',l:'印象句子'},{k:'摘要',l:'內容摘要'},{k:'心得',l:'讀後心得'},{k:'延伸',l:'延伸筆記'}];
+    var opened=false;
     return types.map(function(nt){
       var arr=(b.notes&&b.notes[nt.k])||[]; if(!arr.length) return '';
-      var blocks=arr.map(function(n){
-        return '<div class="note-block">'+esc(n).replace(/\n/g,'<br>')+'</div>';
-      }).join('');
+      // 只展開第一個有內容的區塊（通常是印象句子），其餘收合
+      var col=opened?' collapsed':''; opened=true;
+      var SHOW=3;
+      var blocks=arr.map(function(n,i){
+        var extra=i>=SHOW;
+        return '<div class="note-block'+(extra?' extra" style="display:none':'')+'">'+esc(n).replace(/\n/g,'<br>')+'</div>';
+      }).join('')+(arr.length>SHOW?'<button class="more-btn">顯示全部 '+arr.length+' 則</button>':'');
       return '<div class="note-sec-wrap note-sec-'+nt.k+'" style="margin-bottom:10px">'+
-        '<div class="note-sec-title">'+nt.l+'<span class="toggle-arrow">▼</span></div>'+
-        '<div class="note-sec-body">'+blocks+'</div></div>';
+        '<div class="note-sec-title'+col+'">'+nt.l+' · '+arr.length+'<span class="toggle-arrow">▼</span></div>'+
+        '<div class="note-sec-body'+col+'">'+blocks+'</div></div>';
     }).join('');
   }
 
@@ -627,7 +980,7 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
       var list=ge('comments-list'); if(!list) return;
       var items=snap.docs.map(function(d){ return Object.assign({id:d.id},d.data()); });
       items.sort(function(a,b){ return (a.createdAt||0)-(b.createdAt||0); });
-      if(!items.length){ list.innerHTML='<p style="font-size:.82rem;color:rgba(96,17,0,.35);font-style:italic;margin-bottom:8px">還沒有留言，來第一個吧！</p>'; return; }
+      if(!items.length){ list.innerHTML='<p style="font-size:.82rem;color:rgba(11,28,44,.35);font-style:italic;margin-bottom:8px">還沒有留言，來第一個吧！</p>'; return; }
       list.innerHTML=items.map(function(c){
         var d=c.createdAt?new Date(c.createdAt).toLocaleDateString('zh-TW'):'';
         return '<div class="comment-item"><div class="comment-name">'+esc(c.name||'匿名')+'<span class="comment-time">'+d+'</span></div>'+
@@ -662,20 +1015,20 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
 
   function exportCSV(){
     if(!books.length){ toast('尚無書籍資料'); return; }
-    var headers=['書名','作者','出版年份','閱讀日期','評分（/5）','印象句子','內容摘要','讀後心得','延伸筆記'];
+    var headers=['書名','作者','出版年份','狀態','類型','開始日期','結束日期','天數','評分（/5）','印象句子','內容摘要','讀後心得','延伸筆記'];
     var rows=books.map(function(b){
-      return [b.title||'',b.author||'',b.year||'',b.date||'',b.rating||0,
+      return [b.title||'',b.author||'',b.year||'',STATUS_LABEL[statusOf(b)],b.genre||'',b.startDate||'',b.date||'',daysOf(b)||'',b.rating||0,
         (b.notes&&b.notes['句子']||[]).join(' ／ '),(b.notes&&b.notes['摘要']||[]).join(' ／ '),
         (b.notes&&b.notes['心得']||[]).join(' ／ '),(b.notes&&b.notes['延伸']||[]).join(' ／ ')];
     });
     var csv='\uFEFF'+[headers].concat(rows).map(function(r){ return r.map(csvCell).join(','); }).join('\r\n');
-    downloadBlob(new Blob([csv],{type:'text/csv;charset=utf-8'}),'reading-air-'+today()+'.csv');
+    downloadBlob(new Blob([csv],{type:'text/csv;charset=utf-8'}),'cliche-'+today()+'.csv');
     toast('CSV 匯出完成');
   }
 
   function exportJSON(){
     if(!books.length){ toast('尚無書籍資料'); return; }
-    downloadBlob(new Blob([JSON.stringify({exportedAt:new Date().toISOString(),count:books.length,books:books},null,2)],{type:'application/json'}),'reading-air-'+today()+'.json');
+    downloadBlob(new Blob([JSON.stringify({exportedAt:new Date().toISOString(),count:books.length,books:books},null,2)],{type:'application/json'}),'cliche-'+today()+'.json');
     toast('JSON 備份完成');
   }
 
@@ -704,7 +1057,7 @@ nav{background:var(--red);padding:0 40px;height:70px;display:flex;align-items:ce
     reader.readAsText(file);
   }
 
-  function today(){ return new Date().toISOString().slice(0,10); }
+  function today(){ var d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,10); }
   function downloadBlob(blob,filename){
     var url=URL.createObjectURL(blob); var a=document.createElement('a');
     a.href=url; a.download=filename; document.body.appendChild(a); a.click();
