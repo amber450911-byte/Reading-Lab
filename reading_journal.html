@@ -247,12 +247,104 @@ nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70p
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--red);color:var(--cream);padding:10px 28px;font-size:.82rem;font-weight:900;opacity:0;transition:.3s;z-index:999;pointer-events:none;letter-spacing:.1em;text-transform:uppercase;font-family:'Anton',sans-serif;border:2px solid var(--cream);box-shadow:4px 4px 0 var(--dk)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--dk)}::-webkit-scrollbar-thumb{background:var(--red)}
+/* shelf view：最上面是正在讀，下面依類型分排，書立在一條細層板線上 */
+.shelf-wrap{--gut:40px}
+body.v-shelf{background:var(--cream)}
+body.v-shelf .empty{color:rgba(11,28,44,.4)}
+body.v-shelf .empty strong{color:var(--dk)}
+.shelves{display:flex;flex-direction:column;gap:38px;color:var(--dk)}
+.sec-h{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.sec-h h3{font-size:1.02rem;font-weight:700;letter-spacing:.06em;white-space:nowrap}
+.sec-h .ln{flex:1;height:1px;background:rgba(11,28,44,.16)}
+.sec-h .n{font-size:.74rem;color:rgba(11,28,44,.45);white-space:nowrap}
+.sec-h.an h3{font-family:'Anton',sans-serif;font-weight:400;font-size:.82rem;letter-spacing:.3em;color:var(--red)}
+.sarrow{background:none;border:none;color:rgba(11,28,44,.35);font-size:1.15rem;line-height:1;padding:0 3px;cursor:pointer;font-family:inherit;transition:color .2s}
+.sarrow:hover{color:var(--red)}
+.srow-body{position:relative;margin:0 calc(var(--gut) * -1)}
+.srow-track{display:flex;gap:14px;align-items:flex-end;overflow-x:auto;padding:10px var(--gut) 0;scroll-padding:0 var(--gut);scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.srow-track::-webkit-scrollbar{display:none}
+.sline{height:3px;margin:0 calc(var(--gut) / 2);background:var(--red);border-radius:2px;box-shadow:0 7px 12px -5px rgba(0,49,83,.4)}
+.sbook{flex:0 0 auto;width:124px;height:186px;position:relative;cursor:pointer;scroll-snap-align:start;background:var(--red);border-radius:2px 3px 3px 2px;overflow:hidden;
+  box-shadow:0 10px 18px -10px rgba(11,28,44,.55),0 1px 3px rgba(11,28,44,.18);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.sbook:hover{transform:translateY(-8px);box-shadow:0 20px 26px -12px rgba(11,28,44,.5),0 1px 3px rgba(11,28,44,.18)}
+.sbook::after,.now-cover::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,.12),rgba(255,255,255,.08) 4%,rgba(255,255,255,0) 9%)}
+.sbook img{width:100%;height:100%;object-fit:cover;display:block}
+.sbook .badge{position:absolute;top:6px;left:6px;z-index:1;border-radius:2px}
+.sbook.st-dnf img,.sbook.st-dnf .sph{filter:grayscale(1);opacity:.45}
+.sph{width:100%;height:100%;padding:14px 12px;display:flex;flex-direction:column;gap:6px;color:var(--cream);position:relative;overflow:hidden}
+.sph b{font-size:.88rem;line-height:1.35;position:relative;z-index:1}
+.sph small{font-size:.68rem;opacity:.6;font-style:italic;position:relative;z-index:1}
+.sph .ph-circle{right:-60px;bottom:-60px}
+/* NOW READING */
+.now-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 calc(var(--gut) * -1);-webkit-overflow-scrolling:touch}
+.now-track::-webkit-scrollbar{display:none}
+.now-card{flex:0 0 100%;scroll-snap-align:center;padding:4px var(--gut) 6px;display:flex;flex-direction:column;gap:18px}
+.now-main{display:flex;gap:18px;align-items:stretch;max-width:560px}
+.now-cover{flex:0 0 auto;width:150px;height:220px;position:relative;cursor:pointer;background:var(--red);border-radius:2px 4px 4px 2px;overflow:hidden;
+  box-shadow:0 22px 34px -16px rgba(0,49,83,.6),0 2px 6px rgba(11,28,44,.15);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.now-cover:active{transform:scale(.97)}
+.now-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.now-info{flex:1;min-width:0;display:flex;flex-direction:column;padding:2px 0}
+.now-title{font-size:1.12rem;font-weight:700;line-height:1.4;letter-spacing:.02em;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.now-author{font-size:.8rem;color:var(--red2);font-style:italic;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.now-days{margin-top:auto;font-family:'Anton',sans-serif;font-size:2.9rem;line-height:1;color:var(--red);letter-spacing:.02em}
+.now-days span{font-family:'Noto Sans TC',sans-serif;font-size:.8rem;letter-spacing:.1em;color:rgba(11,28,44,.55);margin-left:6px}
+.now-meta{font-size:.74rem;color:rgba(11,28,44,.48);margin-top:5px}
+.now-acts{display:flex;gap:8px;max-width:560px}
+.pill{font-family:'Noto Sans TC',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.06em;padding:8px 16px;border-radius:999px;cursor:pointer;
+  border:1.5px solid var(--red);background:transparent;color:var(--red);transition:background .2s,color .2s,transform .15s}
+.pill:active{transform:scale(.95)}
+.pill.solid{background:var(--red);color:var(--cream)}
+.pill.solid:hover{background:var(--red2);border-color:var(--red2)}
+.pill.ghost{border-color:rgba(11,28,44,.22);color:rgba(11,28,44,.5)}
+.pill:not(.solid):hover{background:rgba(0,49,83,.07)}
+.now-acts .pill:nth-child(2){margin-left:auto}
+.now-dots{display:flex;justify-content:center;gap:6px;margin-top:4px}
+.now-dots i{width:6px;height:4px;border-radius:2px;background:rgba(11,28,44,.18);transition:width .35s,background .35s}
+.now-dots i.on{width:20px;background:var(--red)}
+/* 底部滑出的小卡片 */
+.overlay.sheet .modal{max-width:460px;border:none;border-radius:16px;box-shadow:0 24px 60px rgba(6,16,26,.45)}
+.sheet-body{padding:22px 22px 20px;display:flex;flex-direction:column;gap:16px}
+.sheet-body h4{font-size:1rem;font-weight:700;line-height:1.45}
+.sheet-body h4 small{display:block;font-size:.76rem;font-weight:400;color:rgba(11,28,44,.5);margin-top:2px}
+.sheet-body textarea{width:100%;background:#fff;border:1.5px solid rgba(11,28,44,.16);border-radius:10px;padding:12px;font-size:.92rem;line-height:1.7;font-family:inherit;color:var(--dk);outline:none;resize:none}
+.sheet-body textarea:focus{border-color:var(--red)}
+.sheet-acts{display:flex;justify-content:flex-end;gap:8px}
+.sheet-body .star-pick span{width:28px;height:28px}
+.fab,.fade{display:none}
+@media(max-width:600px){
+  .shelf-wrap{--gut:16px}
+  .shelves{gap:32px}
+  .sbook{width:104px;height:156px}
+  .now-cover{width:124px;height:182px}
+  .now-main{gap:16px}
+  .now-title{font-size:1.02rem}
+  .now-days{font-size:2.5rem}
+  .pill{padding:7px 14px}
+  .overlay.sheet{align-items:flex-end;padding:0}
+  .overlay.sheet .modal{border-radius:18px 18px 0 0;max-height:85vh;transform:translateY(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+  .overlay.sheet.open .modal{transform:translateY(0)}
+  .sheet-body{padding:22px 18px calc(20px + env(safe-area-inset-bottom))}
+  #btn-add{display:none}
+  .fab{display:block;position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:150;background:var(--dk);color:var(--cream);border:none;border-radius:999px;padding:15px 38px;font-family:'Anton',sans-serif;font-size:.95rem;letter-spacing:.14em;box-shadow:0 10px 26px rgba(11,28,44,.35);cursor:pointer}
+  .fab:active{transform:translateX(-50%) scale(.96)}
+  .fade{display:block;position:fixed;left:0;right:0;bottom:0;height:120px;z-index:140;pointer-events:none;
+    background:linear-gradient(rgba(11,28,44,0),var(--dk) 90%);
+    backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);
+    -webkit-mask-image:linear-gradient(transparent,#000 55%);mask-image:linear-gradient(transparent,#000 55%)}
+  body.v-shelf .fade{background:linear-gradient(rgba(242,238,228,0),var(--cream) 90%)}
+  .shelf-wrap{padding-bottom:120px!important}
+  .toast{bottom:calc(92px + env(safe-area-inset-bottom))}
+  .hero{align-items:center!important;text-align:center}
+  .hero-right{align-items:center!important}
+  .hero-count{text-align:center}
+}
 @media(max-width:600px){
   nav{padding:env(safe-area-inset-top) 16px 0;min-height:56px}.logo-en{font-size:1.5rem}.logo-zh{display:none}
   .nav-btn{padding:4px 14px;font-size:1rem}.long{display:none}.short{display:inline}
   .watermark{display:none}.tiles{grid-template-columns:repeat(2,1fr)}.genre-wrap{grid-template-columns:1fr;gap:8px}
   .drow{grid-template-columns:minmax(0,110px) 1fr 44px;gap:8px}.chip{padding:6px 8px}.modal-head{padding:14px 16px}.modal-head h3{font-size:1.05rem;white-space:normal;line-height:1.3}.tiles{gap:8px}.tile{padding:12px}.tile .n{font-size:1.9rem}.panel{padding:16px 14px}
-  .search-wrap{max-width:none;flex-basis:100%}#toolbar-left{flex:1 1 100%;gap:8px}.view-toggle{margin-left:0}.vtbtn{padding:7px 16px}
+  .search-wrap{max-width:none;flex-basis:100%}#toolbar-left{flex:1 1 100%;gap:8px}.view-toggle{margin-left:0}.vtbtn{padding:7px 12px}
   .hero{padding:28px 16px 24px;flex-direction:column;align-items:flex-start}.hero-title{font-size:3.2rem}.hero-count{font-size:3rem}
   .toolbar-band{padding:10px 16px}.shelf-wrap{padding:20px 16px}
   .grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px}
@@ -280,7 +372,7 @@ nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70p
     <div class="hero-title">CLICHÉ</div>
     <div class="hero-sub">不閱讀不會死，但會變笨。</div>
   </div>
-  <div style="position:relative;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end">
+  <div class="hero-right" style="position:relative;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end">
     <div class="watermark">READ</div>
     <div class="hero-count" id="hero-count" style="position:relative;z-index:1">0<span>BOOKS READ</span></div>
   </div>
@@ -292,18 +384,24 @@ nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70p
     <div class="filter-chips" id="filterChips">
       <button class="chip on" data-f="all">全部</button>
       <button class="chip" data-f="reading">在讀</button>
-      <button class="chip" data-f="read">讀完</button>
-      <button class="chip" data-f="dnf">棄書</button>
+      <button class="chip" data-f="read">完成</button>
+      <button class="chip" data-f="dnf">放棄</button>
     </div>
   </div>
   <div class="view-toggle">
-    <button class="vtbtn active" id="vg">COVER</button>
+    <button class="vtbtn active" id="vh">SHELF</button>
+    <button class="vtbtn" id="vg">COVER</button>
     <button class="vtbtn" id="vl">LIST</button>
     <button class="vtbtn" id="vs">YEAR</button>
   </div>
 </div>
 
 <div class="shelf-wrap"><div id="shelf"></div></div>
+<!-- QUICK SHEET：+句子／完成／放棄 -->
+<div class="overlay sheet" id="quickOverlay"><div class="modal"><div class="sheet-body" id="q-body"></div></div></div>
+
+<div class="fade"></div>
+<button class="fab" id="btn-fab">+ NEW BOOK</button>
 <div class="toast" id="toast"></div>
 
 <!-- ADD MODAL -->
@@ -330,8 +428,8 @@ nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70p
         <div class="form-group"><label>狀態</label>
           <div class="seg-pick" id="statusPick">
             <button type="button" data-s="reading">在讀</button>
-            <button type="button" data-s="read">讀完</button>
-            <button type="button" data-s="dnf">棄書</button>
+            <button type="button" data-s="read">完成</button>
+            <button type="button" data-s="dnf">放棄</button>
           </div>
         </div>
         <div class="form-group"><label>出版年份</label><input type="number" id="f-year" placeholder="例如 2023" min="1000" max="2099"></div>
@@ -437,9 +535,10 @@ nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70p
 (function(){
   // ── STATE ──
   var db;
-  var books=[], view='grid', shelfFilter='all', formStatus='read', statYear=new Date().getFullYear(), editId=null, currentRating=0, currentCover=null;
+  var books=[], view=loadView(), shelfFilter='all', formStatus='read', statYear=new Date().getFullYear(), editId=null, currentRating=0, currentCover=null;
   var tmpNotes={句子:[],摘要:[],心得:[],延伸:[]};
   var currentDetailId=null;
+  var nowIdx=0;
   var curTab='句子';
   var commentsUnsub=null;
 
@@ -462,6 +561,7 @@ nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70p
 
     // bind all buttons via addEventListener — no onclick attributes
     ge('btn-add').addEventListener('click', openAdd);
+    ge('btn-fab').addEventListener('click', openAdd);
     ge('btn-export').addEventListener('click', openExport);
     ge('btn-close-add').addEventListener('click', closeAddModal);
     ge('btn-cancel-add').addEventListener('click', closeAddModal);
@@ -470,6 +570,7 @@ nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70p
     ge('btn-close-export').addEventListener('click', closeExportModal);
     ge('btn-csv').addEventListener('click', exportCSV);
     ge('btn-json').addEventListener('click', exportJSON);
+    ge('vh').addEventListener('click', function(){ setView('shelf'); });
     ge('vg').addEventListener('click', function(){ setView('grid'); });
     ge('vl').addEventListener('click', function(){ setView('list'); });
     ge('vs').addEventListener('click', function(){ setView('stats'); });
@@ -487,6 +588,8 @@ nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70p
     ge('d-del').addEventListener('click', function(){ deleteBook(currentDetailId); });
     ge('shelf').addEventListener('click', function(e){
       var y=e.target.closest('[data-year]'); if(y){ statYear=+y.dataset.year; renderShelf(); }
+      var a=e.target.closest('[data-scroll]');
+      if(a){ var t=a.closest('.srow').querySelector('.srow-track'); t.scrollBy({left:+a.dataset.scroll*t.clientWidth*.8,behavior:'smooth'}); }
     });
     ge('search').addEventListener('input', renderShelf);
     ge('starPick').addEventListener('click', function(e){
@@ -498,10 +601,12 @@ nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70p
     ge('addOverlay').addEventListener('click', function(e){ if(e.target===this) closeAddModal(); });
     ge('detailOverlay').addEventListener('click', function(e){ if(e.target===this) closeDetailModal(); });
     ge('exportOverlay').addEventListener('click', function(e){ if(e.target===this) closeExportModal(); });
+    ge('quickOverlay').addEventListener('click', function(e){ if(e.target===this) closeQuick(); });
     document.querySelectorAll('.note-tab').forEach(function(btn){
       btn.addEventListener('click', function(){ switchTab(this.dataset.t); });
     });
 
+    setView(view);
     startSync();
   });
 
@@ -533,7 +638,7 @@ nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70p
   }
   function fmtDate(d){ return (d||'').replace(/-/g,'/'); }
   function statusOf(b){ return b.status||'read'; }
-  var STATUS_LABEL={reading:'在讀',read:'讀完',dnf:'棄書'};
+  var STATUS_LABEL={reading:'在讀',read:'完成',dnf:'放棄'};
   // 從開始到結束（在讀中則到今天）共幾天，含頭尾
   function daysOf(b){
     if(!b.startDate) return null;
@@ -545,7 +650,7 @@ nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70p
   function metaLine(b){
     var parts=[], st=statusOf(b), d=daysOf(b);
     if(st==='reading') parts.push(b.startDate?'開始 '+fmtDate(b.startDate)+(d?' · 第 '+d+' 天':''):'在讀');
-    else if(b.date) parts.push((st==='dnf'?'棄書 ':'讀完 ')+fmtDate(b.date)+(d?' · '+d+' 天':''));
+    else if(b.date) parts.push((st==='dnf'?'放棄 ':'讀完 ')+fmtDate(b.date)+(d?' · '+d+' 天':''));
     if(b.year) parts.push(b.year+' 年出版');
     return esc(parts.join(' · '));
   }
@@ -576,7 +681,8 @@ nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70p
       shelf.innerHTML='<div class="empty"><div class="big">EMPTY</div><p>'+(q||shelfFilter!=='all'?'沒有符合的書':'No books yet — click <strong>+ NEW BOOK</strong> to start')+'</p></div>';
       shelf.className=''; return;
     }
-    if(view==='grid'){ shelf.className='grid'; shelf.innerHTML=f.map(cardHTML).join(''); }
+    if(view==='shelf'){ shelf.className='shelves'; shelf.innerHTML=(!q&&shelfFilter==='all'?nowHTML():'')+shelvesHTML(f); bindNow(); }
+    else if(view==='grid'){ shelf.className='grid'; shelf.innerHTML=f.map(cardHTML).join(''); }
     else { shelf.className='list'; shelf.innerHTML=f.map(listHTML).join(''); }
   }
 
@@ -594,6 +700,106 @@ nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70p
       '</div></div>';
   }
 
+  // ── SHELF ──
+
+  function shelvesHTML(f){
+    var groups=GENRES.concat(['未分類']).map(function(g){
+      return {g:g, list:f.filter(function(b){ return (GENRES.indexOf(b.genre)<0?'未分類':b.genre)===g; })};
+    }).filter(function(x){ return x.list.length; });
+    // 書多的排在上面，未分類永遠最後
+    groups.sort(function(a,b){ return (a.g==='未分類')-(b.g==='未分類') || b.list.length-a.list.length; });
+    return groups.map(function(x){
+      return '<section class="srow">'+
+        '<div class="sec-h"><h3>'+x.g+'</h3><span class="ln"></span><span class="n">'+x.list.length+' 本</span>'+
+        '<button class="sarrow" data-scroll="-1" aria-label="往左">‹</button><button class="sarrow" data-scroll="1" aria-label="往右">›</button></div>'+
+        '<div class="srow-body"><div class="srow-track">'+x.list.map(spineHTML).join('')+'</div>'+
+        '<div class="sline"></div></div></section>';
+    }).join('');
+  }
+
+  // ── NOW READING ──
+  function nowHTML(){
+    var list=books.filter(function(b){ return statusOf(b)==='reading'; })
+      .sort(function(a,b){ return (b.startDate||'').localeCompare(a.startDate||''); });
+    if(!list.length) return '';
+    if(nowIdx>=list.length) nowIdx=0;
+    return '<section class="now"><div class="sec-h an"><h3>NOW READING</h3><span class="ln"></span><span class="n">'+list.length+' 本</span></div>'+
+      '<div class="now-track" id="now-track">'+list.map(function(b){
+        var d=daysOf(b);
+        var cover=b.cover?'<img src="'+esc(b.cover)+'" alt="'+esc(b.title)+'">':
+          '<div class="sph"><div class="ph-circle"></div><b>'+esc(b.title)+'</b><small>'+esc(b.author||'')+'</small></div>';
+        return '<div class="now-card"><div class="now-main">'+
+          '<div class="now-cover" data-id="'+esc(b.id)+'">'+cover+'</div>'+
+          '<div class="now-info"><div class="now-title">'+esc(b.title)+'</div>'+
+            (b.author?'<div class="now-author">'+esc(b.author)+'</div>':'')+
+            (d?'<div class="now-days">'+d+'<span>天</span></div>':'<div class="now-days" style="font-size:1.4rem">在讀</div>')+
+            '<div class="now-meta">'+(b.startDate?fmtDate(b.startDate).slice(5).replace(/^0/,'')+' 開始':'')+(b.genre?' · '+esc(b.genre):'')+'</div></div></div>'+
+          '<div class="now-acts">'+
+            '<button class="pill solid" data-act="quote" data-bid="'+esc(b.id)+'">+ 句子</button>'+
+            '<button class="pill" data-act="done" data-bid="'+esc(b.id)+'">✓ 完成</button>'+
+            '<button class="pill ghost" data-act="dnf" data-bid="'+esc(b.id)+'">✕ 放棄</button>'+
+          '</div></div>';
+      }).join('')+'</div>'+
+      (list.length>1?'<div class="now-dots" id="now-dots">'+list.map(function(_,i){ return '<i class="'+(i===nowIdx?'on':'')+'"></i>'; }).join('')+'</div>':'')+
+      '</section>';
+  }
+  // 重畫後捲回原本那張，並在滑動時更新小圓點
+  function bindNow(){
+    var t=ge('now-track'); if(!t) return;
+    t.scrollLeft=nowIdx*t.clientWidth;
+    t.addEventListener('scroll', function(){
+      var i=Math.round(t.scrollLeft/t.clientWidth);
+      if(i===nowIdx) return; nowIdx=i;
+      var dots=ge('now-dots'); if(dots) dots.querySelectorAll('i').forEach(function(x,k){ x.classList.toggle('on',k===i); });
+    }, {passive:true});
+  }
+
+  // ── QUICK ACTIONS ──
+  var quickRating=0;
+  function openQuick(kind, id){
+    var b=books.find(function(x){ return x.id===id; }); if(!b) return;
+    var head='<h4>'+({quote:'記一句',done:'讀完了，給幾分？',dnf:'確定要放棄這本？'})[kind]+'<small>《'+esc(b.title)+'》</small></h4>';
+    var body='', ok='';
+    if(kind==='quote'){ body='<textarea id="q-text" rows="4" placeholder="寫下打動你的句子…"></textarea>'; ok='加入'; }
+    if(kind==='done'){ body='<div class="star-pick" id="q-stars">'+[1,2,3,4,5].map(function(v){ return '<span data-v="'+v+'"></span>'; }).join('')+'</div>'; ok='完成'; }
+    if(kind==='dnf'){ body='<p class="muted">會移到「放棄」，日期記成今天。之後想重讀可以再改回來。</p>'; ok='放棄'; }
+    ge('q-body').innerHTML=head+body+'<div class="sheet-acts"><button class="pill ghost" id="q-cancel">取消</button>'+
+      '<button class="pill solid" id="q-ok">'+ok+'</button></div>';
+    quickRating=b.rating||0;
+    if(kind==='done'){
+      paintQuickStars();
+      ge('q-stars').addEventListener('click', function(e){ var s=e.target.closest('[data-v]'); if(s){ quickRating=+s.dataset.v; paintQuickStars(); } });
+    }
+    ge('q-cancel').addEventListener('click', closeQuick);
+    ge('q-ok').addEventListener('click', function(){ submitQuick(kind, b); });
+    ge('quickOverlay').classList.add('open');
+    if(kind==='quote') setTimeout(function(){ ge('q-text').focus(); },350);
+  }
+  function paintQuickStars(){
+    ge('q-stars').querySelectorAll('span').forEach(function(s,i){ s.classList.toggle('on',i<quickRating); });
+  }
+  function closeQuick(){ ge('quickOverlay').classList.remove('open'); }
+  function submitQuick(kind, b){
+    var ref=db.collection('books').doc(b.id), p, msg;
+    if(kind==='quote'){
+      var v=ge('q-text').value.trim(); if(!v){ toast('先寫一句'); return; }
+      var q=((b.notes&&b.notes['句子'])||[]).concat([v]);
+      p=ref.update({'notes.句子':q}); msg='已記下';
+    } else if(kind==='done'){
+      p=ref.update({status:'read', date:today(), rating:quickRating}); msg='恭喜讀完';
+    } else {
+      p=ref.update({status:'dnf', date:today()}); msg='已放棄';
+    }
+    closeQuick();
+    p.then(function(){ toast(msg); }).catch(function(e){ toast('儲存失敗: '+e.message); });
+  }
+
+  function spineHTML(b){
+    var cover=b.cover?'<img src="'+esc(b.cover)+'" alt="'+esc(b.title)+'" loading="lazy">':
+      '<div class="sph"><div class="ph-circle"></div><b>'+esc(b.title)+'</b><small>'+esc(b.author||'')+'</small></div>';
+    return '<div class="sbook st-'+statusOf(b)+'" data-id="'+esc(b.id)+'" title="'+esc(b.title)+'">'+badgeHTML(b)+cover+'</div>';
+  }
+
   function listHTML(b){
     var L=(b.title||'?')[0];
     var cover=b.cover?'<img class="list-cover" src="'+esc(b.cover)+'" alt="" loading="lazy">':
@@ -609,6 +815,8 @@ nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70p
 
   // delegate click on shelf items
   ge('shelf').addEventListener('click', function(e){
+    var act=e.target.closest('[data-act]');
+    if(act){ openQuick(act.dataset.act, act.dataset.bid); return; }
     var card=e.target.closest('[data-id]');
     if(card) openDetail(card.dataset.id);
   });
@@ -666,7 +874,7 @@ nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70p
     var mmax=Math.max.apply(null,mDone.map(function(v,i){ return v+mDnf[i]; }))||1;
     var cols=mDone.map(function(n,i){
       var t=n+mDnf[i];
-      var tip=(i+1)+' 月：讀完 '+n+' 本'+(mDnf[i]?'、棄書 '+mDnf[i]+' 本':'')+(t?'\n'+mT[i].join('\n'):'');
+      var tip=(i+1)+' 月：讀完 '+n+' 本'+(mDnf[i]?'、放棄 '+mDnf[i]+' 本':'')+(t?'\n'+mT[i].join('\n'):'');
       return '<div class="mcol" title="'+esc(tip)+'">'+(t?'<span class="v">'+t+'</span>':'')+
         '<div class="stack" style="height:'+(t/mmax*82)+'%">'+
           (mDnf[i]?'<div class="seg seg-dnf" style="flex:'+mDnf[i]+'"></div>':'')+
@@ -708,13 +916,13 @@ nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70p
         return '<button data-year="'+y+'" class="'+(y===statYear?'on':'')+'">'+y+'</button>'; }).join('')+'</div>':'')+
       '<div class="tiles">'+
         '<div class="tile"><div class="n">'+done.length+'</div><div class="l">本讀完</div></div>'+
-        '<div class="tile"><div class="n">'+dnf.length+'</div><div class="l">本棄書'+(reading.length?' · '+reading.length+' 本在讀':'')+'</div></div>'+
+        '<div class="tile"><div class="n">'+dnf.length+'</div><div class="l">本放棄'+(reading.length?' · '+reading.length+' 本在讀':'')+'</div></div>'+
         '<div class="tile"><div class="n">'+quotes+'</div><div class="l">句子收藏</div></div>'+
         '<div class="tile"><div class="n">'+(avgDays||avg)+'</div><div class="l">'+(avgDays?'平均每本天數':'平均評分')+'</div></div>'+
       '</div>'+
       '<div class="panel"><h4>閱讀類型</h4>'+genrePanel+'</div>'+
       '<div class="panel"><div class="ph"><h4>'+statYear+' 每月閱讀</h4>'+
-        '<div class="legend"><span><i class="sw sw-done"></i>讀完</span><span><i class="sw sw-dnf"></i>棄書</span></div></div>'+
+        '<div class="legend"><span><i class="sw sw-done"></i>讀完</span><span><i class="sw sw-dnf"></i>放棄</span></div></div>'+
         '<div class="months">'+cols+'</div><div class="mlabels">'+labels+'</div></div>'+
       '<div class="panel"><h4>一本書讀多久</h4>'+
         (timed.length?drows:'<p class="muted">新增或編輯書時填上「開始日期」，這裡就會顯示每本書讀了幾天。</p>')+
@@ -722,8 +930,13 @@ nav{background:var(--red);padding:env(safe-area-inset-top) 40px 0;min-height:70p
     '</div>';
   }
 
+  function loadView(){ try{ return localStorage.getItem('cliche-view')||'shelf'; }catch(e){ return 'shelf'; } }
+
   function setView(v){
     view=v;
+    try{ localStorage.setItem('cliche-view',v); }catch(e){}
+    document.body.classList.toggle('v-shelf',v==='shelf');
+    ge('vh').classList.toggle('active',v==='shelf');
     ge('vg').classList.toggle('active',v==='grid');
     ge('vl').classList.toggle('active',v==='list');
     ge('vs').classList.toggle('active',v==='stats');
