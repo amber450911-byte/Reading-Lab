@@ -377,6 +377,13 @@ nav{background:var(--choc);padding:env(safe-area-inset-top) 40px 0;min-height:70
 .sheet-body textarea:focus{border-color:var(--tan-b);box-shadow:0 0 0 3px rgba(213,76,21,.15)}
 .sheet-acts{display:flex;justify-content:flex-end;gap:8px}
 .sheet-body .star-pick span{width:30px;height:30px}
+#quickOverlay{z-index:210}
+.type-pick{display:flex;gap:6px;flex-wrap:wrap}
+.type-pick button{border:1.5px solid rgba(74,40,25,.2);background:transparent;color:var(--ink2);border-radius:999px;padding:6px 14px;font-size:.82rem;font-weight:700;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.type-pick button.on{background:var(--choc);border-color:var(--choc);color:var(--linen)}
+.d-add{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:48px;margin-bottom:14px;border:1.5px dashed rgba(249,232,212,.35);border-radius:18px;background:rgba(249,232,212,.05);color:var(--linen);font-size:.92rem;font-weight:700;letter-spacing:.04em;cursor:pointer;transition:background .2s,border-color .2s}
+.d-add:hover,.d-add:active{background:rgba(249,232,212,.12);border-color:var(--tan-lt)}
+.d-add svg{color:var(--tan-lt)}
 
 /* bottom tab bar (phone) */
 .tabbar,.fade{display:none}
@@ -707,7 +714,7 @@ nav{background:var(--choc);padding:env(safe-area-inset-top) 40px 0;min-height:70
       renderShelf();
       if(currentDetailId){
         var b=books.find(function(x){ return x.id===currentDetailId; });
-        if(b) renderDetailPane(b, false);
+        if(b){ renderDetailTabs(b); renderDetailPane(b, false); }
       }
     }, function(err){ toast('載入失敗: '+err.message); });
   }
@@ -874,12 +881,18 @@ nav{background:var(--choc);padding:env(safe-area-inset-top) 40px 0;min-height:70
   }
 
   // ── QUICK ACTIONS ──
-  var quickRating=0;
-  function openQuick(kind, id){
+  var quickRating=0, quickType='句子';
+  function openQuick(kind, id, type){
     var b=books.find(function(x){ return x.id===id; }); if(!b) return;
-    var head='<h4>'+({quote:'記一句',done:'讀完了，給幾分？',dnf:'確定要放棄這本？'})[kind]+'<small>《'+esc(b.title)+'》</small></h4>';
+    if(kind==='quote') quickType=type||'句子';
+    var head='<h4><span id="q-title">'+({quote:ADD_LABEL[quickType],done:'讀完了，給幾分？',dnf:'確定要放棄這本？'})[kind]+'</span><small>《'+esc(b.title)+'》</small></h4>';
     var body='', ok='';
-    if(kind==='quote'){ body='<textarea id="q-text" rows="4" placeholder="寫下打動你的句子…"></textarea>'; ok='加入'; }
+    if(kind==='quote'){
+      body='<div class="type-pick" id="q-types">'+NOTE_TYPES.map(function(t){
+          return '<button type="button" data-t="'+t.k+'"'+(t.k===quickType?' class="on"':'')+'>'+t.l+'</button>';
+        }).join('')+'</div><textarea id="q-text" rows="4" placeholder="'+NOTE_HINT[quickType]+'"></textarea>';
+      ok='加入';
+    }
     if(kind==='done'){ body='<div class="star-pick" id="q-stars">'+[1,2,3,4,5].map(function(v){ return '<span data-v="'+v+'"></span>'; }).join('')+'</div>'; ok='完成'; }
     if(kind==='dnf'){ body='<p class="muted">會移到「放棄」，日期記成今天。之後想重讀可以再改回來。</p>'; ok='放棄'; }
     ge('q-body').innerHTML=head+body+'<div class="sheet-acts"><button class="pill ghost" id="q-cancel">取消</button>'+
@@ -889,6 +902,14 @@ nav{background:var(--choc);padding:env(safe-area-inset-top) 40px 0;min-height:70
       paintQuickStars();
       ge('q-stars').addEventListener('click', function(e){ var s=e.target.closest('[data-v]'); if(s){ quickRating=+s.dataset.v; paintQuickStars(); } });
     }
+    if(kind==='quote') ge('q-types').addEventListener('click', function(e){
+      var t=e.target.closest('[data-t]'); if(!t) return;
+      quickType=t.dataset.t;
+      this.querySelectorAll('button').forEach(function(x){ x.classList.toggle('on',x===t); });
+      ge('q-text').placeholder=NOTE_HINT[quickType];
+      ge('q-title').textContent=ADD_LABEL[quickType];
+      ge('q-text').focus();
+    });
     ge('q-cancel').addEventListener('click', closeQuick);
     ge('q-ok').addEventListener('click', function(){ submitQuick(kind, b); });
     ge('quickOverlay').classList.add('open');
@@ -902,8 +923,11 @@ nav{background:var(--choc);padding:env(safe-area-inset-top) 40px 0;min-height:70
     var ref=db.collection('books').doc(b.id), p, msg;
     if(kind==='quote'){
       var v=ge('q-text').value.trim(); if(!v){ toast('先寫一句'); return; }
-      var q=((b.notes&&b.notes['句子'])||[]).concat([v]);
-      p=ref.update({'notes.句子':q}); msg='已記下';
+      var cur=books.find(function(x){ return x.id===b.id; })||b, upd={};
+      upd['notes.'+quickType]=((cur.notes&&cur.notes[quickType])||[]).concat([v]);
+      // 在詳細頁加的，就切到那個分頁，存好後馬上看得到
+      if(currentDetailId===b.id) detTab=quickType;
+      p=ref.update(upd); msg='已記下';
     } else if(kind==='done'){
       p=ref.update({status:'read', date:today(), rating:quickRating}); msg='恭喜讀完';
     } else {
@@ -1228,6 +1252,8 @@ nav{background:var(--choc);padding:env(safe-area-inset-top) 40px 0;min-height:70
 
   // ── DETAIL ──
   var NOTE_TYPES=[{k:'句子',l:'句子'},{k:'摘要',l:'摘要'},{k:'心得',l:'心得'},{k:'延伸',l:'延伸'}];
+  var NOTE_HINT={'句子':'寫下打動你的句子…（開頭加 P53, 會記成頁碼）','摘要':'這段在講什麼…','心得':'讀完的感受…','延伸':'聯想到的書、電影、想法…'};
+  var ADD_LABEL={'句子':'記一句','摘要':'寫摘要','心得':'寫心得','延伸':'寫延伸筆記'};
   var LAMP='<div class="lamp" aria-hidden="true"><span class="cord"></span>'+
     '<svg width="96" height="52" viewBox="0 0 96 52"><path d="M4 48C4 20 24 4 48 4s44 16 44 44Z" fill="#D54C15"/><ellipse cx="48" cy="48" rx="44" ry="4" fill="#F6B48A"/></svg>'+
     '<span class="beam"></span></div>';
@@ -1250,19 +1276,12 @@ nav{background:var(--choc);padding:env(safe-area-inset-top) 40px 0;min-height:70
       '<div><b>'+(d||'–')+'</b><span>閱讀天數</span></div>'+
       '<div><b>'+(when[0]||'–')+'</b><span>'+when[1]+'</span></div>'+
       '<div><b>'+noteCount(b,'句子')+'</b><span>印象句子</span></div></div>';
-    // 有內容的筆記才出現分頁；第一個有內容的先打開
-    var tabs=NOTE_TYPES.filter(function(t){ return noteCount(b,t.k); });
-    if(!tabs.length) tabs=[NOTE_TYPES[0]];
-    tabs=tabs.concat([{k:'留言',l:'留言'}]);
-    detTab=tabs[0].k;
+    detTab=null;
     ge('d-body').innerHTML='<div class="d-hero">'+LAMP+cover+
         '<h2 class="d-title">'+esc(b.title)+'</h2>'+
         (b.author?'<div class="d-author">'+esc(b.author)+'</div>':'')+
         '<div class="d-chips">'+chips+'</div>'+stats+'</div>'+
-      '<div class="d-tabs" id="d-tabs" role="tablist">'+tabs.map(function(t){
-        var n=t.k==='留言'?'':noteCount(b,t.k);
-        return '<button class="d-tab'+(t.k===detTab?' on':'')+'" role="tab" data-tab="'+t.k+'">'+t.l+(n?' '+n:'')+'</button>';
-      }).join('')+'<span class="d-ink"></span></div>'+
+      '<div class="d-tabs" id="d-tabs" role="tablist"></div>'+
       '<div class="d-pane" id="d-notes"></div>'+
       '<div class="d-pane comments-pane" id="d-comments" hidden>'+
         '<div id="comments-list">載入中…</div>'+
@@ -1273,6 +1292,7 @@ nav{background:var(--choc);padding:env(safe-area-inset-top) 40px 0;min-height:70
         '</div>'+
       '</div>';
 
+    renderDetailTabs(b);
     ge('btn-comment').addEventListener('click', function(){ submitComment(id); });
     ge('d-tabs').addEventListener('click', function(e){
       var t=e.target.closest('[data-tab]'); if(!t||t.dataset.tab===detTab) return;
@@ -1283,12 +1303,28 @@ nav{background:var(--choc);padding:env(safe-area-inset-top) 40px 0;min-height:70
       if(cur) renderDetailPane(cur, true);
     });
     renderDetailPane(b, false);
+    ge('d-notes').addEventListener('click', function(e){
+      if(e.target.closest('.d-add')) openQuick('quote', currentDetailId, detTab);
+    });
 
     ge('detailOverlay').querySelector('.modal').scrollTop=0;
     ge('detailOverlay').classList.add('open');
     moveInk();
     if(document.fonts) document.fonts.ready.then(moveInk);
     loadComments(id);
+  }
+
+  // 有內容的筆記才出現分頁；第一個有內容的先打開（筆記數變了也從這裡重畫）
+  function renderDetailTabs(b){
+    var tabs=NOTE_TYPES.filter(function(t){ return noteCount(b,t.k); });
+    if(!tabs.length) tabs=[NOTE_TYPES[0]];
+    tabs=tabs.concat([{k:'留言',l:'留言'}]);
+    if(!tabs.some(function(t){ return t.k===detTab; })) detTab=tabs[0].k;
+    ge('d-tabs').innerHTML=tabs.map(function(t){
+      var n=t.k==='留言'?'':noteCount(b,t.k);
+      return '<button class="d-tab'+(t.k===detTab?' on':'')+'" role="tab" data-tab="'+t.k+'">'+t.l+(n?' '+n:'')+'</button>';
+    }).join('')+'<span class="d-ink"></span>';
+    moveInk();
   }
 
   // 分頁底下那條橘線滑到目前的分頁
@@ -1308,9 +1344,10 @@ nav{background:var(--choc);padding:env(safe-area-inset-top) 40px 0;min-height:70
     el.hidden=detTab==='留言'; cm.hidden=detTab!=='留言';
     if(detTab!=='留言'){
       var arr=(b.notes&&b.notes[detTab])||[];
-      if(!arr.length) el.innerHTML='<p class="d-empty">還沒有筆記</p>';
-      else if(detTab==='句子') el.innerHTML=quotesHTML(arr);
-      else el.innerHTML='<div class="q-list">'+arr.map(function(n,i){ return '<div class="n-card" style="--i:'+Math.min(i,10)+'">'+fmtNote(n)+'</div>'; }).join('')+'</div>';
+      var add='<button class="d-add" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>'+ADD_LABEL[detTab]+'</button>';
+      if(!arr.length) el.innerHTML=add+'<p class="d-empty">還沒有筆記，讀到喜歡的句子就記下來吧</p>';
+      else if(detTab==='句子') el.innerHTML=add+quotesHTML(arr);
+      else el.innerHTML=add+'<div class="q-list">'+arr.map(function(n,i){ return '<div class="n-card" style="--i:'+Math.min(i,10)+'">'+fmtNote(n)+'</div>'; }).join('')+'</div>';
     }
     if(animate){ pane.classList.remove('swap'); void pane.offsetWidth; pane.classList.add('swap'); }
   }
